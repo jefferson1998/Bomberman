@@ -18,64 +18,93 @@ local options =
 	{
 		--Frame 1
 		{
-			x = 17,
-			y = 26,
-			width = 74,
-            height = 176
+			x = 2,
+			y = 1,
+			width = 18,
+            height = 31
 		},
 
 		--Frame 2
 		{
-			x = 95,
-			y = 26,
-			width = 74,
-            height = 176
+			x = 25,
+			y = 1,
+			width = 18,
+            height = 31
 		},
 		--Frame 3
 		{
-			x = 166,
-			y = 26,
-			width = 74,
-            height = 176
+			x = 48,
+			y = 1,
+			width = 18,
+            height = 31
 		},
 		--Frame 4
 		{
-			x = 240,
-			y = 26,
-			width = 74,
-            height = 176
+			x = 72,
+			y = 1,
+			width = 18,
+            height = 31
 		},
 
 		-- Frame 5
 		{
-			x = 314,
-			y = 26,
-			width = 74,
-            height = 176
+			x = 92,
+			y = 1,
+			width = 18,
+            height = 31
+		},
+
+		-- Frame 6
+		{
+			x = 112,
+			y = 1,
+			width = 18,
+            height = 31
+		},
+
+		-- Frame 7
+		{
+			x = 132,
+			y = 1,
+			width = 18,
+            height = 31
+		},
+
+		-- Frame 8
+		{
+			x = 151,
+			y = 1,
+			width = 18,
+            height = 31
 		}
 
 	},
 	-- tamanho total da imagem
-	sheetContentWidth = 400,
-    sheetContentHeight = 200
+	sheetContentWidth = 172,
+    sheetContentHeight = 32
 }
 
-local animacao = graphics.newImageSheet( "BomberAtualizado.png", options)
+local animacao = graphics.newImageSheet( "frentePersonagemBranco.png", options)
 
 local animacao_run = {
 	name = "normalRun",
 	start = 1,
-	count = 5,
+	count = 8,
 	time = 1100,
 	loopCount = 0
 }
 
-local animacaoDoBomber = display.newSprite( animacao, animacao_run)
 
+local imagemCenario = display.newImageRect("cenario1.png", 350, 270	)
+
+imagemCenario.x = cX
+imagemCenario.y = cY
+local animacaoDoBomber = display.newSprite( animacao, animacao_run)
 animacaoDoBomber.x = cX
 animacaoDoBomber.y = cY
 
 animacaoDoBomber:play()
+
 --function funcaoBotao( )
 --	 texto.text = "Consegui"
 --end
