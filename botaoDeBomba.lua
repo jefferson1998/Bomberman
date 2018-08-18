@@ -5,10 +5,14 @@ local w = display.contentWidth
 local h = display.contentHeight
 
 
-local buttonUp = widget.newButton {
+local buttonExplosion = widget.newButton {
 	--retangulo = display.newRect( 0, 0, w, h - 250)
 	defaultFile = "botaoBomba.png",
 }
 
-buttonUp.x = w - 30
-buttonUp.y = h - 150
+buttonExplosion.x = w - 30
+buttonExplosion.y = h - 150
+
+function mover()
+	buttonExplosion.x = buttonExplosion - 10
+end
