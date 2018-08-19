@@ -7,7 +7,7 @@ local h = display.contentHeight
 
 local buttonExplosion = widget.newButton {
 	--retangulo = display.newRect( 0, 0, w, h - 250)
-	defaultFile = "botaoBomba.png",
+	defaultFile = "imagens/botaoBomba.png",
 }
 
 buttonExplosion.x = w - 30
