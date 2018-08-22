@@ -1,20 +1,23 @@
- Histórias de Usuário
+ Histórias de Usuário / Teste de aceitação
 
  1. Eu como usuário terei personagem para andar pelo mapa;
 
- 	a) O personagem não poderá atravessar os objetos;
+ 	a) O personagem não poderá atravessar as bordas do mapa;
+ 	b) O personagem não poderá atravessar as bombas após sair de cima delas
+ 	c) O personagem podera atravessar outros personagens
+ 	d) O personagem não poderá atravessar os blocos do mapa
  	
  2. Eu como usuário terei um mapa para caminhar;
 
- 	a) Neste mapa deverá ter objetos estáticos que não poderão ser destruídos;
- 	b) Neste mapa haverá também objetos que serão destruídos;
+ 	a) Neste mapa deverá ter objetos que não poderão ser destruídos;
+ 	b) Neste mapa haverá objetos que poderão ser destruídos;
  	
  3. Eu como usuário terei bombas para utilizar;
 
  	a) Estas bombas poderão destruir alguns obstáculos do mapa;
  	b) Estas bombas poderão destruir alguns inimigos no mapa;
  	c) Estas bombas poderão destruir o próprio personagem;
- 	d) Estas bombas terão um limite de atuação;
+ 	d) Estas bombas terão um limite de atuação que poderão aumentar com certos "buffs" encontrados no mapa;
 
  4. Eu como usuário terei fases para passar
 
@@ -22,6 +25,7 @@
 
  5. Eu como usuário terei uma tela de inicío
 
- 	a) Esta tela terá a opção de desligar SOM;
- 	b) Esta tela terá a opção de "START";
+ 	a) Esta tela terá a opção "SOUND OFF" que desligara o som;
+ 	b) Esta tela terá a opção "START" que começará o jogo;
+ 	c) Esta tela terá a opção "CREDITS" que mostrara os nomes dos envolvidos no jogo
  
