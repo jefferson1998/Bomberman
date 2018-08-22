@@ -1,0 +1,22 @@
+ Histórias de Usuário
+
+ 1. Eu como usuário terei personagem para andar pelo mapa;
+
+ 	a) O personagem não poderá atravessar os objetos;
+ 	
+ 2. Eu como usuário terei um mapa para caminhar;
+
+ 	a) Neste mapa deverá ter objetos estáticos que não poderão ser destruídos;
+ 	b) Neste mapa haverá também objetos que serão destruídos;
+ 	
+ 3. Eu como usuário terei bombas para utilizar;
+
+ 	a) Estas bombas poderão destruir alguns obstáculos do mapa;
+ 	b) Estas bombas poderão destruir alguns inimigos no mapa;
+ 	c) Estas bombas poderão destruir o próprio personagem;
+ 	d) Estas bombas terão um limite de atuação;
+
+ 4. Eu como usuário terei fases para passar
+
+ 	a) O usuário só poderá passar de fase, caso tenha destruído todos os inimigos
+ 	
