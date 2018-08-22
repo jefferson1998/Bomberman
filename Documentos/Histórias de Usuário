@@ -19,4 +19,9 @@
  4. Eu como usuário terei fases para passar
 
  	a) O usuário só poderá passar de fase, caso tenha destruído todos os inimigos
- 	
+
+ 5. Eu como usuário terei uma tela de inicío
+
+ 	a) Esta tela terá a opção de desligar SOM;
+ 	b) Esta tela terá a opção de "START";
+ 
