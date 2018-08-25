@@ -5,20 +5,13 @@
 -----------------------------------------------------------------------------------------
 
 -- Your code here
-local cenarioPorTrasDeTudo = display.newImageRect("imagens/cenario.png", 1000, 600	)
-local cenario = require ("cenarioBomberman")
-local personagem = require ("personagemBomberman")
-local botaoBomba = require("botaoDeBomba")
-local botoes = require ("botoesDeMovimento")
-local physics = require "physics"
+
+display.setStatusBar (display.HiddenStatusBar)
+system.setIdleTimer( false ) -- impede a tela de apagar;
+
+local director = require ("Sources.diretorio")
+director:changeScene("Sources.menu")
 
 
-function getCharacterInMotion()
-	return personagem.onOrientationChange();
-end
 
-function getMoverBombermanDown()
-	return personagem.touch();
-	-- body
-end
 
