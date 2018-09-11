@@ -180,6 +180,7 @@ local animacaoDoBomberPosicao = display.newSprite( animacaoBombermanFrente, anim
 animacaoDoBomberPosicao.x = cX
 animacaoDoBomberPosicao.y = cY
 
+
 local animacaoDoBomberDeTrasPosicao = display.newSprite( animacaoBombermanTras, animacaoBombermanTras_run)
 --animacaoDoBomberDeTrasPosicao.x = cX
 --animacaoDoBomberDeTrasPosicao.y = cY
@@ -189,6 +190,7 @@ animacaoDoBomberPosicao.isVisible = false;
 local animacaoDoBomberParada = display.newImage("imagens/bomberInicaParado.png")
 animacaoDoBomberParada.x = cX
 animacaoDoBomberParada.y = cY
+
 
 
 
@@ -205,8 +207,8 @@ end
 local personagemBomberman = {
 	movimentacao = animacaoDoBomberPosicao:play(),
 	rotacao = onOrientationChange
-
 }
+
 Runtime:addEventListener("orientation", onOrientationChange)
 
 
@@ -247,10 +249,7 @@ local touchFunction = function (e)
 	-- quando há clique    ou clicar e arrastar para o lado
 	if e.phase == "began"  or e.phase == "moved" then
 		if e.target.myName == "up" then
-			--animacaoDoBomberDeTrasPosicao.x = animacaoDoBomberPosicao.x
-			--animacaoDoBomberDeTrasPosicao.y = animacaoDoBomberPosicao.y
-			--animacaoDoBomberDeTrasPosicao.isVisible = true;
-			--animacaoDoBomberDeTrasPosicao:play()
+
 			passosY = -1.3
 			passosX = 0
 		elseif e.target.myName == "down" then
@@ -281,7 +280,6 @@ end
 for i=1, #buttons do
 	buttons[i]:addEventListener("touch", touchFunction)
 end
-
 
 -- atualiza o jogo
 local update = function ()
