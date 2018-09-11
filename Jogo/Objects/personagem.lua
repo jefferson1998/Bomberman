@@ -80,81 +80,8 @@ local optionsBombermanDeFrente =
     sheetContentHeight = 32
 }
 
-local optionsBombermanDeTras =
-{
-	frames =
-	{
-		--Frame 1
-		{
-			x = 2,
-			y = 1,
-			width = 16,
-            height = 25
-		},
-
-		--Frame 2
-		{
-			x = 23,
-			y = 1,
-			width = 16,
-            height = 25
-		},
-		--Frame 3
-		{
-			x = 45,
-			y = 1,
-			width = 16,
-            height = 25
-		},
-		--Frame 4
-		{
-			x = 69,
-			y = 1,
-			width = 16,
-            height = 25
-		},
-
-		-- Frame 5
-		{
-			x = 89,
-			y = 1,
-			width = 16,
-            height = 25
-		},
-
-		-- Frame 6
-		{
-			x = 112,
-			y = 1,
-			width = 16,
-            height = 25
-		},
-
-		-- Frame 7
-		{
-			x = 132,
-			y = 1,
-			width = 16,
-            height = 25
-		},
-
-		-- Frame 8
-		{
-			x = 150,
-			y = 1,
-			width = 16,
-            height = 25
-		}
-
-	},
-	-- tamanho total da imagem
-	sheetContentWidth = 169,
-    sheetContentHeight = 26
-}
 
 local animacaoBombermanFrente = graphics.newImageSheet( "imagens/frentePersonagemBranco.png", optionsBombermanDeFrente)
-local animacaoBombermanTras = graphics.newImageSheet( "imagens/trasPersonagemBranco.png", optionsBombermanDeTras)
-
 
 -- faz a animação acontecer: star - determina de que recorte deve começar
 --count determina até quanto deve contar
@@ -168,49 +95,22 @@ local animacaoBombermanFrente_run = {
 	loopCount = 0
 }
 
-local animacaoBombermanTras_run = {
-	name = "normalRun",
-	start = 2,
-	count = 7,
-	time = 800,
-	loopCount = 0
-}
 
-local animacaoDoBomberPosicao = display.newSprite( animacaoBombermanFrente, animacaoBombermanFrente_run)
-animacaoDoBomberPosicao.x = cX
-animacaoDoBomberPosicao.y = cY
+local personagemEmMovimento = display.newSprite( animacaoBombermanFrente, animacaoBombermanFrente_run)
+personagemEmMovimento.x = cX
+personagemEmMovimento.y = cY
 
 
-local animacaoDoBomberDeTrasPosicao = display.newSprite( animacaoBombermanTras, animacaoBombermanTras_run)
---animacaoDoBomberDeTrasPosicao.x = cX
---animacaoDoBomberDeTrasPosicao.y = cY
+personagemEmMovimento.isVisible = false;
 
-animacaoDoBomberPosicao.isVisible = false;
-
-local animacaoDoBomberParada = display.newImage("imagens/bomberInicaParado.png")
-animacaoDoBomberParada.x = cX
-animacaoDoBomberParada.y = cY
-
-
-
-
--- processo de rotação, verifica se o tipo é diferente de cima ou baixo, ou seja, ele sempre vira para o lado direito/esquerto
--- então ele rotaciona
-local function onOrientationChange(e)
-	if(e.type ~= "faceUp" or e.type ~= "faceDown") then
-		animacaoDoBomberPosicao.play = e.type;
-		animacaoDoBomberPosicao.rotation = animacaoDoBomberPosicao.rotation - e.delta;
-		
-	end
-end
+local personagemParado = display.newImage("imagens/bomberInicaParado.png")
+personagemParado.x = cX
+personagemParado.y = cY
 
 local personagemBomberman = {
-	movimentacao = animacaoDoBomberPosicao:play(),
-	rotacao = onOrientationChange
+
+	movimentacao = personagemEmMovimento:play(),
 }
-
-Runtime:addEventListener("orientation", onOrientationChange)
-
 
 local buttons = {}
 
@@ -254,9 +154,9 @@ local touchFunction = function (e)
 			passosX = 0
 		elseif e.target.myName == "down" then
 		
-			animacaoDoBomberParada.isVisible = false;
-			animacaoDoBomberPosicao.isVisible = true;
-			animacaoDoBomberPosicao:play()
+			personagemParado.isVisible = false;
+			personagemEmMovimento.isVisible = true;
+			personagemEmMovimento:play()
 			passosY = 1.3
 			passosX = 0
 		elseif e.target.myName == "right" then
@@ -268,9 +168,9 @@ local touchFunction = function (e)
 		end
 	-- quando soltar o botão ele para
 	else
-		animacaoDoBomberPosicao.isVisible = false;
-		animacaoDoBomberParada.isVisible = true;
-		animacaoDoBomberPosicao:play()
+		personagemEmMovimento.isVisible = false;
+		personagemParado.isVisible = true;
+		personagemEmMovimento:play()
 
 		passosY = 0
 		passosX = 0
@@ -283,13 +183,13 @@ end
 
 -- atualiza o jogo
 local update = function ()
-	animacaoDoBomberPosicao.x = animacaoDoBomberPosicao.x + passosX
-	animacaoDoBomberPosicao.y = animacaoDoBomberPosicao.y + passosY
-	animacaoDoBomberParada.x = animacaoDoBomberParada.x + passosX
-	animacaoDoBomberParada.y = animacaoDoBomberParada.y + passosY
+	personagemEmMovimento.x = personagemEmMovimento.x + passosX
+	personagemEmMovimento.y = personagemEmMovimento.y + passosY
+	personagemParado.x = personagemParado.x + passosX
+	personagemParado.y = personagemParado.y + passosY
 
 end
 
 -- executa em vários circulos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", update)
-animacaoDoBomberParada:addEventListener("touch", touchFunction)
+personagemParado:addEventListener("touch", touchFunction)
