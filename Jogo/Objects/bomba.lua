@@ -1,6 +1,11 @@
 -- faz referência a uma biblioteca do Corona	
 local widget = require "widget"
 
+local bomba = {
+	tamanho = 0,
+	tempo = 0,
+}
+
 local w = display.contentWidth
 local h = display.contentHeight
 
