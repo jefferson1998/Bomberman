@@ -108,38 +108,41 @@ personagemParado.x = cX
 personagemParado.y = cY
 
 local personagemBomberman = {
-
 	movimentacao = personagemEmMovimento:play(),
 }
 
 local buttons = {}
 
-buttons[1] = display.newImage("imagens/buttonDown.png")
+buttons[1] = display.newImage("imagens/botaoMovimentarPersonagem.png")
+buttons[1]:rotate ( 180 )
 buttons[1].x = w - 445
-buttons[1].y = h - 200
-buttons[1].width = 20
-buttons[1].height = 25
+buttons[1].y = h - 193
+buttons[1].width = 25
+buttons[1].height = 30
 buttons[1].myName = "up"
 
-buttons[2] = display.newImage("imagens/buttonUp.png")
+buttons[2] = display.newImage("imagens/botaoMovimentarPersonagem.png")
+buttons[2]:rotate ( 360 )
 buttons[2].x =  w - 445
-buttons[2].y = h - 150
-buttons[2].width = 20
-buttons[2].height = 25
+buttons[2].y = h - 158
+buttons[2].width = 25
+buttons[2].height = 30
 buttons[2].myName = "down"
 
-buttons[3] = display.newImage("imagens/buttonRight.png")
-buttons[3].x = w - 470
+buttons[3] = display.newImage("imagens/botaoMovimentarPersonagem.png")
+buttons[3]:rotate ( 90 )
+buttons[3].x = w - 459
 buttons[3].y = h - 175
-buttons[3].width = 20
-buttons[3].height = 25
+buttons[3].width = 25
+buttons[3].height = 30
 buttons[3].myName = "left"
 
-buttons[4] = display.newImage("imagens/buttonLeft.png")
-buttons[4].x = w - 420
+buttons[4] = display.newImage("imagens/botaoMovimentarPersonagem.png")
+buttons[4]:rotate ( 270 )
+buttons[4].x = w - 430
 buttons[4].y = h - 175
-buttons[4].width = 20
-buttons[4].height = 25
+buttons[4].width = 25
+buttons[4].height = 30
 buttons[4].myName = "right"
 
 local passosX= 0
@@ -153,7 +156,6 @@ local touchFunction = function (e)
 			passosY = -1.3
 			passosX = 0
 		elseif e.target.myName == "down" then
-		
 			personagemParado.isVisible = false;
 			personagemEmMovimento.isVisible = true;
 			personagemEmMovimento:play()
@@ -190,6 +192,13 @@ local update = function ()
 
 end
 
+function personagemBomberman:localizacaoNoMapa()
+	return personagemEmMovimento.x, personagemEmMovimento.y
+end
+
 -- executa em vários circulos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", update)
 personagemParado:addEventListener("touch", touchFunction)
+
+
+return personagemBomberman

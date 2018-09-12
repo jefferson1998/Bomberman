@@ -1,16 +1,13 @@
-local imagemCenario = display.newImageRect("imagens/Mapa1.png", 350, 265)
+--local imagemCenario = display.newImageRect("imagens/Mapa1.png", 350, 265)
 
-local cX = display.contentCenterX
-local cY = display.contentCenterY
+--local cX = display.contentCenterX
+--local cY = display.contentCenterY
 
-imagemCenario.x = cX
-imagemCenario.y = cY
-local personagem = require ("Objects.personagem")
-local physics = require ( "physics" )
-	
-	physics.start()
-	physics.addBody(imagemCenario, "static", {friction = 0, bounce = 0})
-	imagemCenario.myName = "cenario"
+--imagemCenario.x = cX
+--imagemCenario.y = cY
+local tiled = require "com.ponywolf.ponytiled"
+local mapData = require "Objects.mapa" -- load from lua export
+local map = tiled.new(mapData)
 
 
 -- Teste
