@@ -116,33 +116,33 @@ local buttons = {}
 buttons[1] = display.newImage("imagens/botaoMovimentarPersonagem.png")
 buttons[1]:rotate ( 180 )
 buttons[1].x = w - 445
-buttons[1].y = h - 193
-buttons[1].width = 25
-buttons[1].height = 30
+buttons[1].y = h - 196
+buttons[1].width = 30
+buttons[1].height = 35
 buttons[1].myName = "up"
 
 buttons[2] = display.newImage("imagens/botaoMovimentarPersonagem.png")
 buttons[2]:rotate ( 360 )
-buttons[2].x =  w - 445
-buttons[2].y = h - 158
-buttons[2].width = 25
-buttons[2].height = 30
+buttons[2].x =  w - 444
+buttons[2].y = h - 154
+buttons[2].width = 30
+buttons[2].height = 35
 buttons[2].myName = "down"
 
 buttons[3] = display.newImage("imagens/botaoMovimentarPersonagem.png")
 buttons[3]:rotate ( 90 )
-buttons[3].x = w - 459
+buttons[3].x = w - 461
 buttons[3].y = h - 175
-buttons[3].width = 25
-buttons[3].height = 30
+buttons[3].width = 30
+buttons[3].height = 35
 buttons[3].myName = "left"
 
 buttons[4] = display.newImage("imagens/botaoMovimentarPersonagem.png")
 buttons[4]:rotate ( 270 )
-buttons[4].x = w - 430
+buttons[4].x = w - 428	
 buttons[4].y = h - 175
-buttons[4].width = 25
-buttons[4].height = 30
+buttons[4].width = 30
+buttons[4].height = 35
 buttons[4].myName = "right"
 
 local passosX= 0

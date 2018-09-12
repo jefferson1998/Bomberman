@@ -34,7 +34,7 @@ end
 
 local touchFunction = function (evento)
 	-- quando há clique  
-	if evento.phase == "began" then
+	if evento.phase == "began" or evento.phase == "moved" then
 		--print(personagem.x .. personagem.y)
 		bomba = display.newCircle(eixoX, eixoY, 7)	
 	end

@@ -38,7 +38,7 @@ function _M.new()
 		local t = event.target
 		if t.myName == "play" then 
 			freeMemory()
-			director:changeScene("Sources.gameplay")
+			director:changeScene("Sources.gamePlay")
 		end
 	end
 
