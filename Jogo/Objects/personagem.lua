@@ -4,84 +4,11 @@ local w = display.contentWidth
 local h = display.contentHeight
 
 -- cria o sistema de rotação
-local o = system.orientation;
 
 local widget = require "widget"
+local framesBombermanParaFrente = require "view.frames"
 
-local optionsBombermanDeFrente =
-{
-	frames =
-	{
-		--Frame 1
-		{
-			x = 2,
-			y = 1,
-			width = 18,
-            height = 31
-		},
-
-		--Frame 2
-		{
-			x = 25,
-			y = 1,
-			width = 18,
-            height = 31
-		},
-		--Frame 3
-		{
-			x = 48,
-			y = 1,
-			width = 18,
-            height = 31
-		},
-		--Frame 4
-		{
-			x = 72,
-			y = 1,
-			width = 18,
-            height = 31
-		},
-
-		-- Frame 5
-		{
-			x = 92,
-			y = 1,
-			width = 18,
-            height = 31
-		},
-
-		-- Frame 6
-		{
-			x = 112,
-			y = 1,
-			width = 18,
-            height = 31
-		},
-
-		-- Frame 7
-		{
-			x = 132,
-			y = 1,
-			width = 18,
-            height = 31
-		},
-
-		-- Frame 8
-		{
-			x = 151,
-			y = 1,
-			width = 18,
-            height = 31
-		}
-
-	},
-	-- tamanho total da imagem
-	sheetContentWidth = 172,
-    sheetContentHeight = 32
-}
-
-
-local animacaoBombermanFrente = graphics.newImageSheet( "imagens/frentePersonagemBranco.png", optionsBombermanDeFrente)
+local animacaoBombermanFrente = graphics.newImageSheet( "imagens/frentePersonagemBranco.png", framesBombermanParaFrente:personagemBombermanParaFrente())
 
 -- faz a animação acontecer: star - determina de que recorte deve começar
 --count determina até quanto deve contar
@@ -96,19 +23,20 @@ local animacaoBombermanFrente_run = {
 }
 
 
-local personagemEmMovimento = display.newSprite( animacaoBombermanFrente, animacaoBombermanFrente_run)
+local personagemEmMovimento = display.newSprite( animacaoBombermanFrente, animacaoBombermanFrente_run, cX, cY)
 personagemEmMovimento.x = cX
 personagemEmMovimento.y = cY
 
 
 personagemEmMovimento.isVisible = false;
 
-local personagemParado = display.newImage("imagens/bomberInicaParado.png")
-personagemParado.x = cX
-personagemParado.y = cY
+--local personagemParado = 
+--personagemParado.x = cX
+--personagemParado.y = cY
 
 local personagemBomberman = {
-	movimentacao = personagemEmMovimento:play(),
+	personagemParado = display.newImage("imagens/bomberInicaParado.png", cX, cY),
+	personagemEmMovimento = personagemEmMovimento,
 }
 
 local buttons = {}
@@ -156,9 +84,9 @@ local touchFunction = function (e)
 			passosY = -1.3
 			passosX = 0
 		elseif e.target.myName == "down" then
-			personagemParado.isVisible = false;
-			personagemEmMovimento.isVisible = true;
-			personagemEmMovimento:play()
+			personagemBomberman.personagemParado.isVisible = false;
+			personagemBomberman.personagemEmMovimento.isVisible = true;
+			personagemBomberman.personagemEmMovimento:play()
 			passosY = 1.3
 			passosX = 0
 		elseif e.target.myName == "right" then
@@ -170,9 +98,9 @@ local touchFunction = function (e)
 		end
 	-- quando soltar o botão ele para
 	else
-		personagemEmMovimento.isVisible = false;
-		personagemParado.isVisible = true;
-		personagemEmMovimento:play()
+		personagemBomberman.personagemEmMovimento.isVisible = false;
+		personagemBomberman.personagemParado.isVisible = true;
+		personagemBomberman.personagemEmMovimento:play()
 
 		passosY = 0
 		passosX = 0
@@ -185,10 +113,10 @@ end
 
 -- atualiza o jogo
 local update = function ()
-	personagemEmMovimento.x = personagemEmMovimento.x + passosX
-	personagemEmMovimento.y = personagemEmMovimento.y + passosY
-	personagemParado.x = personagemParado.x + passosX
-	personagemParado.y = personagemParado.y + passosY
+	personagemBomberman.personagemEmMovimento.x = personagemBomberman.personagemEmMovimento.x + passosX
+	personagemBomberman.personagemEmMovimento.y = personagemBomberman.personagemEmMovimento.y + passosY
+	personagemBomberman.personagemParado.x = personagemBomberman.personagemParado.x + passosX
+	personagemBomberman.personagemParado.y = personagemBomberman.personagemParado.y + passosY
 
 end
 
@@ -198,7 +126,7 @@ end
 
 -- executa em vários circulos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", update)
-personagemParado:addEventListener("touch", touchFunction)
+personagemBomberman.personagemParado:addEventListener("touch", touchFunction)
 
 
 return personagemBomberman

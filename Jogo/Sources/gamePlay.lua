@@ -4,10 +4,6 @@ local _M = {}
 
 local director = require("Sources.diretorio")
 
-local w = display.contentWidth -- representa a largura da tela
-local h = display.contentHeight -- altura da tela
-
-
 --Images------------------>
 
 local background
@@ -20,8 +16,8 @@ local freeMemory
 --Principal Function--------------------------------------------------------------------------->
 ----------------------------------------------------------------------------------------------->
 function _M.new()
+	system.activate( "multitouch" )
 	local localGroup = display.newGroup()
-	
 	local cenarioPorTrasDeTudo = display.newImageRect("imagens/cenario.png", 1000, 600	)
 --	local cenario = require ("Objects.cenario")
 	local personagem = require ("Objects.personagem")
