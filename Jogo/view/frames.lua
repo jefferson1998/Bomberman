@@ -1,7 +1,7 @@
 local frames = {}
 
 function frames:personagemBombermanParaFrente()
-	local optionsBombermanDeFrente =
+	local frames =
 {
 	frames =
 	{
@@ -73,7 +73,7 @@ function frames:personagemBombermanParaFrente()
     sheetContentHeight = 32
 }
 
-	return optionsBombermanDeFrente
+	return frames
 end
 
 
