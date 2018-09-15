@@ -20,6 +20,7 @@ function _M.new()
 	local localGroup = display.newGroup()
 	local cenarioPorTrasDeTudo = display.newImageRect("imagens/cenario.png", 1000, 600	)
 --	local cenario = require ("Objects.cenario")
+	local inimigo = require ("Objects.inimigo")
 	local personagem = require ("Objects.personagem")
 	local botaoBomba = require("Objects.bomba")
 	

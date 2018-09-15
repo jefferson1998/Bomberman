@@ -23,7 +23,7 @@ local animacaoBombermanFrente_run = {
 }
 
 
-local personagemEmMovimento = display.newSprite( animacaoBombermanFrente, animacaoBombermanFrente_run, cX, cY)
+local personagemEmMovimento = display.newSprite( animacaoBombermanFrente, animacaoBombermanFrente_run)
 personagemEmMovimento.x = cX
 personagemEmMovimento.y = cY
 
