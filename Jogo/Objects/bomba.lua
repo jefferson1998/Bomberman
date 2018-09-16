@@ -4,7 +4,7 @@ local personagem = require "Objects.personagem"
 local inimigo = require "Objects.inimigo"
 
 local bomba = {
-	tamanho = 0,
+	tamanho = 7,
 	tempo = 5,
 	imagem = "",
 }
@@ -39,6 +39,9 @@ local function updateTime()
     --se o tempo for igual a 0 então      
     if  bomba.tempo == 0 then
         --remova a imagem
+        if bomba:percorrerAreaDaBomba(inimigo) then
+        	inimigo:removeSelf()
+        end
         bomba.imagem:removeSelf()
         -- renove o tempo, quando houver outra bomba o tempo voltará o mesmo
         bomba.tempo = 5
@@ -47,11 +50,43 @@ local function updateTime()
 end
 
 
+function bomba:percorrerAreaDaBomba(inimigo)
+	for i=1,7  do
+		if math.floor(bomba.imagem.x) == inimigo.x or math.floor(bomba.imagem.y) == inimigo.y then
+			return true
+		end
+		bomba.imagem.y = bomba.imagem.y + 1
+	end
+
+	for i=1,7 do
+		if bomba.imagem.x == inimigo.x or bomba.imagem.y == inimigo.y then
+			return true
+		end
+		bomba.imagem.y = bomba.imagem.y - 1
+	end
+
+	for i=1,7 do
+		if bomba.imagem.x == inimigo.x or bomba.imagem.y == inimigo.y then
+			return true
+		end
+		bomba.imagem.x = bomba.imagem.x + 1
+	end
+
+	for i=1,7 do
+		if bomba.imagem.x == inimigo.x or bomba.imagem.y == inimigo.y then
+			return true
+		end
+		bomba.imagem.x = bomba.imagem.x - 1
+	end
+
+end
+
+
+
 local touchFunction = function (evento)
 	-- quando há clique  
 	if evento.phase == "began" then
-			bomba.imagem = display.newCircle(eixoX, eixoY, 7)
-
+			bomba.imagem = display.newCircle(eixoX, eixoY, bomba.tamanho)
 	local countDownTimer = timer.performWithDelay( 1000, updateTime, bomba.tempo)
 	end
 end
