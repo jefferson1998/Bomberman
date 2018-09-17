@@ -5,7 +5,7 @@ local inimigo = require "Objects.inimigo"
 
 local bomba = {
 	tamanho = 7,
-	tempo = 5,
+	tempo = 0,
 	imagem = "",
 }
 
@@ -43,9 +43,6 @@ local function updateTime()
         	inimigo:removeSelf()
         end
         bomba.imagem:removeSelf()
-        -- renove o tempo, quando houver outra bomba o tempo voltará o mesmo
-        bomba.tempo = 5
-    --se não, exiba BOOOOM!
    	end     
 end
 
@@ -86,11 +83,13 @@ end
 local touchFunction = function (evento)
 	-- quando há clique  
 	if evento.phase == "began" then
-			bomba.imagem = display.newCircle(eixoX, eixoY, bomba.tamanho)
-	local countDownTimer = timer.performWithDelay( 1000, updateTime, bomba.tempo)
+			if bomba.tempo == 0 then
+				bomba.imagem = display.newCircle(eixoX, eixoY, bomba.tamanho)
+				bomba.tempo = 5
+				local countDownTimer = timer.performWithDelay( 1000, updateTime, bomba.tempo)
+			end
 	end
 end
 
 Runtime:addEventListener("enterFrame", update)
 buttonExplosion:addEventListener("touch", touchFunction)
-
