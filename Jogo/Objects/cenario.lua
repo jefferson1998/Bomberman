@@ -5,8 +5,8 @@
 
 --imagemCenario.x = cX
 --imagemCenario.y = cY
-local tiled = require "com.ponywolf.ponytiled"
-local mapData = require "Objects.mapa" -- load from lua export
+--local tiled = require "com.ponywolf.ponytiled"
+local mapData = require "Objects.mapaTeste." -- load from lua export
 local map = tiled.new(mapData)
 
 
