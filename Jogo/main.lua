@@ -12,9 +12,21 @@
 --local director = require ("Sources.diretorio")
 --director:changeScene("Sources.menu")
 
---local tiled = require "com.ponywolf.ponytiled"
---local mapData = require "Objects.mapa.cenario1.cenarioLua"
---local mapa = tiled.new(mapData, "Objects.mapa.cenario1.imagens")
+local tiled = require "com.ponywolf.ponytiled"
+local json = require "json"
+local physics = require "physics"
+
+physics.start()
+
+
+display.setDefault("magTextureFilter", "nearest")
+display.setDefault("minTextureFilter", "nearest")
+local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/cenarioJson.json", system.ResourceDirectory))  -- load from json export
+local map = tiled.new(mapData, "Objects/mapa/cenario1")
+
+
+-- center the map on screen
+map.x,map.y = display.contentCenterX - map.designedWidth/2, display.contentCenterY - map.designedHeight/2
 
 local cenarioPorTrasDeTudo = display.newImageRect("imagens/cenario.png", 1000, 600	)
 --local cenario = require ("Objects.cenario")

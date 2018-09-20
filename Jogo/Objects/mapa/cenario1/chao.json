@@ -1,0 +1,20 @@
+{ "columns":1,
+ "image":"imagens\/chao.png",
+ "imageheight":32,
+ "imagewidth":32,
+ "margin":0,
+ "name":"chao",
+ "properties":
+    {
+     "fisica":false
+    },
+ "propertytypes":
+    {
+     "fisica":"bool"
+    },
+ "spacing":0,
+ "tilecount":1,
+ "tileheight":32,
+ "tilewidth":32,
+ "type":"tileset"
+}
