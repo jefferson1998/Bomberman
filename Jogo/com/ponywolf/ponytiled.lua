@@ -61,7 +61,6 @@ local centerX, centerY = display.contentCenterX, display.contentCenterY
 function M.new(data, dir)
   local map = display.newGroup()
   dir = dir and (dir .. "/") or "" -- where does the map live?
-
   local layers = data.layers
   local tilesets = data.tilesets
   local width, height = data.width * data.tilewidth, data.height * data.tileheight
