@@ -28,7 +28,7 @@ local map = tiled.new(mapData, "Objects/mapa/cenario1")
 -- center the map on screen
 --map.x,map.y = display.contentCenterX - map.designedWidth/2, display.contentCenterY - map.designedHeight/2
 
-local cenarioPorTrasDeTudo = display.newImageRect("imagens/cenario.png", 1000, 600	)
+--local cenarioPorTrasDeTudo = display.newImageRect("imagens/cenario.png", 1000, 600	)
 --local cenario = require ("Objects.cenario")
 local inimigo = require ("Objects.inimigo")
 local personagem = require ("Objects.personagem")
