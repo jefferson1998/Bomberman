@@ -21,7 +21,7 @@ physics.start()
 
 display.setDefault("magTextureFilter", "nearest")
 display.setDefault("minTextureFilter", "nearest")
-local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/cenarioJson.json", system.ResourceDirectory))  -- load from json export
+local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/testeObjeto.json", system.ResourceDirectory))  -- load from json export
 local map = tiled.new(mapData, "Objects/mapa/cenario1")
 
 
