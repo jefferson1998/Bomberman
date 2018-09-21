@@ -17,18 +17,16 @@ local json = require "json"
 local physics = require "physics"
 
 physics.start()
+local cenarioPorTrasDeTudo = display.newImageRect("imagens/cenario.png", 1000, 600	)
 
-
-display.setDefault("magTextureFilter", "nearest")
-display.setDefault("minTextureFilter", "nearest")
 local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/cenarioJson.json", system.ResourceDirectory))  -- load from json export
 local map = tiled.new(mapData, "Objects/mapa/cenario1")
 
 
 -- center the map on screen
---map.x,map.y = display.contentCenterX - map.designedWidth/2, display.contentCenterY - map.designedHeight/2
+map.x,map.y = display.contentCenterX - map.designedWidth/2, display.contentCenterY - map.designedHeight/2
 
---local cenarioPorTrasDeTudo = display.newImageRect("imagens/cenario.png", 1000, 600	)
+
 --local cenario = require ("Objects.cenario")
 local inimigo = require ("Objects.inimigo")
 local personagem = require ("Objects.personagem")
