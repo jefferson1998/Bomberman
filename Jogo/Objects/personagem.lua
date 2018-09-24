@@ -6,37 +6,11 @@ local h = display.contentHeight
 -- cria o sistema de rotação
 
 local widget = require "widget"
-local framesBombermanParaFrente = require "view.frames"
 
-local animacaoBombermanFrente = graphics.newImageSheet( "imagens/frentePersonagemBranco.png", framesBombermanParaFrente:personagemBombermanParaFrente())
-
--- faz a animação acontecer: star - determina de que recorte deve começar
---count determina até quanto deve contar
---time é o tempo em milisegundos
---loopCount determina deverá repetir a animação
-local animacaoBombermanFrente_run = {
-	name = "normalRun",
-	start = 2,
-	count = 7,
-	time = 800,
-	loopCount = 0
-}
-
-
-local personagemEmMovimento = display.newSprite( animacaoBombermanFrente, animacaoBombermanFrente_run)
-personagemEmMovimento.x = cX
-personagemEmMovimento.y = cY
-
-
-personagemEmMovimento.isVisible = false;
-
---local personagemParado = 
---personagemParado.x = cX
---personagemParado.y = cY
+local animacao = require ("view.personagemView")
 
 local personagemBomberman = {
-	personagemParado = display.newImage("imagens/bomberInicaParado.png", cX, cY),
-	personagemEmMovimento = personagemEmMovimento,
+	personagemEmMovimento = animacao:newPersonagem()
 }
 
 local buttons = {}
@@ -80,12 +54,9 @@ local touchFunction = function (e)
 	-- quando há clique    ou clicar e arrastar para o lado
 	if e.phase == "began"  or e.phase == "moved" then
 		if e.target.myName == "up" then
-
 			passosY = -1.3
 			passosX = 0
 		elseif e.target.myName == "down" then
-			personagemBomberman.personagemParado.isVisible = false;
-			personagemBomberman.personagemEmMovimento.isVisible = true;
 			personagemBomberman.personagemEmMovimento:play()
 			passosY = 1.3
 			passosX = 0
@@ -98,9 +69,7 @@ local touchFunction = function (e)
 		end
 	-- quando soltar o botão ele para
 	else
-		personagemBomberman.personagemEmMovimento.isVisible = false;
-		personagemBomberman.personagemParado.isVisible = true;
-		personagemBomberman.personagemEmMovimento:play()
+		personagemBomberman.personagemEmMovimento:pause()
 
 		passosY = 0
 		passosX = 0
@@ -115,18 +84,15 @@ end
 local update = function ()
 	personagemBomberman.personagemEmMovimento.x = personagemBomberman.personagemEmMovimento.x + passosX
 	personagemBomberman.personagemEmMovimento.y = personagemBomberman.personagemEmMovimento.y + passosY
-	personagemBomberman.personagemParado.x = personagemBomberman.personagemParado.x + passosX
-	personagemBomberman.personagemParado.y = personagemBomberman.personagemParado.y + passosY
 
 end
 
 function personagemBomberman:localizacaoNoMapa()
-	return personagemEmMovimento.x, personagemEmMovimento.y
+	return personagemBomberman.personagemEmMovimento.x, personagemBomberman.personagemEmMovimento.y
 end
 
 -- executa em vários circulos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", update)
-personagemBomberman.personagemParado:addEventListener("touch", touchFunction)
-
+personagemBomberman.personagemEmMovimento:addEventListener("touch", touchFunction)
 
 return personagemBomberman

@@ -22,7 +22,8 @@
 local mapa = require("Objects.mapa")
 local inimigo = require ("Objects.inimigo")
 local personagem = require ("Objects.personagem")
-physics.addBody( personagem.personagemEmMovimento, "dynamic")
+--physics.addBody( personagem.personagemEmMovimento, "dynamic")
+
 
 local botaoBomba = require("Objects.bomba")
 

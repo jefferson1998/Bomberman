@@ -1,6 +1,6 @@
 local frames = {}
 
-function frames:personagemBombermanParaFrente()
+function frames:personagemBombermanParaFrente(imagem)
 	local frames =
 {
 	frames =
@@ -72,8 +72,18 @@ function frames:personagemBombermanParaFrente()
 	sheetContentWidth = 172,
     sheetContentHeight = 32
 }
-
-	return frames
+-- faz a animação acontecer: star - determina de que recorte deve começar
+	--count determina até quanto deve contar
+	--time é o tempo em milisegundos
+	--loopCount determina deverá repetir a animação
+local animacaoBomberman_run = {
+		name = "normalRun",
+		start = 1,
+		count = 7,
+		time = 800,
+		loopCount = 0
+	}
+	return animacaoBomberman_run, graphics.newImageSheet( imagem, frames)
 end
 
 
