@@ -1,6 +1,6 @@
 local frames = {}
 
-function frames:personagemBombermanParaFrente(imagem)
+function frames:personagemBomberman(imagem)
 	local frames = 
 {
 	frames =
@@ -78,10 +78,5 @@ local animacaoBomberman_run = {
 	return animacaoBomberman_run, graphics.newImageSheet( imagem, frames)
 end
 
-local paint = {
-	type = "image",
-	sheet = animacaoBomberman_run,
-	frame = 1
-}
 
 return frames

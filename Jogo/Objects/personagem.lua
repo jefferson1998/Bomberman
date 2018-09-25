@@ -9,15 +9,16 @@ local widget = require "widget"
 
 local frames = require "view.frames"
 
-local animacao = require ("view.personagemView")
+local personagemView = require ("view.personagemView")
 
 local personagemBomberman = {
-	personagemEmMovimento = animacao:newPersonagem()
+	personagemEmMovimento = personagemView:newPersonagem()
 }
 
+local imagemBotao = "imagens/botaoMovimentarPersonagem.png"
 local buttons = {}
 
-buttons[1] = display.newImage("imagens/botaoMovimentarPersonagem.png")
+buttons[1] = display.newImage(imagemBotao)
 buttons[1]:rotate ( 180 )
 buttons[1].x = w - 445
 buttons[1].y = h - 196
@@ -25,7 +26,7 @@ buttons[1].width = 30
 buttons[1].height = 35
 buttons[1].myName = "up"
 
-buttons[2] = display.newImage("imagens/botaoMovimentarPersonagem.png")
+buttons[2] = display.newImage(imagemBotao)
 buttons[2]:rotate ( 360 )
 buttons[2].x =  w - 444
 buttons[2].y = h - 154
@@ -33,7 +34,7 @@ buttons[2].width = 30
 buttons[2].height = 35
 buttons[2].myName = "down"
 
-buttons[3] = display.newImage("imagens/botaoMovimentarPersonagem.png")
+buttons[3] = display.newImage(imagemBotao)
 buttons[3]:rotate ( 90 )
 buttons[3].x = w - 461
 buttons[3].y = h - 175
@@ -41,7 +42,7 @@ buttons[3].width = 30
 buttons[3].height = 35
 buttons[3].myName = "left"
 
-buttons[4] = display.newImage("imagens/botaoMovimentarPersonagem.png")
+buttons[4] = display.newImage(imagemBotao)
 buttons[4]:rotate ( 270 )
 buttons[4].x = w - 428	
 buttons[4].y = h - 175
@@ -51,11 +52,17 @@ buttons[4].myName = "right"
 
 local passosX = 0
 local passosY = 0
-
+local sequencia = ""
 function touchFunction(e)
 	-- quando há clique ou clicar e arrastar para o lado
 	if e.phase == "began"  or e.phase == "moved" then
 		if e.target.myName == "up" then
+			sequencia = frames:personagemBomberman("imagens/trasPersonagemBranco.png")
+			print(sequencia.name)
+			sequencia.name = "trasRun"
+			print(sequencia.name)
+			personagemBomberman.personagemEmMovimento:setSequence(sequencia.name)
+			personagemBomberman.personagemEmMovimento:play()
 			passosY = -1.3
 			passosX = 0
 		elseif e.target.myName == "down" then
