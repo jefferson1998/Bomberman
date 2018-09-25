@@ -7,6 +7,8 @@ local h = display.contentHeight
 
 local widget = require "widget"
 
+local frames = require "view.frames"
+
 local animacao = require ("view.personagemView")
 
 local personagemBomberman = {
@@ -47,11 +49,11 @@ buttons[4].width = 30
 buttons[4].height = 35
 buttons[4].myName = "right"
 
-local passosX= 0
+local passosX = 0
 local passosY = 0
 
-local touchFunction = function (e)
-	-- quando há clique    ou clicar e arrastar para o lado
+function touchFunction(e)
+	-- quando há clique ou clicar e arrastar para o lado
 	if e.phase == "began"  or e.phase == "moved" then
 		if e.target.myName == "up" then
 			passosY = -1.3
@@ -69,10 +71,13 @@ local touchFunction = function (e)
 		end
 	-- quando soltar o botão ele para
 	else
+
+		passosX = 0
+		passosY = 0
+
+		personagemBomberman.personagemEmMovimento:setFrame(1)
 		personagemBomberman.personagemEmMovimento:pause()
 
-		passosY = 0
-		passosX = 0
 	end
 end
 	-- for que adiciona o evento de toque

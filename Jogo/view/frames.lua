@@ -1,7 +1,7 @@
 local frames = {}
 
 function frames:personagemBombermanParaFrente(imagem)
-	local frames =
+	local frames = 
 {
 	frames =
 	{
@@ -57,20 +57,12 @@ function frames:personagemBombermanParaFrente(imagem)
 			y = 1,
 			width = 18,
             height = 31
-		},
-
-		-- Frame 8
-		{
-			x = 151,
-			y = 1,
-			width = 18,
-            height = 31
 		}
 
 	},
 	-- tamanho total da imagem
-	sheetContentWidth = 172,
-    sheetContentHeight = 32
+	sheetContentWidth = imagem.width,
+    sheetContentHeight = imagem.height
 }
 -- faz a animação acontecer: star - determina de que recorte deve começar
 	--count determina até quanto deve contar
@@ -86,5 +78,10 @@ local animacaoBomberman_run = {
 	return animacaoBomberman_run, graphics.newImageSheet( imagem, frames)
 end
 
+local paint = {
+	type = "image",
+	sheet = animacaoBomberman_run,
+	frame = 1
+}
 
 return frames

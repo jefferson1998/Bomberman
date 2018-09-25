@@ -3,8 +3,10 @@ local framesBombermanParaFrente = require "view.frames"
 local cX = display.contentCenterX
 local cY = display.contentCenterY
 
+local imagem = "imagens/frentePersonagemBranco.png"
+
 function personagem:newPersonagem()
-	animacaoBombermanFrente_run, animacaoBombermanFrente = framesBombermanParaFrente:personagemBombermanParaFrente("imagens/frentePersonagemBranco.png")
+	animacaoBombermanFrente_run, animacaoBombermanFrente = framesBombermanParaFrente:personagemBombermanParaFrente(imagem)
 	
 	bomberman = display.newSprite( animacaoBombermanFrente, animacaoBombermanFrente_run);
 		  bomberman.x = cX

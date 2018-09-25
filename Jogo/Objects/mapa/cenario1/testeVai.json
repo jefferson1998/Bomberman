@@ -4,6 +4,7 @@
         {
          "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3],
          "height":9,
+         "id":1,
          "name":"Camada de Tiles 1",
          "opacity":1,
          "type":"tilelayer",
@@ -14,6 +15,7 @@
         }, 
         {
          "draworder":"topdown",
+         "id":2,
          "name":"labirinto",
          "objects":[
                 {
@@ -704,10 +706,11 @@
          "x":0,
          "y":0
         }],
+ "nextlayerid":3,
  "nextobjectid":66,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.1.6",
+ "tiledversion":"1.2.0",
  "tileheight":32,
  "tilesets":[
         {
@@ -731,37 +734,31 @@
          "imagewidth":32,
          "margin":0,
          "name":"parede",
-         "properties":
-            {
-             "bodyType":"static"
-            },
-         "propertytypes":
-            {
-             "bodyType":"string"
-            },
+         "properties":[
+                {
+                 "name":"bodyType",
+                 "type":"string",
+                 "value":"static"
+                }],
          "spacing":0,
          "tilecount":1,
          "tileheight":32,
-         "tileproperties":
-            {
-             "0":
+         "tiles":[
                 {
-                 "bodyType":"static"
-                }
-            },
-         "tilepropertytypes":
-            {
-             "0":
-                {
-                 "bodyType":"string"
-                }
-            },
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"bodyType",
+                         "type":"string",
+                         "value":"static"
+                        }]
+                }],
          "tilewidth":32
         }, 
         {
          "columns":1,
          "firstgid":3,
-         "image":"..\/..\/..\/..\/..\/..\/Corona Projects\/TesteColisao\/_MeusMapas\/parede.png",
+         "image":"parede.png",
          "imageheight":32,
          "imagewidth":32,
          "margin":0,
@@ -769,24 +766,20 @@
          "spacing":0,
          "tilecount":1,
          "tileheight":32,
-         "tileproperties":
-            {
-             "0":
+         "tiles":[
                 {
-                 "bodyType":"static"
-                }
-            },
-         "tilepropertytypes":
-            {
-             "0":
-                {
-                 "bodyType":"string"
-                }
-            },
+                 "id":0,
+                 "properties":[
+                        {
+                         "name":"bodyType",
+                         "type":"string",
+                         "value":"static"
+                        }]
+                }],
          "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",
- "version":1,
+ "version":1.2,
  "width":13
 }
