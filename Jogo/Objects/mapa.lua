@@ -16,8 +16,8 @@ end
 map:configurandoMapa()
 
 
-local labirinto = map:listTypes( "bloco" )
+local labirinto = map:listTypes( "bounds" )
 
 for i=1,#labirinto do
-  physics.addBody(labirinto[i], "static", { density=0.9} )
+  physics.addBody(labirinto[i], "static" )
 end
