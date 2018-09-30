@@ -83,8 +83,9 @@ function touchFunction(e)
 
 		passosX = 0
 		passosY = 0
+			
+		personagemBomberman.personagemEmMovimento:setFrame(1)
 		personagemBomberman.personagemEmMovimento:pause()
-
 	end
 end
 	-- for que adiciona o evento de toque

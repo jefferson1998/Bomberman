@@ -5,7 +5,7 @@ function frames:personagemBomberman(imagem)
 {
 		width = 16,
 		height = 37,
-		numFrames = 31
+		numFrames = 32
 
 }
 -- faz a animação acontecer: star - determina de que recorte deve começar
@@ -38,7 +38,7 @@ local animacaoBomberman_run = {
 
 	{
 		name = "framesLadoEsquerdoRun",
-		frames = {25,26,27,28,29,30,31},
+		frames = {32,31,30,29,28,27,26,25},
 		time = 800,
 		loopCount = 0
 	},
