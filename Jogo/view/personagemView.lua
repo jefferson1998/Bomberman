@@ -3,7 +3,7 @@ local framesBomberman = require "view.frames"
 local cX = display.contentCenterX
 local cY = display.contentCenterY
 
-local imagem = "imagens/frentePersonagemBranco.png"
+local imagem = "imagens/framesDoBomberman.png"
 
 function personagem:newPersonagem()
 	animacaoBomberman_run, animacaoBomberman = framesBomberman:personagemBomberman(imagem)

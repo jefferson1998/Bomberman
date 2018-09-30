@@ -57,22 +57,24 @@ function touchFunction(e)
 	-- quando há clique ou clicar e arrastar para o lado
 	if e.phase == "began"  or e.phase == "moved" then
 		if e.target.myName == "up" then
-			sequencia = frames:personagemBomberman("imagens/trasPersonagemBranco.png")
-			print(sequencia.name)
-			sequencia.name = "trasRun"
-			print(sequencia.name)
-			personagemBomberman.personagemEmMovimento:setSequence(sequencia.name)
+
+			personagemBomberman.personagemEmMovimento:setSequence( "framesTrasRun" )
 			personagemBomberman.personagemEmMovimento:play()
 			passosY = -1.3
 			passosX = 0
 		elseif e.target.myName == "down" then
+			personagemBomberman.personagemEmMovimento:setSequence( "framesFrenteRun" )
 			personagemBomberman.personagemEmMovimento:play()
 			passosY = 1.3
 			passosX = 0
 		elseif e.target.myName == "right" then
+			personagemBomberman.personagemEmMovimento:setSequence( "framesLadoDireitoRun" )
+			personagemBomberman.personagemEmMovimento:play()
 			passosX = 1.3
 			passosY = 0
 		elseif e.target.myName == "left" then
+			personagemBomberman.personagemEmMovimento:setSequence( "framesLadoEsquerdoRun" )
+			personagemBomberman.personagemEmMovimento:play()
 			passosX = -1.3
 			passosY = 0
 		end
@@ -81,8 +83,6 @@ function touchFunction(e)
 
 		passosX = 0
 		passosY = 0
-
-		personagemBomberman.personagemEmMovimento:setFrame(1)
 		personagemBomberman.personagemEmMovimento:pause()
 
 	end
@@ -106,5 +106,6 @@ end
 -- executa em vários circulos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", update)
 personagemBomberman.personagemEmMovimento:addEventListener("touch", touchFunction)
+
 
 return personagemBomberman
