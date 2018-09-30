@@ -1,7 +1,6 @@
 local physics = require "physics"
 physics.start()
 physics.setGravity(0, 0)
-
 --display.setStatusBar (display.HiddenStatusBar)
 --system.setIdleTimer( false ) -- impede a tela de apagar;
 
