@@ -1,23 +1,512 @@
-local tiled = require "com.ponywolf.ponytiled"
-local json = require "json"
-local physics = require "physics"
-physics.start()
-
-local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/testeVai.json", system.ResourceDirectory))  -- load from json export
-local map = tiled.new(mapData, "Objects/mapa/cenario1")
-
-function map:configurandoMapa()
-  map.x = 30
-  map.y = 25
-  map.width = 400
-  map.height = 270
-end
-
-map:configurandoMapa()
-
-
-local labirinto = map:listTypes( "bloco" )
-
-for i=1,#labirinto do
-  physics.addBody(labirinto[i], "static", { density=0.9} )
-end
+return {
+  version = "1.1",
+  luaversion = "5.1",
+  tiledversion = "1.1.6",
+  orientation = "orthogonal",
+  renderorder = "right-down",
+  width = 13,
+  height = 11,
+  tilewidth = 32,
+  tileheight = 32,
+  nextobjectid = 25,
+  properties = {},
+  tilesets = {
+    {
+      name = "azul",
+      firstgid = 1,
+      tilewidth = 32,
+      tileheight = 32,
+      spacing = 0,
+      margin = 0,
+      image = "../../Users/Jefferson/Pictures/azul.png",
+      imagewidth = 32,
+      imageheight = 33,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 32,
+        height = 32
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 0,
+      tiles = {}
+    },
+    {
+      name = "azul",
+      firstgid = 1,
+      tilewidth = 32,
+      tileheight = 32,
+      spacing = 0,
+      margin = 0,
+      image = "../../Users/Jefferson/Pictures/azul.png",
+      imagewidth = 32,
+      imageheight = 33,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 32,
+        height = 32
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 0,
+      tiles = {}
+    },
+    {
+      name = "quadradoCinza",
+      firstgid = 1,
+      tilewidth = 32,
+      tileheight = 32,
+      spacing = 0,
+      margin = 0,
+      image = "../../Users/Jefferson/Pictures/quadradoCinza.png",
+      imagewidth = 34,
+      imageheight = 33,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 32,
+        height = 32
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 1,
+      tiles = {}
+    },
+    {
+      name = "carreirinhaVertical",
+      firstgid = 2,
+      tilewidth = 31,
+      tileheight = 291,
+      spacing = 0,
+      margin = 0,
+      image = "../../Users/Jefferson/Pictures/carreirinhaVertical.png",
+      imagewidth = 32,
+      imageheight = 291,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 31,
+        height = 291
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 1,
+      tiles = {}
+    },
+    {
+      name = "carreirinha",
+      firstgid = 3,
+      tilewidth = 420,
+      tileheight = 31,
+      spacing = 0,
+      margin = 0,
+      image = "../../Users/Jefferson/Pictures/carreirinha.png",
+      imagewidth = 420,
+      imageheight = 31,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 420,
+        height = 31
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 1,
+      tiles = {}
+    }
+  },
+  layers = {
+    {
+      type = "tilelayer",
+      name = "Camada de Tiles 1",
+      x = 0,
+      y = 0,
+      width = 13,
+      height = 11,
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      properties = {},
+      encoding = "lua",
+      data = {
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+      }
+    },
+    {
+      type = "objectgroup",
+      name = "indestrutiveis",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {
+        {
+          id = 1,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64.75,
+          y = 97.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 2,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64.75,
+          y = 161.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 3,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64.75,
+          y = 225.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 4,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 64.75,
+          y = 290.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 5,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 128.75,
+          y = 97.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 6,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 128.75,
+          y = 160.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 7,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 128.75,
+          y = 225.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 8,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 127.75,
+          y = 289.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 9,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 191.75,
+          y = 97.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 10,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 192.75,
+          y = 161.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 11,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 191.75,
+          y = 225.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 12,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 191.75,
+          y = 289.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 13,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 255.75,
+          y = 98.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 14,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 255.75,
+          y = 161.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 15,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 255.75,
+          y = 225.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 16,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 256.75,
+          y = 290.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 17,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 319.75,
+          y = 97.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 18,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 320.75,
+          y = 161.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 19,
+          name = "",
+          type = "",
+          shape = "rectangle",
+          x = 319.75,
+          y = 226.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 20,
+          name = "",
+          type = "physics",
+          shape = "rectangle",
+          x = 319.75,
+          y = 290.75,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          gid = 1,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 21,
+          name = "",
+          type = "physics",
+          shape = "rectangle",
+          x = 0.416667,
+          y = 31.75,
+          width = 415.667,
+          height = 32,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 22,
+          name = "",
+          type = "physics",
+          shape = "rectangle",
+          x = 0.583333,
+          y = 352.75,
+          width = 416.333,
+          height = 32,
+          rotation = 0,
+          gid = 3,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 23,
+          name = "",
+          type = "physics",
+          shape = "rectangle",
+          x = -0.0833333,
+          y = 323.25,
+          width = 33,
+          height = 291,
+          rotation = 0,
+          gid = 2,
+          visible = true,
+          properties = {}
+        },
+        {
+          id = 24,
+          name = "",
+          type = "physics",
+          shape = "rectangle",
+          x = 383.5,
+          y = 321.5,
+          width = 32.3333,
+          height = 291,
+          rotation = 0,
+          gid = 2,
+          visible = true,
+          properties = {}
+        }
+      }
+    }
+  }
+}
