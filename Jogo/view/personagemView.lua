@@ -15,18 +15,4 @@ function personagem:newPersonagem()
 	return bomberman
 end
 
-function personagem:personagemParado()
-	return display.newImage("imagens/bomberInicaParado.png", cX, cY + 22)
-end
-
-function personagem:orientacaoTras()
-	animacaoBomberman_run, animacaoBomberman = framesBomberman:personagemBomberman(argFrames)
-	
-	bomberman = display.newSprite( animacaoBomberman, animacaoBomberman_run);
-		  bomberman.x = cX
-		  bomberman.y = cY
- 
-	return bomberman
-end
-
 return personagem

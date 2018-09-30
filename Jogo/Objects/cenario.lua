@@ -1,3 +1,5 @@
+--local physics = require "physics"
+
 --local imagemCenario = display.newImageRect("imagens/Mapa1.png", 350, 265)
 
 --local cX = display.contentCenterX
