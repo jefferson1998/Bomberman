@@ -7,17 +7,26 @@ local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/testeV
 local map = tiled.new(mapData, "Objects/mapa/cenario1")
 
 function map:configurandoMapa()
-  map.x = 30
-  map.y = 25
-  map.width = 400
-  map.height = 270
+  	map.x = 30
+  	map.y = 25
+  	map.width = 400
+  	map.height = 270
 end
 
-map:configurandoMapa()
+local parede = map:findLayer("parede")
+parede.anchorX = 0.5
+parede.anchorY = 0.5
+
+physics.addBody(parede, "static")
 
 
-local labirinto = map:listTypes( "bounds" )
+--isso não está servindo
+local labirinto = map:listTypes("bounds")
 
 for i=1,#labirinto do
   physics.addBody(labirinto[i], "static" )
 end
+
+map:configurandoMapa()
+
+return map

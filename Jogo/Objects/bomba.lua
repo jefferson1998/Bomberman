@@ -35,7 +35,7 @@ end
 
 local function updateTime()
     --Decrementando os segundos
-    bomba.tempo =  bomba.tempo - 1
+    bomba.tempo = bomba.tempo - 1
     
     --se o tempo for igual a 0 então      
     if  bomba.tempo == 0 then
@@ -83,6 +83,8 @@ local touchFunction = function (evento)
 	-- quando há clique  
 	if evento.phase == "began" then
 			if bomba.tempo == 0 then
+				print ("EixoX____________________ " ..math.floor(eixoX / 32))
+				print ("EixoY____________________ " ..math.floor(eixoY / 32))
 				bomba.imagem = bombaView:newBomba(eixoX, eixoY)
 				bomba.imagem:play()
 				bomba.tempo = 5

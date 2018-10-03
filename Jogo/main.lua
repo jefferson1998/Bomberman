@@ -12,14 +12,15 @@ physics.setGravity(0, 0)
 local mapa = require("Objects.mapa")
 --local inimigo = require ("Objects.inimigo")
 local personagem = require ("Objects.personagem")
-
+print("Tamanho Mapa _____________________" ..mapa.width / 32)
+print("Tamanho Mapa _____________________" ..mapa.height / 32)
 -- local bounds = personagem.contentBounds
 -- print( "xMin: ".. bounds.xMin ) -- xMin: 75
 -- print( "yMin: ".. bounds.yMin ) -- yMin: 75
 -- print( "xMax: ".. bounds.xMax ) -- xMax: 125
 -- print( "yMax: ".. bounds.yMax ) -- yMax: 125
 
---physics.addBody( personagem.personagemEmMovimento, "dynamic")
+physics.addBody( personagem.personagemEmMovimento, "dynamic")
 personagem.personagemEmMovimento.isFixedRotation = true
 
 local botaoBomba = require("Objects.bomba")

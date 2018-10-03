@@ -15,6 +15,9 @@ local personagemBomberman = {
 	personagemEmMovimento = personagemView:newPersonagem()
 }
 
+personagemBomberman.anchorX = 0.5
+personagemBomberman.anchorY = 0.0
+
 local imagemBotao = "imagens/botaoMovimentarPersonagem.png"
 local buttons = {}
 
@@ -55,7 +58,7 @@ local passosY = 0
 local sequencia = ""
 function touchFunction(e)
 	-- quando há clique ou clicar e arrastar para o lado
-	if e.phase == "began"  or e.phase == "moved" then
+	if e.phase == "began" or e.phase == "moved" then
 		if e.target.myName == "up" then
 
 			personagemBomberman.personagemEmMovimento:setSequence( "framesTrasRun" )
@@ -80,11 +83,12 @@ function touchFunction(e)
 		end
 	-- quando soltar o botão ele para
 	else
-
 		passosX = 0
 		passosY = 0
 		personagemBomberman.personagemEmMovimento:setFrame(1)
 		personagemBomberman.personagemEmMovimento:pause()
+		print(math.floor(personagemBomberman.personagemEmMovimento.x / 32))
+		print(personagemBomberman.personagemEmMovimento.x / 32)
 	end
 end
 	-- for que adiciona o evento de toque
@@ -96,7 +100,6 @@ end
 local update = function ()
 	personagemBomberman.personagemEmMovimento.x = personagemBomberman.personagemEmMovimento.x + passosX
 	personagemBomberman.personagemEmMovimento.y = personagemBomberman.personagemEmMovimento.y + passosY
-
 end
 
 function personagemBomberman:localizacaoNoMapa()
