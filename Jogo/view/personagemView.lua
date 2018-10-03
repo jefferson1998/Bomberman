@@ -11,7 +11,6 @@ function personagem:newPersonagem()
 	bomberman = display.newSprite( animacaoBomberman, animacaoBomberman_run);
 		  bomberman.x = cX
 		  bomberman.y = cY + 22
-
  
 	return bomberman
 end

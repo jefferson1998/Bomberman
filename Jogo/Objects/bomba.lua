@@ -2,6 +2,7 @@
 local widget = require "widget"
 local personagem = require "Objects.personagem"
 local inimigo = require "Objects.inimigo"
+local bombaView = require "view.bombaView"
 
 local bomba = {
 	tamanho = 7,
@@ -78,13 +79,12 @@ function bomba:percorrerAreaDaBomba(inimigo)
 
 end
 
-
-
 local touchFunction = function (evento)
 	-- quando há clique  
 	if evento.phase == "began" then
 			if bomba.tempo == 0 then
-				bomba.imagem = display.newCircle(eixoX, eixoY, bomba.tamanho)
+				bomba.imagem = bombaView:newBomba(eixoX, eixoY)
+				bomba.imagem:play()
 				bomba.tempo = 5
 				local countDownTimer = timer.performWithDelay( 1000, updateTime, bomba.tempo)
 			end

@@ -3,7 +3,6 @@
  "layers":[
         {
          "draworder":"topdown",
-         "id":3,
          "name":"bounds",
          "objects":[
                 {
@@ -49,14 +48,188 @@
                  "width":382,
                  "x":23,
                  "y":13
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":73,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":160.666666666667,
+                 "y":127.5
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":76,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":95.6666666666667,
+                 "y":128.166666666667
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":77,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":96.1666666666667,
+                 "y":192.166666666667
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":78,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":96.5,
+                 "y":255.833333333333
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":79,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":159.833333333333,
+                 "y":192.166666666667
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":80,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":159.833333333333,
+                 "y":256.166666666667
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":81,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":224.166666666667,
+                 "y":128.833333333333
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":82,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":223.666666666667,
+                 "y":191.5
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":83,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":192.666666666667,
+                 "y":223.333333333333
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":84,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":288.666666666667,
+                 "y":255.666666666667
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":85,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":288.833333333333,
+                 "y":191.5
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":86,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":288.833333333333,
+                 "y":127.833333333333
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":87,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":352.666666666667,
+                 "y":127.5
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":88,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":351.666666666667,
+                 "y":191.5
+                }, 
+                {
+                 "gid":2,
+                 "height":32,
+                 "id":89,
+                 "name":"bloco",
+                 "rotation":0,
+                 "type":"bounds",
+                 "visible":true,
+                 "width":32,
+                 "x":352.5,
+                 "y":255.833333333333
                 }],
          "opacity":1,
-         "properties":[
-                {
-                 "name":"bodyType",
-                 "type":"string",
-                 "value":"static"
-                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
@@ -65,7 +238,6 @@
         {
          "data":[2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
          "height":9,
-         "id":1,
          "name":"cenario",
          "opacity":1,
          "type":"tilelayer",
@@ -74,11 +246,10 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":4,
- "nextobjectid":73,
+ "nextobjectid":90,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"1.2.0",
+ "tiledversion":"1.1.6",
  "tileheight":32,
  "tilesets":[
         {
@@ -102,29 +273,21 @@
          "imagewidth":32,
          "margin":0,
          "name":"parede",
-         "properties":[
-                {
-                 "name":"bodyType",
-                 "type":"string",
-                 "value":"static"
-                }],
+         "properties":
+            {
+             "bodyType":"static"
+            },
+         "propertytypes":
+            {
+             "bodyType":"string"
+            },
          "spacing":0,
          "tilecount":1,
          "tileheight":32,
-         "tiles":[
-                {
-                 "id":0,
-                 "properties":[
-                        {
-                         "name":"bodyType",
-                         "type":"string",
-                         "value":"static"
-                        }]
-                }],
          "tilewidth":32
         }],
  "tilewidth":32,
  "type":"map",
- "version":1.2,
+ "version":1,
  "width":13
 }
