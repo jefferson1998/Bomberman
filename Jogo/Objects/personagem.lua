@@ -82,16 +82,16 @@ function touchFunction(e)
 			passosY = 0
 		end
 	-- quando soltar o botão ele para
-	else
+	elseif (e.phase == "ended" or e.phase == "canceled") then
 		passosX = 0
 		passosY = 0
 		personagemBomberman.personagemEmMovimento:setFrame(1)
 		personagemBomberman.personagemEmMovimento:pause()
-		print(math.floor(personagemBomberman.personagemEmMovimento.x / 32))
-		print(personagemBomberman.personagemEmMovimento.x / 32)
+		-- print(math.floor(personagemBomberman.personagemEmMovimento.x / 32))
+		-- print(personagemBomberman.personagemEmMovimento.x / 32)
 	end
 end
-	-- for que adiciona o evento de toque
+	-- for que adiciona o evento de toque no botoes
 for i=1, #buttons do
 	buttons[i]:addEventListener("touch", touchFunction)
 end

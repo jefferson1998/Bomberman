@@ -7,17 +7,17 @@ local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/testeV
 local map = tiled.new(mapData, "Objects/mapa/cenario1")
 
 function map:configurandoMapa()
-  	map.x = 30
-  	map.y = 25
+  	map.x = display.contentCenterX - map.designedWidth / 2
+  	map.y = display.contentCenterY - map.designedHeight / 2
   	map.width = 400
   	map.height = 270
 end
 
-local parede = map:findLayer("parede")
-parede.anchorX = 0.5
-parede.anchorY = 0.5
+-- local parede = map:findLayer("parede")
+-- parede.anchorX = 0.5
+-- parede.anchorY = 0.5
 
-physics.addBody(parede, "static")
+--physics.addBody(parede, "static")
 
 
 --isso não está servindo
