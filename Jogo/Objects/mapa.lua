@@ -18,7 +18,7 @@ end
 -- parede.anchorY = 0.5
 
 --physics.addBody(parede, "static")
-
+--map:configurandoMapa()
 
 --isso não está servindo
 local labirinto = map:listTypes("bounds")
@@ -27,6 +27,6 @@ for i=1,#labirinto do
   physics.addBody(labirinto[i], "static" )
 end
 
-map:configurandoMapa()
+
 
 return map

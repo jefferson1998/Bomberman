@@ -1,7 +1,7 @@
 -- faz referência a uma biblioteca do Corona	
 local widget = require "widget"
 local personagem = require "Objects.personagem"
-local inimigo = require "Objects.inimigo"
+--local inimigo = require "Objects.inimigo"
 local bombaView = require "view.bombaView"
 
 local bomba = {
@@ -18,8 +18,8 @@ local buttonExplosion = widget.newButton {
 	defaultFile = "imagens/botaoBomba.png"
 }
 
-buttonExplosion.x = w - 35
-buttonExplosion.y = h - 150
+buttonExplosion.x = w * 0.92
+buttonExplosion.y = h * 0.5
 
 
 function mover()
@@ -40,9 +40,9 @@ local function updateTime()
     --se o tempo for igual a 0 então      
     if  bomba.tempo == 0 then
         --remova a imagem
-        if bomba:percorrerAreaDaBomba(inimigo) then
-        	inimigo:removeSelf()
-        end
+        -- if bomba:percorrerAreaDaBomba(inimigo) then
+        -- 	inimigo:removeSelf()
+        -- end
         bomba.imagem:removeSelf()
    	end     
 end
