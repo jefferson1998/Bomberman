@@ -16,7 +16,7 @@ local personagemBomberman = {
 }
 
 personagemBomberman.anchorX = 0.5
-personagemBomberman.anchorY = 0.0
+personagemBomberman.anchorY = 0.25
 
 local imagemBotao = "imagens/botaoMovimentarPersonagem.png"
 local buttons = {}
@@ -27,7 +27,7 @@ buttons[1] = display.newImage(imagemBotao)
 buttons[1].anchorX = 0.5
 buttons[1].anchorY = 0.0
 buttons[1]:rotate ( 180 )
-buttons[1].x = w * 0.08
+buttons[1].x = w * 0.07
 buttons[1].y = h * 0.5
 buttons[1].width = 30
 buttons[1].height = 35
