@@ -16,6 +16,7 @@ local personagemBomberman = {
 }
 
 local imagemBotao = "imagens/botaoMovimentarPersonagem.png"
+
 local buttons = {}
 
 buttons[1] = display.newImage(imagemBotao)
