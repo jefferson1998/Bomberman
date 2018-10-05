@@ -3,11 +3,11 @@ local frames = {}
 function frames:personagemBomberman(imagem)
 	local frames = 
 {
-		width = 26,
-		height = 59,
-		numFrames = 32
-
+	width = 24,
+	height = 35,
+	numFrames = 32
 }
+print (imagem.height)
 -- faz a animação acontecer: star - determina de que recorte deve começar
 	--count determina até quanto deve contar
 	--time é o tempo em milisegundos

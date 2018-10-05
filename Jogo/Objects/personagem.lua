@@ -15,38 +15,54 @@ local personagemBomberman = {
 	personagemEmMovimento = personagemView:newPersonagem()
 }
 
+personagemBomberman.anchorX = 0.5
+personagemBomberman.anchorY = 0.25
+
 local imagemBotao = "imagens/botaoMovimentarPersonagem.png"
 
 local buttons = {}
 
+
+-- BOTAO CIMA
 buttons[1] = display.newImage(imagemBotao)
+buttons[1].anchorX = 0.5
+buttons[1].anchorY = 0.0
 buttons[1]:rotate ( 180 )
-buttons[1].x = w - 445
-buttons[1].y = h - 196
+buttons[1].x = w * 0.07
+buttons[1].y = h * 0.5
 buttons[1].width = 30
 buttons[1].height = 35
 buttons[1].myName = "up"
 
+
+--BOTAO BAIXO
 buttons[2] = display.newImage(imagemBotao)
-buttons[2]:rotate ( 360 )
-buttons[2].x =  w - 444
-buttons[2].y = h - 154
+buttons[2].anchorX = 0.5
+buttons[2].anchorY = 0.0
+buttons[2].x = buttons[1].x
+buttons[2].y = buttons[1].y
 buttons[2].width = 30
 buttons[2].height = 35
 buttons[2].myName = "down"
 
+--BOTAO ESQUERDA
 buttons[3] = display.newImage(imagemBotao)
+buttons[3].anchorX = 0.5
+buttons[3].anchorY = 0.0
 buttons[3]:rotate ( 90 )
-buttons[3].x = w - 461
-buttons[3].y = h - 175
+buttons[3].x = buttons[1].x
+buttons[3].y = buttons[1].y
 buttons[3].width = 30
 buttons[3].height = 35
 buttons[3].myName = "left"
 
+--BOTAO DIREITA
 buttons[4] = display.newImage(imagemBotao)
+buttons[4].anchorX = 0.5
+buttons[4].anchorY = 0.0
 buttons[4]:rotate ( 270 )
-buttons[4].x = w - 428	
-buttons[4].y = h - 175
+buttons[4].x = buttons[1].x
+buttons[4].y = buttons[1].y
 buttons[4].width = 30
 buttons[4].height = 35
 buttons[4].myName = "right"
@@ -56,7 +72,7 @@ local passosY = 0
 local sequencia = ""
 function touchFunction(e)
 	-- quando há clique ou clicar e arrastar para o lado
-	if e.phase == "began"  or e.phase == "moved" then
+	if e.phase == "began" or e.phase == "moved" then
 		if e.target.myName == "up" then
 
 			personagemBomberman.personagemEmMovimento:setSequence( "framesTrasRun" )
@@ -80,15 +96,16 @@ function touchFunction(e)
 			passosY = 0
 		end
 	-- quando soltar o botão ele para
-	else
-
+	elseif (e.phase == "ended" or e.phase == "canceled") then
 		passosX = 0
 		passosY = 0
 		personagemBomberman.personagemEmMovimento:setFrame(1)
 		personagemBomberman.personagemEmMovimento:pause()
+		-- print(math.floor(personagemBomberman.personagemEmMovimento.x / 32))
+		-- print(personagemBomberman.personagemEmMovimento.x / 32)
 	end
 end
-	-- for que adiciona o evento de toque
+	-- for que adiciona o evento de toque no botoes
 for i=1, #buttons do
 	buttons[i]:addEventListener("touch", touchFunction)
 end
@@ -97,7 +114,6 @@ end
 local update = function ()
 	personagemBomberman.personagemEmMovimento.x = personagemBomberman.personagemEmMovimento.x + passosX
 	personagemBomberman.personagemEmMovimento.y = personagemBomberman.personagemEmMovimento.y + passosY
-
 end
 
 function personagemBomberman:localizacaoNoMapa()

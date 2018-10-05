@@ -1,6 +1,7 @@
 -- faz referência a uma biblioteca do Corona	
 local widget = require "widget"
 local personagem = require "Objects.personagem"
+
 local inimigoView = require "view.inimigoView"
 local bombaView = require "view.bombaView"
 local botaoBombaView = require "view.botaoBombaView"
@@ -20,14 +21,20 @@ end
 
 local function updateTime()
     --Decrementando os segundos
-    bomba.tempo =  bomba.tempo - 1
+    bomba.tempo = bomba.tempo - 1
     
     --se o tempo for igual a 0 então      
     if  bomba.tempo == 0 then
         --remova a imagem
+<<<<<<< HEAD
         if bomba:percorrerAreaDaBomba(inimigoView) then
         	inimigoView:removeSelf()
         end
+=======
+        -- if bomba:percorrerAreaDaBomba(inimigo) then
+        -- 	inimigo:removeSelf()
+        -- end
+>>>>>>> fde109a306502aa3be68f59e5483b7fdc12b44cf
         bomba.imagem:removeSelf()
    	end     
 end
@@ -68,6 +75,8 @@ local touchFunction = function (evento)
 	-- quando há clique  
 	if evento.phase == "began" then
 			if bomba.tempo == 0 then
+				print ("EixoX____________________ " ..math.floor(eixoX / 32))
+				print ("EixoY____________________ " ..math.floor(eixoY / 32))
 				bomba.imagem = bombaView:newBomba(eixoX, eixoY)
 				bomba.imagem:play()
 				bomba.tempo = 5
