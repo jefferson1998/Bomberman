@@ -1,7 +1,8 @@
+local widget = require "widget"
+
 local buttonExplosion = widget.newButton {
 	defaultFile = "imagens/botaoBomba.png"
 }
-
 
 local w = display.contentWidth
 local h = display.contentHeight
