@@ -9,8 +9,6 @@ local map = tiled.new(mapData, "Objects/mapa/cenario1")
 function map:configurandoMapa()
   	map.x = display.contentCenterX - map.designedWidth / 2
   	map.y = display.contentCenterY - map.designedHeight / 2
-  	map.width = 400
-  	map.height = 270
 end
 
 -- local parede = map:findLayer("parede")

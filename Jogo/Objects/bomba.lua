@@ -1,7 +1,7 @@
 -- faz referência a uma biblioteca do Corona	
 local widget = require "widget"
 local personagem = require "Objects.personagem"
-local inimigoView = require "view.inimigoView"
+--local inimigoView = require "view.inimigoView"
 local bombaView = require "view.bombaView"
 local botaoBombaView = require "view.botaoBombaView"
 

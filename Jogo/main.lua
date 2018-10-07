@@ -9,7 +9,7 @@ physics.setGravity(0, 0)
 
 
 --local cenario = require ("Objects.cenario")
-local mapa = require("Objects.mapa")
+local mapa = require("view.mapaView")
 --local inimigo = require ("Objects.inimigo")
 local personagem = require ("Objects.personagem")
 
@@ -18,7 +18,6 @@ local personagem = require ("Objects.personagem")
 -- print( "yMin: ".. bounds.yMin ) -- yMin: 75
 -- print( "xMax: ".. bounds.xMax ) -- xMax: 125
 -- print( "yMax: ".. bounds.yMax ) -- yMax: 125
-
 physics.addBody( personagem.personagemEmMovimento, "dynamic")
 personagem.personagemEmMovimento.isFixedRotation = true
 
