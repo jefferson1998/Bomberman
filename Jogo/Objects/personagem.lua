@@ -66,8 +66,8 @@ end
 local update = function ()
 	personagemBomberman.personagemEmMovimento.x = personagemBomberman.personagemEmMovimento.x + passosX
 	personagemBomberman.personagemEmMovimento.y = personagemBomberman.personagemEmMovimento.y + passosY
-	--margemDeFisica.x = margemDeFisica.x + passosX
-	--margemDeFisica.y = margemDeFisica.y + passosY
+	margemDeFisica.x = margemDeFisica.x + passosX
+	margemDeFisica.y = margemDeFisica.y + passosY
 end
 
 function personagemBomberman:localizacaoNoMapa()
