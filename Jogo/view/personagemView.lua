@@ -13,19 +13,20 @@ function personagem:newPersonagem()
 		  bomberman.y = 32 * 2.6
  	
  	bomberman.anchorX = 0.5
- 	bomberman.anchorY = 0.25
 
+ 	bomberman.anchorY = 0.85
 	return bomberman
 end
 
-function personagem:margemDeFisica()
-	
-	local vertices = {-10,0, -10, 6, 10, 6, 10, 0}
-		margemDeFisica = display.newPolygon(32*2.5, 32 * 3.4,  vertices )
-		margemDeFisica:setStrokeColor(1,0,0)
-		margemDeFisica.isVisible = true
+-- function personagem:margemDeFisica()
 
-		return margemDeFisica
-end
+-- 	local vertices = {-10,0, -10, 7, 10, 7, 10, 0}
+
+-- 	margemDeFisica = display.newPolygon(32*3.5, 32 * 3.4,  vertices )
+-- 	margemDeFisica:setStrokeColor(1,0,0)
+-- 	margemDeFisica.isVisible = true
+-- 	return margemDeFisica
+	
+-- end
 
 return personagem
