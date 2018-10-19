@@ -1,7 +1,7 @@
 -- faz referência a uma biblioteca do Corona	
 local widget = require "widget"
 local personagem = require "Objects.personagem"
---local inimigoView = require "view.inimigoView"
+local inimigoView = require "view.inimigoView"
 local bombaView = require "view.bombaView"
 local botaoBombaView = require "view.botaoBombaView"
 
@@ -14,7 +14,6 @@ local bomba = {
 local eixoX, eixoY
 
 local update = function ()
-	
 	eixoX, eixoY = personagem:localizacaoNoMapa()
 end
 
@@ -24,10 +23,11 @@ local function updateTime()
     
     --se o tempo for igual a 0 então      
     if  bomba.tempo == 0 then
-        --remova a imagem
+        --remova a imagem do inimigo
         if bomba:percorrerAreaDaBomba(inimigoView) then
         	inimigoView:removeSelf()
         end
+        -- remove a imagem da bomba
         bomba.imagem:removeSelf()
    	end     
 end

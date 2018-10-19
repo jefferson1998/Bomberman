@@ -18,7 +18,8 @@ local personagem = require ("Objects.personagem")
 -- print( "yMin: ".. bounds.yMin ) -- yMin: 75
 -- print( "xMax: ".. bounds.xMax ) -- xMax: 125
 -- print( "yMax: ".. bounds.yMax ) -- yMax: 125
-physics.addBody( personagem.personagemEmMovimento, "dynamic")
+local vertices = {-10,0, -10, 16, 10, 16, 10, 0}
+physics.addBody( personagem.personagemEmMovimento, "dynamic", {shape = vertices})
 personagem.personagemEmMovimento.isFixedRotation = true
 
 local botaoBomba = require("Objects.bomba")

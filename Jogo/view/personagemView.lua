@@ -14,14 +14,17 @@ function personagem:newPersonagem()
  	
  	bomberman.anchorX = 0.5
  	bomberman.anchorY = 0.25
+
 	return bomberman
 end
 
 function personagem:margemDeFisica()
+	
 	local vertices = {-10,0, -10, 6, 10, 6, 10, 0}
 		margemDeFisica = display.newPolygon(32*2.5, 32 * 3.4,  vertices )
 		margemDeFisica:setStrokeColor(1,0,0)
 		margemDeFisica.isVisible = true
+
 		return margemDeFisica
 end
 
