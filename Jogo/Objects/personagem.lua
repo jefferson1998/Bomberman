@@ -64,10 +64,10 @@ end
 
 -- atualiza o jogo
 local update = function ()
-	personagemBomberman.personagemEmMovimento.x = personagemBomberman.personagemEmMovimento.x + passosX
-	personagemBomberman.personagemEmMovimento.y = personagemBomberman.personagemEmMovimento.y + passosY
-	margemDeFisica.x = margemDeFisica.x + passosX
-	margemDeFisica.y = margemDeFisica.y + passosY
+	margemDeFisica.x = personagemBomberman.personagemEmMovimento.x + passosX
+	margemDeFisica.y = personagemBomberman.personagemEmMovimento.y + passosY
+	personagemBomberman.personagemEmMovimento.x = margemDeFisica.x
+	personagemBomberman.personagemEmMovimento.y = margemDeFisica.y
 end
 
 function personagemBomberman:localizacaoNoMapa()
