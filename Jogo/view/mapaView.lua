@@ -11,6 +11,8 @@ function map:configurandoMapa()
   	map.y = display.contentCenterY - map.designedHeight / 2
 end
 
+
+
 -- local parede = map:findLayer("parede")
 -- parede.anchorX = 0.5
 -- parede.anchorY = 0.5

@@ -9,12 +9,11 @@ function personagem:newPersonagem()
 	animacaoBomberman_run, animacaoBomberman = framesBomberman:personagemBomberman(imagem)
 	
 	bomberman = display.newSprite( animacaoBomberman, animacaoBomberman_run);
-		  bomberman.x = 32 * 2.5
-		  bomberman.y = 32 * 2.6
- 	
- 	bomberman.anchorX = 0.5
+		bomberman.x = 32 * 2.5
+		bomberman.y = 32 * 2.6
+ 		
+ 		bomberman.anchorY = 0.85
 
- 	bomberman.anchorY = 0.85
 	return bomberman
 end
 

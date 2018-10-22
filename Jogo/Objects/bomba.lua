@@ -1,4 +1,4 @@
--- faz referência a uma biblioteca do Corona	
+	-- faz referência a uma biblioteca do Corona	
 local widget = require "widget"
 local personagem = require "Objects.personagem"
 local inimigoView = require "view.inimigoView"
