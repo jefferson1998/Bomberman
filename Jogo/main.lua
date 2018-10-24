@@ -23,11 +23,4 @@ local vertices = {-10,0, -10, 16, 10, 16, 10, 0}
 physics.addBody( personagem.personagemEmMovimento, "dynamic", {shape = vertices})
 personagem.personagemEmMovimento.isFixedRotation = true
 
-local chao = mapa:findLayer("chao")
-
-display.newCircle( chao[math.round(math.fmod(chao[2].x, mapa.designedWidth) / 32)].x, chao[math.round(math.fmod(chao[2].x, mapa.designedWidth) / 32)].y, 2)
-
-print(math.round(math.fmod(chao[2].x, mapa.designedWidth) / 32))
-
-
 local botaoBomba = require("Objects.bomba")

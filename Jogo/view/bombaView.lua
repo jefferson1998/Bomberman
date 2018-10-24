@@ -15,6 +15,7 @@ function bomba:newBomba(argPosicaoX, argPosicaoY)
 	x = 16 + (32 * (math.ceil(math.fmod(argPosicaoX, mapa.designedWidth) / 32) - 1))
 	y = 16 + (32 * (math.ceil(math.fmod(argPosicaoY, mapa.designedHeight) / 32) - 1))
 
+
 	local i = 1
 
 	-- repeat
