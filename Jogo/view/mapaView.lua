@@ -48,13 +48,6 @@ function map:matrizEstado()
 	return matrizEstado
 end
 
--- local parede = map:findLayer("parede")
--- parede.anchorX = 0.5
--- parede.anchorY = 0.5
-
---physics.addBody(parede, "static")
---map:configurandoMapa()
-
 --isso não está servindo
 local labirinto = map:listTypes("bounds")
 
@@ -62,8 +55,5 @@ for i=1,#labirinto do
   physics.addBody(labirinto[i], "static" )
 end
 
-function map:enterFrame( event )
-	
-end
 
 return map

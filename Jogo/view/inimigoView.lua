@@ -1,8 +1,5 @@
-local personagem = require "view.personagemView"
-local imagem = "imagens/framesDoBomberman.png"
-local mapa = require "view.mapaView"
 
-local inimigo = personagem:newPersonagem(imagem)
+local inimigo = display.newCircle(80, 90, 10 )
 
 
 function inimigo:posicaoInimigo()
