@@ -15,8 +15,8 @@ function bomba:newBomba(argPosicaoX, argPosicaoY)
 
 
 	bombaSprite = display.newSprite( animacaoBomba, tempoBomba_run);
-		  bombaSprite.x = x
-		  bombaSprite.y = y
+	  bombaSprite.x = x
+	  bombaSprite.y = y
  
 	return bombaSprite
 end

@@ -1,5 +1,4 @@
-local personagemModel = {
-}
+local personagemModel = {}
 
 -- atualiza o jogo
 

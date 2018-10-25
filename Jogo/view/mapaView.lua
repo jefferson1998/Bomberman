@@ -6,38 +6,30 @@ physics.start()
 local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/testeTamanho.json", system.ResourceDirectory))  -- load from json export
 local map = tiled.new(mapData, "Objects/mapa/cenario1")
 
-local matrizEstado = {
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{},
-	{}
-}
+function map:getEstado()
+	local matrizEstado = {
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{}
+	}
 
-local i, j = 1, 1
-for k,v in pairs(mapData.layers[1].data) do
-	matrizEstado[i][j] = v
-	j = j + 1
-	if(tonumber(k) % 15 == 0) then 
-		i = i + 1
-		j = 1
-	 end
-end
-
-local str = ""
-for i = 1, #matrizEstado do
-	for j = 1, #matrizEstado[i] do
-		str = str .. tostring( matrizEstado[i][j] )
+	local i, j = 1, 1
+	for k,v in pairs(mapData.layers[1].data) do
+		matrizEstado[i][j] = v
+		j = j + 1
+		if(tonumber(k) % 15 == 0) then 
+			i = i + 1
+			j = 1
+		 end
 	end
-	str = str .. "\n"
 end
-
-print(str)
 
 function map:configurandoMapa()
   	map.x = display.contentCenterX - map.designedWidth / 2

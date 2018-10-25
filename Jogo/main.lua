@@ -1,6 +1,3 @@
-local physics = require "physics"
-physics.start()
-physics.setGravity(0, 0)
 --display.setStatusBar (display.HiddenStatusBar)
 --system.setIdleTimer( false ) -- impede a tela de apagar;
 
@@ -16,6 +13,6 @@ physics.setGravity(0, 0)
 -- print( "xMax: ".. bounds.xMax ) -- xMax: 125
 -- print( "yMax: ".. bounds.yMax ) -- yMax: 125
 
-local mapa = require("view.mapaView")
 local cenario = require("view.cenario")
 local botaoBomba = require("Objects.bomba")
+local botoes = require("view.botaoOrientacaoView")

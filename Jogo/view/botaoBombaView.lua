@@ -1,4 +1,5 @@
 local widget = require "widget"
+local bomba = require "Objects.bomba"
 
 local buttonExplosion = widget.newButton {
 	defaultFile = "imagens/botaoBomba.png"

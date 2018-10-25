@@ -1,3 +1,5 @@
+local cenario = require "view.cenario"
+
 local imagemBotao = "imagens/botaoMovimentarPersonagem.png"
 local w = display.contentWidth
 local h = display.contentHeight
@@ -46,5 +48,11 @@ buttons[4].y = buttons[1].y
 buttons[4].width = 30
 buttons[4].height = 35
 buttons[4].myName = "right"
+
+
+-- for que adiciona o evento de toque no botoes
+for i=1, #buttons do
+	buttons[i]:addEventListener("touch", cenario)
+end
 
 return buttons
