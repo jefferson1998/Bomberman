@@ -1,4 +1,4 @@
-local bomba = {bombaSprite = 0,tempoBomba_run = 0, animacaoBomba = 0 }
+local bomba = {bombaSprite = 0,tempoBomba_run = 0, animacaoBomba = 0, sprite = 0}
 local frames = require "view.frames"
 local mapa = require "view.mapaView"
 
@@ -20,5 +20,7 @@ function bomba:newBomba(argPosicaoX, argPosicaoY)
  
 	return bombaSprite
 end
+
+
 
 return bomba

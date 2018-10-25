@@ -77,6 +77,7 @@ end
 function personagem:enterFrame()
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
+	return personagemGrafico.x , personagemGrafico.y
 end
 
 function personagem:getPersonagemGrafico()

@@ -1,7 +1,6 @@
 local mapa = require "view.mapaView"
 local personagemView = require "view.personagemView"
-local bomba = require "Objects.bomba"
-
+local bombaView = require "view.botaoBombaView"
 
 local cenario = {}
 
@@ -21,7 +20,7 @@ function cenario:getEstado()
 	return mapa:getEstado()
 end
 
-function cenario:getPersonagem(  )
+function cenario:getPersonagem()
 	return personagemView
 end
 
@@ -29,8 +28,8 @@ function cenario:getMapa()
 	return mapa
 end
 
-function localizacaoNoMapa(object)
-	return object.x, object.y
-end
+-- function localizacaoNoMapa(object)
+-- 	return object.x, object.y
+-- end
 
 return cenario
