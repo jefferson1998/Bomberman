@@ -37,7 +37,7 @@ function botaoView:percorrerAreaDaBomba(inimigo)
 		if math.floor(bombaView.sprite.x) == inimigo.x or math.floor(bombaView.sprite.y) == inimigo.y then
 			return true
 		end
-		bombaView.sprite.y = bombaView.imagem.y + 1
+		bombaView.sprite.y = bombaView.sprite.y + 1
 	end
 
 	for i=1,7 do
@@ -71,7 +71,7 @@ end
 
 
 
-function atirarBomba(evento)
+function botaoView:touch(evento)
 	if evento.phase == "began" then
 		if bomba.tempo == 0 then
 				bombaView.sprite = bombaView:newBomba(botaoView:pegandoLocalizandoPersonagem())
@@ -82,6 +82,6 @@ function atirarBomba(evento)
 	end
 end
 
-botaoView:addEventListener("touch", atirarBomba)
+botaoView:addEventListener("touch", botaoView)
 
 return botaoView

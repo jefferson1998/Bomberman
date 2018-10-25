@@ -1,4 +1,3 @@
-
 local inimigo = display.newCircle(80, 90, 10 )
 
 
