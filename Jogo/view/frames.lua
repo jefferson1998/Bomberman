@@ -60,14 +60,13 @@ function frames:tempoBomba(imagem)
 	}
 
 	local animacaoTempoBomba_run = {
-		{
 			name = "framesTempoRum",
 			start = 1,
 			count = 7,
 			time = 5000,
 			loopCount = 1
 		}
-	}
+	
 
 	return animacaoTempoBomba_run, graphics.newImageSheet(imagem, frames)
 

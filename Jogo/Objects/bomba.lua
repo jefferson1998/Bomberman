@@ -3,7 +3,7 @@ local inimigoView = require "view.inimigoView"
 
 local bomba = {
 	tamanho = 7,
-	tempo = 0
+	tempo = 4
 }
 
 return bomba
