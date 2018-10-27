@@ -15,8 +15,9 @@ local function tempoDaBomba()
     if  bombaModel.tempo == 0 then
         -- remove a imagem da bomba
         print("entrei")
-        bombaSprite:removeSelf()
         
+        bombaSprite:removeSelf()
+
         print("BOMBAMODEL___" .. bombaModel.tempo)
         -------------------------------------------------------------
         -- Cria a sprite da explosao e nela ve se tem algum objeto --
