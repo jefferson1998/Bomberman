@@ -21,7 +21,7 @@ function estadoDoJogo:enterFrame()
 
 
 
-	estadoDoJogo[posicaoAtualX][posicaoAtualY] = 
+	--estadoDoJogo[posicaoAtualX][posicaoAtualY] = 
 end
 
 

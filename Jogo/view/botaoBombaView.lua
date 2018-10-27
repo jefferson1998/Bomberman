@@ -3,6 +3,7 @@ local bombaView = require "view.bombaView"
 local personagemView = require "view.personagemView"
 local inimigoView = require "view.inimigoView"
 local bombaModel = bombaView:getBombaModel()
+
 local botaoView = widget.newButton {
 	defaultFile = "imagens/botaoBomba.png"
 }
@@ -13,38 +14,6 @@ local eixoX, eixoY
 
 botaoView.x = w - 35
 botaoView.y = h - 150
-
-function botaoView:percorrerAreaDaBomba(inimigo)
-	inimigo.x, inimigo.y = inimigo:posicaoInimigo()
-	for i=1,7  do
-		if math.floor(bombaView.sprite.x) == inimigo.x or math.floor(bombaView.sprite.y) == inimigo.y then
-			return true
-		end
-		bombaView.sprite.y = bombaView.sprite.y + 1
-	end
-
-	for i=1,7 do
-		if bombaView.sprite.x == inimigo.x or bombaView.sprite.y == inimigo.y then
-			return true
-		end
-		bombaView.sprite.y = bombaView.sprite.y - 1
-	end
-
-	for i=1,7 do
-		if bombaView.sprite.x == inimigo.x or bombaView.sprite.y == inimigo.y then
-			return true
-		end
-		bombaView.sprite.x = bombaView.sprite.x + 1
-	end
-
-	for i=1,7 do
-		if bombaView.sprite.x == inimigo.x or bombaView.sprite.y == inimigo.y then
-			return true
-		end
-		bombaView.sprite.x = bombaView.sprite.x - 1
-	end
-
-end
 
 function botaoView:touch(evento)
 	if evento.phase == "began" then

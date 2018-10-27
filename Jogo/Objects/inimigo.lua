@@ -1,4 +1,3 @@
-
 local inimigo = {
 	vida = 1
 }
