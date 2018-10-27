@@ -1,4 +1,4 @@
-	-- faz referência a uma biblioteca do Corona	
+-- faz referência a uma biblioteca do Corona	
 local inimigoView = require "view.inimigoView"
 
 local bomba = {

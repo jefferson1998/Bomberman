@@ -1,6 +1,7 @@
 local frames = require "view.frames"
 local mapa = require "view.mapaView"
 local bombaModel = require "Objects.bomba"
+local explosao = require "view.explosaoBomba"
 
 local bomba = {bombaSprite = 0,tempoBomba_run = 0, animacaoBomba = 0, sprite = 0}
 
