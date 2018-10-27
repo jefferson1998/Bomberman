@@ -14,6 +14,7 @@
 -- print( "yMax: ".. bounds.yMax ) -- yMax: 125
 
 local cenario = require("view.cenario")
-local botaoBomba = require("Objects.bomba")
-local botoes = require("view.botaoOrientacaoView")
-local estadoDoJogo = require ("Object.estadoDoJogo")
+
+-- local botaoBomba = require("Objects.bomba")
+-- local botoes = require("view.botaoOrientacaoView")
+-- local estadoDoJogo = require ("Objects.estadoJogo")

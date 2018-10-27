@@ -25,9 +25,9 @@ end
 
 personagem:adicionandoFisica()
 
-function personagem:mover( direcao ) 
+function personagem:touch( e ) 
 	-- quando há clique ou clicar e arrastar para o lado
-	-- if e.phase == "began" or e.phase == "moved" then
+	 if e.phase == "began" or e.phase == "moved" then
 		if direcao == "up" then
 
 			personagemGrafico:setSequence( "framesTrasRun" )
@@ -62,16 +62,16 @@ function personagem:mover( direcao )
 			personagemGrafico:setFrame(1)
 			personagemGrafico:pause()
 		end
-	-- -- quando soltar o botão ele para
-	-- elseif (e.phase == "ended" or e.phase == "canceled") then
+	-- quando soltar o botão ele para
+	elseif (e.phase == "ended" or e.phase == "canceled") then
 		
-	-- 	passosX = 0
-	-- 	passosY = 0
-	-- 	personagemGrafico:setFrame(1)
-	-- 	personagemGrafico:pause()
-	-- 	-- print(math.floor(personagemGrafico.x / 32))
-	-- 	-- print(personagemGrafico.x / 32)
-	-- end
+		passosX = 0
+		passosY = 0
+		personagemGrafico:setFrame(1)
+		personagemGrafico:pause()
+		-- print(math.floor(personagemGrafico.x / 32))
+		-- print(personagemGrafico.x / 32)
+	end
 end
 
 function personagem:enterFrame()
@@ -83,5 +83,8 @@ end
 function personagem:getPersonagemGrafico()
 	return personagemGrafico
 end
+
+-- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
+Runtime:addEventListener("enterFrame", personagem)
 
 return personagem

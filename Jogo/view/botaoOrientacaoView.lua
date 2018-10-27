@@ -1,9 +1,8 @@
-local cenario = require "view.cenario"
-
 local imagemBotao = "imagens/botaoMovimentarPersonagem.png"
 local w = display.contentWidth
 local h = display.contentHeight
 local buttons = {}
+local personagemView = cenario:getPersonagem()
 
 -- BOTAO CIMA
 buttons[1] = display.newImage(imagemBotao)
@@ -52,7 +51,7 @@ buttons[4].myName = "right"
 
 -- for que adiciona o evento de toque no botoes
 for i=1, #buttons do
-	buttons[i]:addEventListener("touch", cenario)
+	buttons[i]:addEventListener("touch", cenario:getPersonagem())
 end
 
 return buttons

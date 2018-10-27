@@ -19,7 +19,8 @@ function botaoView:touch(evento)
 	if evento.phase == "began" then
 		if bombaModel.tempo == 0 then
 			bombaModel.tempo = 4
-			bombaView.bombaSprite = bombaView:newBomba(personagemView:getPersonagemGrafico().x, personagemView:getPersonagemGrafico().y)
+			bombaView.bombaSprite = bombaView:newBomba(cenario:getMapa():localizacaoNoMapa(cenario:getPersonagem():getPersonagemGrafico()))
+			cenario:getPersonagem():getPersonagemGrafico():toFront()
 			bombaView.bombaSprite:play()
 		end
 	end

@@ -4,7 +4,8 @@ local physics = require "physics"
 physics.start()
 
 local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/testeTamanho.json", system.ResourceDirectory))  -- load from json export
-map = tiled.new(mapData, "Objects/mapa/cenario1")
+
+local map = tiled.new(mapData, "Objects/mapa/cenario1")
 
 function map:getEstado()
 	local matrizEstado = {
@@ -48,5 +49,8 @@ for i=1,#labirinto do
   physics.addBody(labirinto[i], "static" )
 end
 
+function map:localizacaoNoMapa(object)
+	return object.x, object.y
+end
 
 return map

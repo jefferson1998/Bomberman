@@ -1,6 +1,5 @@
-local personagemView = require "view.personagemView"
-local estadoDoJogo = map:getEstado()
-
+local estadoDoJogo = cenario:getMapa():getEstado()
+local map = cenario:getMapa()
 
 --------------------------------------------------------------------------------------------
 -- Regras do Estado
@@ -13,7 +12,7 @@ local estadoDoJogo = map:getEstado()
 ------------------------------------------------------------------------------------------
 
 function estadoDoJogo:enterFrame()
-	local posX, posY = localizacaoNoMapa(personagemView:getPersonagemGrafico())
+	local posX, posY = map:localizacaoNoMapa(cenario:getPersonagem():getPersonagemGrafico())
 	local posicaoAtualX = (math.ceil(math.fmod(posX, map.designedWidth) / 32) - 1)
 	local posicaoAtualY = (math.ceil(math.fmod(posY, map.designedHeight) / 32) - 1)
 	
