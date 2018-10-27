@@ -13,9 +13,6 @@ function cenario:touch(e)
 	end
 end
 
--- executa em vários circulos, ou seja, fica atualizando direto a posição do personagem
-Runtime:addEventListener("enterFrame", personagemView)
-
 function cenario:getEstado()
 	return mapa:getEstado()
 end
@@ -28,8 +25,11 @@ function cenario:getMapa()
 	return mapa
 end
 
--- function localizacaoNoMapa(object)
--- 	return object.x, object.y
--- end
+function localizacaoNoMapa(object)
+	return object.x, object.y
+end
+
+-- executa em vários circulos, ou seja, fica atualizando direto a posição do personagem
+Runtime:addEventListener("enterFrame", personagemView)
 
 return cenario

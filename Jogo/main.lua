@@ -16,3 +16,4 @@
 local cenario = require("view.cenario")
 local botaoBomba = require("Objects.bomba")
 local botoes = require("view.botaoOrientacaoView")
+local estadoDoJogo = require ("Object.estadoDoJogo")
