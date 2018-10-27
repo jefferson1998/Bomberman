@@ -51,7 +51,7 @@ buttons[4].myName = "right"
 
 -- for que adiciona o evento de toque no botoes
 for i=1, #buttons do
-	buttons[i]:addEventListener("touch", cenario:getPersonagem())
+	buttons[i]:addEventListener("touch", personagemView)
 end
 
 return buttons

@@ -28,39 +28,34 @@ personagem:adicionandoFisica()
 function personagem:touch( e ) 
 	-- quando há clique ou clicar e arrastar para o lado
 	 if e.phase == "began" or e.phase == "moved" then
-		if direcao == "up" then
+		if e.target.myName == "up" then
 
 			personagemGrafico:setSequence( "framesTrasRun" )
 			personagemGrafico:play()
 			passosY = -1.3
 			passosX = 0
 
-		elseif direcao == "down" then
+		elseif e.target.myName == "down" then
 
 			personagemGrafico:setSequence( "framesFrenteRun" )
 			personagemGrafico:play()
 			passosY = 1.3
 			passosX = 0
 
-		elseif direcao == "right" then
+		elseif e.target.myName == "right" then
 			
 			personagemGrafico:setSequence( "framesLadoDireitoRun" )
 			personagemGrafico:play()
 			passosX = 1.3
 			passosY = 0
 
-		elseif direcao == "left" then
+		elseif e.target.myName == "left" then
 
 			personagemGrafico:setSequence( "framesLadoEsquerdoRun" )
 			personagemGrafico:play()
 			passosX = -1.3
 			passosY = 0
 
-		 else
-		 	passosX = 0
-			passosY = 0
-			personagemGrafico:setFrame(1)
-			personagemGrafico:pause()
 		end
 	-- quando soltar o botão ele para
 	elseif (e.phase == "ended" or e.phase == "canceled") then
