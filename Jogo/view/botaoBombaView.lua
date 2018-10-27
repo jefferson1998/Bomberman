@@ -52,7 +52,6 @@ function botaoView:touch(evento)
 			bombaModel.tempo = 4
 			bombaView.bombaSprite = bombaView:newBomba(personagemView:getPersonagemGrafico().x, personagemView:getPersonagemGrafico().y)
 			bombaView.bombaSprite:play()
-
 		end
 	end
 end
