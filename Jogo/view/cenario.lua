@@ -4,7 +4,6 @@ local bombaView = require "view.botaoBombaView"
 
 local cenario = {}
 
-
 function cenario:touch(e)
 	if e.phase == "began" or e.phase == "moved" then
 		personagemView:mover(e.target.myName)
@@ -12,6 +11,9 @@ function cenario:touch(e)
 		personagemView:mover()
 	end
 end
+
+-- executa em vários circulos, ou seja, fica atualizando direto a posição do personagem
+Runtime:addEventListener("enterFrame", personagemView)
 
 function cenario:getEstado()
 	return mapa:getEstado()
@@ -25,11 +27,8 @@ function cenario:getMapa()
 	return mapa
 end
 
-function localizacaoNoMapa(object)
-	return object.x, object.y
-end
-
--- executa em vários circulos, ou seja, fica atualizando direto a posição do personagem
-Runtime:addEventListener("enterFrame", personagemView)
+-- function localizacaoNoMapa(object)
+-- 	return object.x, object.y
+-- end
 
 return cenario

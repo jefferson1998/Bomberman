@@ -4,7 +4,7 @@ local physics = require "physics"
 physics.start()
 
 local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/testeTamanho.json", system.ResourceDirectory))  -- load from json export
-map = tiled.new(mapData, "Objects/mapa/cenario1")
+local map = tiled.new(mapData, "Objects/mapa/cenario1")
 
 function map:getEstado()
 	local matrizEstado = {

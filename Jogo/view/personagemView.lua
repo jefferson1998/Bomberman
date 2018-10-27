@@ -28,10 +28,13 @@ personagem:adicionandoFisica()
 function personagem:mover( direcao ) 
 	-- quando há clique ou clicar e arrastar para o lado
 	-- if e.phase == "began" or e.phase == "moved" then
+	personagemGrafico:toFront()
 		if direcao == "up" then
 
 			personagemGrafico:setSequence( "framesTrasRun" )
 			personagemGrafico:play()
+
+
 			passosY = -1.3
 			passosX = 0
 
@@ -62,16 +65,7 @@ function personagem:mover( direcao )
 			personagemGrafico:setFrame(1)
 			personagemGrafico:pause()
 		end
-	-- -- quando soltar o botão ele para
-	-- elseif (e.phase == "ended" or e.phase == "canceled") then
-		
-	-- 	passosX = 0
-	-- 	passosY = 0
-	-- 	personagemGrafico:setFrame(1)
-	-- 	personagemGrafico:pause()
-	-- 	-- print(math.floor(personagemGrafico.x / 32))
-	-- 	-- print(personagemGrafico.x / 32)
-	-- end
+	
 end
 
 function personagem:enterFrame()

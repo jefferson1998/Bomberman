@@ -10,7 +10,6 @@ local botaoView = widget.newButton {
 
 local w = display.contentWidth
 local h = display.contentHeight
-local eixoX, eixoY
 
 botaoView.x = w - 35
 botaoView.y = h - 150

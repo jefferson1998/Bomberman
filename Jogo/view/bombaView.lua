@@ -1,7 +1,6 @@
 local frames = require "view.frames"
 local mapa = require "view.mapaView"
 local bombaModel = require "Objects.bomba"
-local explosao = require "view.explosaoBomba"
 
 local bomba = {bombaSprite = 0,tempoBomba_run = 0, animacaoBomba = 0, sprite = 0}
 
@@ -15,7 +14,6 @@ local function tempoDaBomba()
     if  bombaModel.tempo == 0 then
         -- remove a imagem da bomba
         print("entrei")
-        
         bombaSprite:removeSelf()
 
         print("BOMBAMODEL___" .. bombaModel.tempo)
@@ -33,7 +31,7 @@ function bomba:newBomba(argPosicaoX, argPosicaoY)
 	bombaSprite = display.newSprite( animacaoBomba, tempoBomba_run);
 	bombaSprite.x = 16 + (32 * (math.ceil(math.fmod(argPosicaoX, mapa.designedWidth) / 32) - 1))
 	bombaSprite.y = 16 + (32 * (math.ceil(math.fmod(argPosicaoY, mapa.designedHeight) / 32) - 1))
-
+    
     local countDownTimer = timer.performWithDelay( 1000, tempoDaBomba, bombaModel.tempo)
 
 	return bombaSprite
