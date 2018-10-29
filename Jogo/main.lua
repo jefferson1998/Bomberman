@@ -14,4 +14,3 @@
 -- print( "yMax: ".. bounds.yMax ) -- yMax: 125
 
 local cenario = require("view.cenario")
-local estadoDoJogo = require ("Objects.estadoJogo")

@@ -1,6 +1,5 @@
 local widget = require "widget"
 local bombaView = require "view.bombaView"
-local personagemView = require "view.personagemView"
 local inimigoView = require "view.inimigoView"
 local bombaModel = bombaView:getBombaModel()
 

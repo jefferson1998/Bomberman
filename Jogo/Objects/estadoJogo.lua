@@ -17,9 +17,9 @@ local posicaoIntermediariaY = 3
 function estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo)
 	local str = ""
 
-	for i=1,10 do
+	for i=1,#estadoDoJogo do
 
-		for j=1,15 do
+		for j=1,#estadoDoJogo[i] do
 			str = str .. estadoDoJogo[i][j]
 		end
 		str = str .. "\n"
@@ -29,14 +29,15 @@ function estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo)
 end
 
 function estadoDoJogo:enterFrame()
-	local posPersonagemX, posPersonagemY = map:localizacaoNoMapa(cenario:getPersonagem():getPersonagemGrafico())
+
+	local posEmPixelPersonagemX, posEmPixelPersonagemY = map:localizacaoNoMapa(cenario:getPersonagem():getPersonagemGrafico())
 	local posBombaX, posBombaY = map:localizacaoNoMapa(cenario:getBotaoBomba())
 	-- invertir a ordem porque quando o personagem estava na linha (posicao X) estava atualizando a matriz
 	-- na linha, onde na verdade deveria atualizar a coluna.
-	local posicaoAtualPersonagemX = (math.ceil(math.fmod(posPersonagemY, cenario:getMapa().designedHeight) / 32))
-	local posicaoAtualPersonagemY = (math.ceil(math.fmod(posPersonagemX, cenario:getMapa().designedWidth) / 32))
+	local posNoTabuleiroAtualPersonagemX = (math.ceil(math.fmod(posEmPixelPersonagemY, cenario:getMapa().designedHeight) / 32))
+	local posicaoAtualPersonagemY = (math.ceil(math.fmod(posEmPixelPersonagemX, cenario:getMapa().designedWidth) / 32))
 
-	estadoDoJogo[posicaoAtualPersonagemX][posicaoAtualPersonagemY] = 2
+	estadoDoJogo[posNoTabuleiroAtualPersonagemX][posicaoAtualPersonagemY] = cenario:getPersonagem().id
 		
 	print(estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo))
 

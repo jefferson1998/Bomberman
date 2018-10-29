@@ -1,4 +1,4 @@
-local personagemModel = {vida = 3}
+local personagemModel = {id = 2, vida = 3}
 
 -- atualiza o jogo
 

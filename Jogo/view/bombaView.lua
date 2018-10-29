@@ -1,5 +1,5 @@
 local frames = require "view.frames"
-local mapa = require "view.mapaView"
+local mapa = cenario:getMapa()
 local bombaModel = require "Objects.bomba"
 
 local bomba = {bombaSprite = 0,tempoBomba_run = 0, animacaoBomba = 0, sprite = 0}

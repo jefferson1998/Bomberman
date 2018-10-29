@@ -1,6 +1,6 @@
 local framesBomberman = require "view.frames"
 local imagem = "imagens/framesDoBomberman.png"
-local personagem = {}
+local personagem = {id = 2}
 
 local passosX, passosY = 0, 0
 
@@ -11,19 +11,15 @@ function personagem:newPersonagem()
 		personagem.bombermanSprite.y = 32 * 2.6
  		personagem.bombermanSprite.anchorY = 0.85
 
+ 		local vertices = {-10,0, -10, 16, 10, 16, 10, 0}
+		physics.addBody( personagem.bombermanSprite, "dynamic", {shape = vertices})
+		personagem.bombermanSprite.isFixedRotation = true
+		physics.setGravity( 0, 0 )
+
 	return personagem.bombermanSprite
 end
 
 local personagemGrafico = personagem:newPersonagem()
-
-function personagem:adicionandoFisica()
-		local vertices = {-10,0, -10, 16, 10, 16, 10, 0}
-		physics.addBody( personagemGrafico, "dynamic", {shape = vertices})
-		personagemGrafico.isFixedRotation = true
-		physics.setGravity( 0, 0 )
-end
-
-personagem:adicionandoFisica()
 
 function personagem:touch( e ) 
 	-- quando há clique ou clicar e arrastar para o lado
@@ -57,7 +53,7 @@ function personagem:touch( e )
 			passosY = 0
 
 		end
-	-- quando soltar o botão ele para
+		-- quando soltar o botão ele para
 	elseif (e.phase == "ended" or e.phase == "canceled") then
 				
 		passosX = 0
@@ -78,8 +74,5 @@ end
 function personagem:getPersonagemGrafico()
 	return personagemGrafico
 end
-
--- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
-Runtime:addEventListener("enterFrame", personagem)
 
 return personagem
