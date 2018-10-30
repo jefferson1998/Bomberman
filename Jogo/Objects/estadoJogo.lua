@@ -30,9 +30,11 @@ function estadoDoJogo:atualizarEstado(obj)
 	
 
 	local posAnteriorX, posAnteriorY = posX, posY
-
+	if(posX ~= nil and posY ~= nil) then
+		estadoDoJogo[posX][posY] = aux	
+	end
 	posX, posY = estadoDoJogo:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
-
+	
 	print (posAnteriorX,posAnteriorY, posX, posY)
 
 	aux = estadoDoJogo[posX][posY]
