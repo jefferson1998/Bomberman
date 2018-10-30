@@ -1,9 +1,7 @@
 local estadoDoJogo = cenario:getMapa():getEstado()
 local map = cenario:getMapa()
-local posicaoAnteriorX = 0
-local posicaoAnteriorY = 0
-local posicaoIntermediariaX = 3
-local posicaoIntermediariaY = 3
+local posX, posY = nil, nil
+local aux = 1
 --------------------------------------------------------------------------------------------
 -- Regras do Estado
 -- 0 = PAREDE
@@ -28,23 +26,44 @@ function estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo)
 	return str
 end
 
-function estadoDoJogo:atualizarEstado()
+function estadoDoJogo:atualizarEstado(obj)
+	
 
-	local posEmPixelPersonagemX, posEmPixelPersonagemY = map:localizacaoNoMapa(cenario:getPersonagem():getPersonagemGrafico())
-	local posBombaX, posBombaY = map:localizacaoNoMapa(cenario:getBotaoBomba())
-	-- invertir a ordem porque quando o personagem estava na linha (posicao X) estava atualizando a matriz
-	-- na linha, onde na verdade deveria atualizar a coluna.
-	local posNoTabuleiroAtualPersonagemX = (math.ceil(math.fmod(posEmPixelPersonagemY, cenario:getMapa().designedHeight) / 32))
-	local posicaoAtualPersonagemY = (math.ceil(math.fmod(posEmPixelPersonagemX, cenario:getMapa().designedWidth) / 32))
+	local posAnteriorX, posAnteriorY = posX, posY
 
-	estadoDoJogo[posNoTabuleiroAtualPersonagemX][posicaoAtualPersonagemY] = cenario:getPersonagem().id
+	posX, posY = estadoDoJogo:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
+
+	print (posAnteriorX,posAnteriorY, posX, posY)
+
+	aux = estadoDoJogo[posX][posY]
+
+	print(aux)
+
+	estadoDoJogo[posX][posY] = obj:getId()
+	
+	if(posAnteriorX ~= nil and posAnteriorY ~= nil) then
+
+		estadoDoJogo[posAnteriorX][posAnteriorY] = aux
+
+	end
 		
-	--print(estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo))
+	print(estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo))
 
 end
 
-function estadoDoJogo:resetEstado()
-	
+function estadoDoJogo:estadoPadrao()
+	estadoDoJogo[3][3] = 2
+	estadoDoJogo[#estadoDoJogo - 1][#estadoDoJogo[1] - 2] = 4
+	print(estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo))
+end
+
+function estadoDoJogo:pixelToBoard(posPixelX, posPixelY)
+	return (math.ceil(math.fmod(posPixelY, cenario:getMapa().designedHeight) / 32)),
+		(math.ceil(math.fmod(posPixelX, cenario:getMapa().designedWidth) / 32))
+end
+
+function estadoDoJogo:getEstado()
+	return estadoDoJogo
 end
 
 return estadoDoJogo

@@ -53,7 +53,7 @@ for i=1,#labirinto do
   physics.addBody(labirinto[i], "static" )
 end
 
-function map:localizacaoNoMapa(object)
+function map:localizarNoMapa(object)
 	return object.x, object.y
 end
 

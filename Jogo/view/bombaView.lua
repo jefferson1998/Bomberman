@@ -42,4 +42,16 @@ function bomba:getBombaModel()
     return bombaModel
 end
 
+function bomba:addFisica()
+    physics.addBody( bombaSprite, "static")
+end
+
+function bomba:getSprite()
+    return bombaSprite
+end
+
+function bomba:getId()
+    return 3
+end
+
 return bomba

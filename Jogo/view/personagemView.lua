@@ -41,7 +41,6 @@ function personagem:touch( e )
 			passosX = 0
 
 		elseif e.target.myName == "right" then
-			print("oi")	
 			personagemGrafico:setSequence( "framesLadoDireitoRun" )
 			personagemGrafico:play()
 			passosX = 1.3
@@ -68,13 +67,28 @@ function personagem:touch( e )
 end
 
 function personagem:enterFrame()
+	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getEstadoJogo():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
+
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
+
+	local novaPosicaoX, novaPosicaoY = cenario:getEstadoJogo():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
+
+	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
+		cenario:getEstadoJogo():atualizarEstado(personagem)
+	end
+
 	return personagemGrafico.x , personagemGrafico.y
 end
 
-function personagem:getPersonagemGrafico()
+function personagem:getSprite()
 	return personagemGrafico
 end
+
+function personagem:getId()
+	return personagem.id
+end
+
+cenario:getEstadoJogo():atualizarEstado(personagem)
 
 return personagem
