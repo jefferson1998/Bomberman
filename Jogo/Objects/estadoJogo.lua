@@ -28,7 +28,7 @@ function estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo)
 	return str
 end
 
-function estadoDoJogo:enterFrame()
+function estadoDoJogo:atualizarEstado()
 
 	local posEmPixelPersonagemX, posEmPixelPersonagemY = map:localizacaoNoMapa(cenario:getPersonagem():getPersonagemGrafico())
 	local posBombaX, posBombaY = map:localizacaoNoMapa(cenario:getBotaoBomba())
@@ -39,8 +39,12 @@ function estadoDoJogo:enterFrame()
 
 	estadoDoJogo[posNoTabuleiroAtualPersonagemX][posicaoAtualPersonagemY] = cenario:getPersonagem().id
 		
-	print(estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo))
+	--print(estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo))
 
 end
--- estadoDoJogo:enterFrame()
+
+function estadoDoJogo:resetEstado()
+	
+end
+
 return estadoDoJogo

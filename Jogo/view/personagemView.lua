@@ -22,8 +22,10 @@ end
 local personagemGrafico = personagem:newPersonagem()
 
 function personagem:touch( e ) 
+	
 	-- quando há clique ou clicar e arrastar para o lado
 	 if e.phase == "began" or e.phase == "moved" then
+
 		if e.target.myName == "up" then
 
 			personagemGrafico:setSequence( "framesTrasRun" )
@@ -39,7 +41,7 @@ function personagem:touch( e )
 			passosX = 0
 
 		elseif e.target.myName == "right" then
-			
+			print("oi")	
 			personagemGrafico:setSequence( "framesLadoDireitoRun" )
 			personagemGrafico:play()
 			passosX = 1.3

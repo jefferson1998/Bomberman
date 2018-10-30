@@ -30,5 +30,10 @@ function cenario:enterFrame()
 	estadoJogo:enterFrame()
 end
 
+function transformPixelToBoard(posPixelX, posPixelY)
+	return (math.ceil(math.fmod(posEmPixelPersonagemY, cenario:getMapa().designedHeight) / 32)),
+		(math.ceil(math.fmod(posEmPixelPersonagemX, cenario:getMapa().designedWidth) / 32))
+end
+
 -- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", cenario)
