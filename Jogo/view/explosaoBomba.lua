@@ -14,25 +14,34 @@ function explosaoBomba:explodir(objBomba, estado)
 	print (origemX,origemY)
 	
 	for i = 1, cenario:getBombaView():getBombaModel().tamanho do
-		if(estado[origemX + i][origemY] ~= 0 and estado[origemX + i][origemY] ~= nil) then
+		if(estado[origemX + 1][origemY] ~= 0 and estado[origemX + i][origemY] ~= nil) then
 			estado:setEstado(objBomba:getId(), origemX + i, origemY)
 			print(estado:mostrarTabuleiroDoJogo())
 		end
-		if(estado[origemX - i][origemY] ~= 0 and estado[origemX - i][origemY] ~= nil) then
+		if(estado[origemX - 1][origemY] ~= 0 and estado[origemX - i][origemY] ~= nil) then
 			estado:setEstado(objBomba:getId(), origemX - i, origemY)
 			print(estado:mostrarTabuleiroDoJogo())
 		end
-		if(estado[origemX][origemY + i] ~= 0 and estado[origemX][origemY + i] ~= nil) then
+		if(estado[origemX][origemY + 1] ~= 0 and estado[origemX][origemY + i] ~= nil) then
 			estado:setEstado(objBomba:getId(), origemX, origemY + i)
 			print(estado:mostrarTabuleiroDoJogo())
 		end
-		if(estado[origemX][origemY - i] ~= 0 and estado[origemX][origemY - i] ~= nil) then
+		if(estado[origemX][origemY - 1] ~= 0 and estado[origemX][origemY - i] ~= nil) then
 			estado:setEstado(objBomba:getId(), origemX, origemY - i)
 			print(estado:mostrarTabuleiroDoJogo())
 		end
 	end
 end
 
+function explosaoBomba:fimExplosao(estado)
+	for i = 1, #estado do
+		for j = 1, #estado[i] do
+			if(estado[i][j] == 3) then
+				estado[i][j] = 1
+			end
+		end
+	end
+end
 -- function botaoView:percorrerAreaDaBomba(inimigo)
 -- 	inimigo.x, inimigo.y = inimigo:posicaoInimigo()
 -- 	for i=1,7  do

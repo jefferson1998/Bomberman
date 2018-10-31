@@ -89,6 +89,10 @@ function personagem:getId()
 	return personagem.id
 end
 
+function personagem:morrer()
+	--MORRER
+end
+
 cenario:getEstadoJogo():atualizarEstado(personagem)
 
 return personagem
