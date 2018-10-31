@@ -67,12 +67,12 @@ function personagem:touch( e )
 end
 
 function personagem:enterFrame()
-	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getEstadoJogo():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
+	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
 
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
 
-	local novaPosicaoX, novaPosicaoY = cenario:getEstadoJogo():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
+	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
 
 	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
 		cenario:getEstadoJogo():atualizarEstado(personagem)

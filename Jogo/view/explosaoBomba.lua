@@ -1,4 +1,4 @@
-local estado = require "Objects.estadoJogo"
+local estado = cenario:getEstadoJogo()
 local imagens = display.newGroup( )
 
 local explosaoCentro = "imagens/explosaoCentro.png"
@@ -9,11 +9,26 @@ local explosaoBomba = {
 	duracao = 2
 }
 
-function explosaoBomba:explodir(bomba, estado)
-	local origemX, origemY = bomba
-	for i = 1, #estado do
-		for j = 1, #estado[i] do
-			
+function explosaoBomba:explodir(objBomba, estado)
+	local origemX, origemY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(objBomba:getSprite()))
+	print (origemX,origemY)
+	
+	for i = 1, cenario:getBombaView():getBombaModel().tamanho do
+		if(estado[origemX + i][origemY] ~= 0 and estado[origemX + i][origemY] ~= nil) then
+			estado:setEstado(objBomba:getId(), origemX + i, origemY)
+			print(estado:mostrarTabuleiroDoJogo())
+		end
+		if(estado[origemX - i][origemY] ~= 0 and estado[origemX - i][origemY] ~= nil) then
+			estado:setEstado(objBomba:getId(), origemX - i, origemY)
+			print(estado:mostrarTabuleiroDoJogo())
+		end
+		if(estado[origemX][origemY + i] ~= 0 and estado[origemX][origemY + i] ~= nil) then
+			estado:setEstado(objBomba:getId(), origemX, origemY + i)
+			print(estado:mostrarTabuleiroDoJogo())
+		end
+		if(estado[origemX][origemY - i] ~= 0 and estado[origemX][origemY - i] ~= nil) then
+			estado:setEstado(objBomba:getId(), origemX, origemY - i)
+			print(estado:mostrarTabuleiroDoJogo())
 		end
 	end
 end

@@ -57,4 +57,13 @@ function map:localizarNoMapa(object)
 	return object.x, object.y
 end
 
+function map:pixelToBoard(posPixelX, posPixelY)
+	return (math.ceil(math.fmod(posPixelY, cenario:getMapa().designedHeight) / 32)),
+		(math.ceil(math.fmod(posPixelX, cenario:getMapa().designedWidth) / 32))
+end
+
+function map:boardToPixel(posBoardX, posBoardY)
+	return 16 + (32 * (posBoardY - 1)), 16 + (32 * (posBoardX - 1))
+end
+
 return map

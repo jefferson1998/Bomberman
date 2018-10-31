@@ -1,6 +1,7 @@
 local frames = require "view.frames"
 local mapa = cenario:getMapa()
 local bombaModel = require "Objects.bomba"
+local explosao = require "view.explosaoBomba"
 
 local bomba = {bombaSprite = 0,tempoBomba_run = 0, animacaoBomba = 0, sprite = 0}
 
@@ -20,6 +21,7 @@ local function tempoDaBomba()
         -------------------------------------------------------------
         -- Cria a sprite da explosao e nela ve se tem algum objeto --
         -------------------------------------------------------------
+        explosao:explodir(bomba, cenario:getEstadoJogo())
    	end     
 end
 
@@ -29,9 +31,9 @@ function bomba:newBomba(argPosicaoX, argPosicaoY)
 	tempoBomba_run, animacaoBomba = frames:tempoBomba(imagem)
 
 	bombaSprite = display.newSprite( animacaoBomba, tempoBomba_run);
-	bombaSprite.x = 16 + (32 * (math.ceil(math.fmod(argPosicaoX, mapa.designedWidth) / 32) - 1))
-	bombaSprite.y = 16 + (32 * (math.ceil(math.fmod(argPosicaoY, mapa.designedHeight) / 32) - 1))
-    
+	bombaSprite.x, bombaSprite.y = mapa:boardToPixel(mapa:pixelToBoard(argPosicaoX, argPosicaoY))
+    print(bombaSprite.x,  bombaSprite.y)
+    cenario:getEstadoJogo():atualizarEstado(bomba)
     local countDownTimer = timer.performWithDelay( 1000, tempoDaBomba, bombaModel.tempo)
 
 	return bombaSprite

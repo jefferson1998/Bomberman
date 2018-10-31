@@ -12,13 +12,13 @@ local aux = 1
 -- 5 = Destrutíveis
 ------------------------------------------------------------------------------------------
 
-function estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo)
+function estadoDoJogo:mostrarTabuleiroDoJogo()
 	local str = ""
 
-	for i=1,#estadoDoJogo do
+	for i = 1, #self do
 
-		for j=1,#estadoDoJogo[i] do
-			str = str .. estadoDoJogo[i][j]
+		for j = 1, #self[i] do
+			str = str .. self[i][j]
 		end
 		str = str .. "\n"
 	end
@@ -28,44 +28,44 @@ end
 
 function estadoDoJogo:atualizarEstado(obj)
 	
-
-	local posAnteriorX, posAnteriorY = posX, posY
-	if(posX ~= nil and posY ~= nil) then
-		estadoDoJogo[posX][posY] = aux	
-	end
-	posX, posY = estadoDoJogo:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
-	
-	print (posAnteriorX,posAnteriorY, posX, posY)
-
-	aux = estadoDoJogo[posX][posY]
-
-	print(aux)
-
-	estadoDoJogo[posX][posY] = obj:getId()
-	
-	if(posAnteriorX ~= nil and posAnteriorY ~= nil) then
-
-		estadoDoJogo[posAnteriorX][posAnteriorY] = aux
-
-	end
+	if(obj:getId() == 2) then
+		if(posX ~= nil and posY ~= nil) then
+			self[posX][posY] = aux	
+		end
+		posX, posY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		
-	print(estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo))
+		print (posX, posY)
+
+		aux = self[posX][posY]
+
+		print(aux)
+
+		self[posX][posY] = obj:getId()
+	end
+
+	if (obj:getId() == 3) then
+		posX, posY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
+
+		self[posX][posY] = obj:getId()
+		aux = self[posX][posY]
+	end
+
+	print(estadoDoJogo:mostrarTabuleiroDoJogo())
 
 end
 
 function estadoDoJogo:estadoPadrao()
-	estadoDoJogo[3][3] = 2
-	estadoDoJogo[#estadoDoJogo - 1][#estadoDoJogo[1] - 2] = 4
-	print(estadoDoJogo:mostrarTabuleiroDoJogo(estadoDoJogo))
-end
-
-function estadoDoJogo:pixelToBoard(posPixelX, posPixelY)
-	return (math.ceil(math.fmod(posPixelY, cenario:getMapa().designedHeight) / 32)),
-		(math.ceil(math.fmod(posPixelX, cenario:getMapa().designedWidth) / 32))
+	--estadoDoJogo[3][3] = 2
+	self[#self - 1][#self[1] - 2] = 4
+	print(estadoDoJogo:mostrarTabuleiroDoJogo())
 end
 
 function estadoDoJogo:getEstado()
-	return estadoDoJogo
+	return self
+end
+
+function estadoDoJogo:setEstado(value, posX, posY)
+	self[posX][posY] = value
 end
 
 return estadoDoJogo

@@ -1,8 +1,7 @@
 -- faz referência a uma biblioteca do Corona	
-local inimigoView = require "view.inimigoView"
 
 local bomba = {
-	tamanho = 7,
+	tamanho = 3,
 	tempo = 0
 }
 

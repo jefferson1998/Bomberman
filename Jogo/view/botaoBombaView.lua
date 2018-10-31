@@ -1,5 +1,5 @@
 local widget = require "widget"
-local bombaView = require "view.bombaView"
+local bombaView = cenario:getBombaView()
 local inimigoView = require "view.inimigoView"
 local bombaModel = bombaView:getBombaModel()
 
@@ -18,8 +18,8 @@ function botaoView:touch(evento)
 	if evento.phase == "began" then
 		if bombaModel.tempo == 0 then
 			bombaModel.tempo = 4
-			bombaView.bombaSprite = bombaView:newBomba(cenario:getMapa():localizacaoNoMapa(cenario:getPersonagem():getPersonagemGrafico()))
-			cenario:getPersonagem():getPersonagemGrafico():toFront()
+			bombaView.bombaSprite = bombaView:newBomba(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
+			cenario:getPersonagem():getSprite():toFront()
 			bombaView.bombaSprite:play()
 		end
 	end
