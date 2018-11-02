@@ -1,7 +1,9 @@
 local framesBomberman = require "view.frames"
-local imagem = "imagens/framesDoBomberman.png"
 local passosX, passosY = 0, 0
 local buscaEmLargura = "Objects.buscaEmLargura"
+
+local imagem = "imagens/framesDoInimigo.png"
+
 local inimigo = {id = 4}
 
 function inimigo:newInimigo()

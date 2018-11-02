@@ -3,6 +3,7 @@ local map = cenario:getMapa()
 local estadoDoJogo = require "Objects.estadoJogo"
 local inimigo = cenario:getInimigoView()
 local posPersonagemX, posPersonagemY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
+
 local posAnteriorX, posAnteriorY
 function buscaEmLargura:isResultadoBusca()
 	local posPersonagemX, posPersonagemY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
