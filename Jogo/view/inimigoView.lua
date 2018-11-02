@@ -27,9 +27,6 @@ end
 function inimigo:enterFrame()
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 
-	inimigoGrafico.imagem.x = inimigoGrafico.x + passosX
-	inimigoGrafico.imagem.y = inimigoGrafico.y + passosY
-
 	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 
 	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
