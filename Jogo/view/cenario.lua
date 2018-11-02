@@ -35,8 +35,20 @@ local direcional = require "view.botaoOrientacaoView"
 local botaoBomba = require "view.botaoBombaView"
 
 function cenario:enterFrame()
-	personagemView:enterFrame()
-	inimigoView:enterFrame()
+	if personagemView:getSprite().x ~= nil then
+		personagemView:enterFrame()
+	else 
+		cenario:removerEventos(personagemView:getId())
+
+	end
+
+	if inimigoView:getSprite().x ~= nil then
+		inimigoView:enterFrame()
+	else
+		cenario:removerEventos(personagemView:getId())
+		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
+	end
+
 end
 
 function cenario:removerEvento()
