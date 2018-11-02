@@ -24,6 +24,7 @@ function explosaoBomba:explodir(objBomba, estado)
 			if(estado[origemX + i][origemY] == 2 or estado[origemX + i][origemY] == 4) then
 				print("IF 1.1")
 				cenario:getPersonagem():morrer(estado[origemX + i][origemY])
+				cenario:getInimigo():morrer(estado[origemX + i][origemY])
 			end
 			estado:setEstado(objBomba:getId(), origemX + i, origemY)
 			print("Setei o Estado")
@@ -37,6 +38,7 @@ function explosaoBomba:explodir(objBomba, estado)
 			if(estado[origemX - i][origemY] == 2 or estado[origemX - i][origemY] == 4) then
 				print("IF 2.1")
 				cenario:getPersonagem():morrer(estado[origemX - i][origemY])
+				cenario:getInimigo():morrer(estado[origemX - i][origemY])
 			end
 			estado:setEstado(objBomba:getId(), origemX - i, origemY)
 			print("Setei o Estado")
@@ -49,6 +51,7 @@ function explosaoBomba:explodir(objBomba, estado)
 			if(estado[origemX][origemY + i] == 2 or estado[origemX][origemY + i] == 4) then
 				print("IF 3.1")
 				cenario:getPersonagem():morrer(estado[origemX][origemY + i])
+				cenario:getInimigo():morrer(estado[origemX][origemY] + i)
 			end
 			estado:setEstado(objBomba:getId(), origemX, origemY + i)
 			print("Setei o Estado")

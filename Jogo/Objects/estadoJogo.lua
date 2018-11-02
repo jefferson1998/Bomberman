@@ -50,6 +50,21 @@ function estadoDoJogo:atualizarEstado(obj)
 		aux = self[posX][posY]
 	end
 
+	if(obj:getId() == 4) then
+		if(posX ~= nil and posY ~= nil) then
+			self[posX][posY] = aux	
+		end
+		posX, posY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
+		
+		print (posX, posY)
+
+		aux = self[posX][posY]
+
+		print(aux)
+
+		self[posX][posY] = obj:getId()
+	end
+
 	print(estadoDoJogo:mostrarTabuleiroDoJogo())
 
 end

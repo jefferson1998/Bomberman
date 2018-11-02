@@ -5,7 +5,7 @@ function cenario:getMapa()
 	return mapa
 end
 local estadoJogo = require "Objects.estadoJogo"
-estadoJogo:estadoPadrao()
+
 function cenario:getEstadoJogo()
 	return estadoJogo
 end
@@ -24,11 +24,19 @@ function cenario:getBombaView()
 	return bombaView
 end
 
+local inimigoView = require "view.inimigoView"
+function cenario:getInimigoView()
+	return inimigoView
+end
+
+estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
+
 local direcional = require "view.botaoOrientacaoView"
 local botaoBomba = require "view.botaoBombaView"
 
 function cenario:enterFrame()
 	personagemView:enterFrame()
+	inimigoView:enterFrame()
 end
 
 function cenario:removerEvento()
