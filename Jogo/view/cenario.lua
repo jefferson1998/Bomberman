@@ -43,10 +43,14 @@ function cenario:removerEvento()
 	Runtime:removeEventListener( "enterFrame", cenario)
 end
 
-function cenario:removerEventos()
-	cenario:removerEvento()
-	direcional:removerEvento()
-	botaoBomba:removerEvento()
+function cenario:removerEventos(id)
+	if(id == 2) then
+		cenario:removerEvento()
+		direcional:removerEvento()
+		botaoBomba:removerEvento()
+	elseif (id == 4) then
+		cenario:removerEvento()
+	end
 end
 
 

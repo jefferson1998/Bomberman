@@ -84,7 +84,7 @@ end
 function personagem:getSprite()
 	return personagemGrafico
 end
- 
+
 function personagem:getId()
 	return personagem.id
 end
