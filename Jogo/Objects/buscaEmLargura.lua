@@ -84,6 +84,7 @@ function buscaEmLargura:atualizarInimigo()
 end
 
 function buscaEmLargura:enterFrame()
+	inimigo:enterFrame()
 	buscaEmLargura:isResultadoBusca()
 	buscaEmLargura:buscar()
 	buscaEmLargura:atualizarInimigo()

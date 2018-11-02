@@ -70,7 +70,7 @@ function estadoDoJogo:atualizarEstado(obj)
 end
 
 function estadoDoJogo:estadoPadrao()
-	--estadoDoJogo[3][3] = 2
+	-- estadoDoJogo[3][3] = 2
 	-- self[#self - 1][#self[1] - 2] = 4
 	-- print(estadoDoJogo:mostrarTabuleiroDoJogo())
 end
