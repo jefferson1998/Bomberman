@@ -1,5 +1,5 @@
 local framesBomberman = require "view.frames"
-local imagem = "imagens/framesDoBomberman.png"
+local imagem = "imagens/framesDoInimigo.png"
 
 local inimigo = {id = 4}
 
