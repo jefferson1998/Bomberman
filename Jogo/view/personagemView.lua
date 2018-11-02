@@ -75,6 +75,9 @@ function personagem:enterFrame()
 	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
 
 	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
+		if(cenario:getEstadoJogo()[novaPosicaoX][novaPosicaoY] == 3) then
+			personagem:morrer(personagem.id)
+		end
 		cenario:getEstadoJogo():atualizarEstado(personagem)
 	end
 
