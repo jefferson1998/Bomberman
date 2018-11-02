@@ -1,7 +1,6 @@
 local framesBomberman = require "view.frames"
 local imagem = "imagens/framesDoBomberman.png"
 local personagem = {id = 2}
-
 local passosX, passosY = 0, 0
 
 function personagem:newPersonagem()

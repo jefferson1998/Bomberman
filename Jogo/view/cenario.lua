@@ -37,6 +37,8 @@ local botaoBomba = require "view.botaoBombaView"
 
 function cenario:enterFrame()
 	personagemView:enterFrame()
+	inimigoView:enterFrame()
+	-- inimigoView:mover("left")
 	buscaEmLargura:enterFrame()
 end
 

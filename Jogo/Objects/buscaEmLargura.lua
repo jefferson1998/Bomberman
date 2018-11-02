@@ -1,11 +1,9 @@
 local buscaEmLargura = {}
 local map = cenario:getMapa()
 local estadoDoJogo = require "Objects.estadoJogo"
-
-
+local inimigo = cenario:getInimigoView()
+local posPersonagemX, posPersonagemY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
 local posAnteriorX, posAnteriorY
-local posInimigoX, posInimigoY =  map:pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite()))
-
 function buscaEmLargura:isResultadoBusca()
 	local posPersonagemX, posPersonagemY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
 
@@ -17,7 +15,7 @@ function buscaEmLargura:isResultadoBusca()
 end
 
 function buscaEmLargura:buscar()
-	local posPersonagemX, posPersonagemY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
+local posInimigoX, posInimigoY =  map:pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite()))
 
 	if buscaEmLargura:isResultadoBusca() then
 		-- Para o jogo
@@ -52,27 +50,36 @@ function buscaEmLargura:buscar()
 			end 
 
 		end
-		posAnteriorX, posAnteriorY = posInimigoX, posInimigoY
 		-- print("P. ANT X___ " .. posAnteriorX)
 		-- print("P. ANT Y___ " .. posAnteriorY)
 	end
 end
 function buscaEmLargura:atualizarInimigo()
-	if estadoDoJogo[posAnteriorX][posAnteriorY + 1] ~= nil and estadoDoJogo[posAnteriorX][posAnteriorY + 1] ~= 0 then
-		-- print("INI> DIREITA")
-		posInimigoY = posInimigoY + 1
-	elseif estadoDoJogo[posAnteriorX][posAnteriorY - 1] ~= nil and estadoDoJogo[posAnteriorX][posAnteriorY - 1] ~= 0 then
-		posInimigoY = posInimigoY - 1
+	local posInimigoX, posInimigoY =  map:pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite()))
+			
+	if estadoDoJogo[posInimigoX][posInimigoY + 1] ~= nil and estadoDoJogo[posInimigoX][posInimigoY + 1] ~= 0 then
+		if posInimigoX ~= posAnteriorX and posInimigoY + 1 ~= posAnteriorY then
+			inimigo:mover("right")
+			-- print("INI> DIREITA")
+		end
+	elseif estadoDoJogo[posInimigoX][posInimigoY - 1] ~= nil and estadoDoJogo[posInimigoX][posInimigoY - 1] ~= 0 then
+		if posInimigoX ~= posAnteriorX and posInimigoY - 1 ~= posAnteriorY then
+			inimigo:mover("left")
 		-- print("INI> ESQUERDA")
-	elseif estadoDoJogo[posAnteriorX + 1][posAnteriorY] ~= nil and estadoDoJogo[posAnteriorX + 1][posAnteriorY] ~= 0 then
-		posInimigoX = posInimigoX + 1
-		-- print("INI> BAIXO")
-	elseif estadoDoJogo[posAnteriorX -1][posAnteriorY] ~= nil and estadoDoJogo[posAnteriorX- 1][posAnteriorY] ~= 0 then
-		posInimigoX = posInimigoX - 1
-		print("INI> CIMA")
+		end	
+	elseif estadoDoJogo[posInimigoX + 1][posInimigoY] ~= nil and estadoDoJogo[posInimigoX + 1][posInimigoY] ~= 0 then
+		
+		if posInimigoX ~= posAnteriorX and posInimigoY ~= posAnteriorY then
+			inimigo:mover("down")		
+			-- print("INI> BAIXO")
+		end
+	elseif estadoDoJogo[posInimigoX -1][posInimigoY] ~= nil and estadoDoJogo[posInimigoX- 1][posInimigoY] ~= 0 then
+		if posInimigoX ~= posAnteriorX - 1 and posInimigoY ~= posAnteriorY then
+			inimigo:mover("up")
+			print("INI> CIMA")
+		end
 	end
-		-- print("INIMIGO ANDEI")
-	estadoDoJogo:setEstado(4,posInimigoX,posInimigoY)
+	posAnteriorX, posAnteriorY = posInimigoX, posInimigoY
 end
 
 function buscaEmLargura:enterFrame()
