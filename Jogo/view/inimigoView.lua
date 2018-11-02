@@ -24,15 +24,7 @@ function inimigo:mover()
 	
 end
 
-function inimigo:enterFrame()
-	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
-
-	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
-
-	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
-		cenario:getEstadoJogo():atualizarEstado(inimigo)
-	end
-
+function inimigo:posicao()
 	return inimigoGrafico.x , inimigoGrafico.y
 end
 

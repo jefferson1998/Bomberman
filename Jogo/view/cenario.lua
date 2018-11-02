@@ -28,6 +28,7 @@ local inimigoView = require "view.inimigoView"
 function cenario:getInimigoView()
 	return inimigoView
 end
+local buscaEmLargura = require "Objects.buscaEmLargura"
 
 estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
 
@@ -36,7 +37,7 @@ local botaoBomba = require "view.botaoBombaView"
 
 function cenario:enterFrame()
 	personagemView:enterFrame()
-	inimigoView:enterFrame()
+	buscaEmLargura:enterFrame()
 end
 
 function cenario:removerEvento()
