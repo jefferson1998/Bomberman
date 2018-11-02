@@ -46,7 +46,6 @@ function map:matrizEstado()
 	return matrizEstado
 end
 
---isso não está servindo
 local labirinto = map:listTypes("bounds")
 
 for i=1,#labirinto do

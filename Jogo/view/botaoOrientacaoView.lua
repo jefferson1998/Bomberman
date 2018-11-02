@@ -54,4 +54,10 @@ for i=1, #buttons do
 	buttons[i]:addEventListener("touch", personagemView)
 end
 
+function buttons:removerEvento()
+	for i = 1, #buttons do
+		buttons[i]:removeSelf()	
+	end
+end
+
 return buttons

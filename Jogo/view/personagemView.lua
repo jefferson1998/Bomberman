@@ -89,8 +89,11 @@ function personagem:getId()
 	return personagem.id
 end
 
-function personagem:morrer()
-	--MORRER
+function personagem:morrer(id)
+	if(id == 2) then
+		cenario:removerEventos()
+		display.remove(personagem:getSprite())
+	end
 end
 
 cenario:getEstadoJogo():atualizarEstado(personagem)

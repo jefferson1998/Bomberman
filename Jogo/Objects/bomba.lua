@@ -1,7 +1,7 @@
 -- faz referência a uma biblioteca do Corona	
 
 local bomba = {
-	tamanho = 3,
+	tamanho = 4,
 	tempo = 0
 }
 

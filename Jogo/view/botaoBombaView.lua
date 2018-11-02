@@ -1,6 +1,5 @@
 local widget = require "widget"
 local bombaView = cenario:getBombaView()
-local inimigoView = require "view.inimigoView"
 local bombaModel = bombaView:getBombaModel()
 
 local botaoView = widget.newButton {
@@ -26,5 +25,9 @@ function botaoView:touch(evento)
 end
 
 botaoView:addEventListener("touch", botaoView)
+
+function botaoView:removerEvento()
+	botaoView:removeSelf()
+end
 
 return botaoView

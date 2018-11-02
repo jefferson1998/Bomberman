@@ -31,5 +31,17 @@ function cenario:enterFrame()
 	personagemView:enterFrame()
 end
 
+function cenario:removerEvento()
+	Runtime:removeEventListener( "enterFrame", cenario)
+end
+
+function cenario:removerEventos()
+	cenario:removerEvento()
+	direcional:removerEvento()
+	botaoBomba:removerEvento()
+end
+
+
+
 -- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", cenario)
