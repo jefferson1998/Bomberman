@@ -132,6 +132,9 @@ function explosaoBomba:pintarExplosao(x, y, estado)
 
 	local cima, baixo, direita, esquerda = true, true, true, true
 	
+	local explosao = audio.loadSound("sons/explosion.mp3")
+	audio.play(explosao, {channel = 1, duration = 3000})
+
 	for i = 0, cenario:getBombaView():getBombaModel().tamanho do
 		if (i == 0) then
 			local centroDaExplosao = display.newImage(explosaoCentro)
