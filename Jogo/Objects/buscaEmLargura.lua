@@ -1,6 +1,6 @@
 local buscaEmLargura = {}
 local map = cenario:getMapa()
-local estadoDoJogo = require "Objects.estadoJogo"
+local estadoDoJogo = cenario:getEstadoJogo()
 
 
 local posAnteriorX, posAnteriorY
