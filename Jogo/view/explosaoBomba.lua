@@ -76,7 +76,7 @@ function explosaoBomba:explodir(objBomba, estado)
 	print(estado:mostrarTabuleiroDoJogo())
 end
 
-function explosaoBomba:onTimer()
+function explosaoBomba:timer()
 	print ("resetando o estado")
 	for i = 1, #estado do
 		for j = 1, #estado[i] do

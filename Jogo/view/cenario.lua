@@ -40,7 +40,7 @@ function cenario:enterFrame()
 end
 
 function cenario:removerEvento()
-	Runtime:removeEventListener( "enterFrame", cenario)
+	Runtime:removeEventListener("enterFrame", cenario)
 end
 
 function cenario:removerEventos(id)
