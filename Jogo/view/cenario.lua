@@ -39,6 +39,7 @@ function cenario:enterFrame()
 		personagemView:enterFrame()
 	else 
 		cenario:removerEventos(personagemView:getId())
+		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
 
 	end
 
