@@ -1,8 +1,9 @@
 local framesBomberman = require "view.frames"
 local passosX, passosY = 0, 0
-local buscaEmLargura = "Objects.buscaEmLargura"
+-- local buscaEmLargura = require "Objects.buscaEmLargura"
 
 local imagem = "imagens/framesDoInimigo.png"
+local posicaoAtualX, posicaoAtualY, posAntX, posAntY
 
 local inimigo = {id = 4}
 
@@ -27,26 +28,26 @@ function inimigo:mover(argOrientacao)
 	if	argOrientacao == "up" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
 		inimigoGrafico:play()
-		passosY = -1.9
+		passosY = -2
 		passosX = 0
 
 	elseif argOrientacao == "down" then
 		inimigoGrafico:setSequence( "framesFrenteRun" )
 		inimigoGrafico:play()
-		passosY = 1.9
+		passosY = 2
 		passosX = 0
 	
 	elseif argOrientacao == "right" then
 		inimigoGrafico:setSequence( "framesLadoDireitoRun" )
 		inimigoGrafico:play()
 		passosY = 0
-		passosX = 1.9
+		passosX = 2
 
 	elseif argOrientacao == "left" then
 		inimigoGrafico:setSequence( "framesLadoEsquerdoRun" )
 		inimigoGrafico:play()
 		passosY = 0
-		passosX = -1.9
+		passosX = -2
 
 	end
 end
@@ -71,14 +72,32 @@ function inimigo:morrer(id)
 	end
 end
 
+-- function inimigo:setPosicaoAtual(posicaoX, posicaoY)
+-- 	posicaoAtualX, posicaoAtualY =  posicaoX, posicaoY
+-- end
+
+-- function inimigo:setPosicaoAnterior(posicaoX, posicaoY)
+-- 	posAntX, posAntY =  posicaoX, posicaoY
+-- end
+
+-- function inimigo:getPosicaoAtual()
+-- 	return posicaoAtualX, posicaoAtualY
+-- end
+
+-- function inimigo:getPosicaoAnterior()
+-- 	return posAntX, posAntY
+-- end
+
 function inimigo:enterFrame()
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 
 	inimigoGrafico.x = inimigoGrafico.x + passosX
-	inimigoGrafico.y = inimigoGrafico.y + passosY
-
+	inimigoGrafico.y = inimigoGrafico.y + passosY 	
 	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
-
+	
+	-- inimigo:setPosicaoAnterior(posicaoXAtualNoMapa, posicaoYAtualNoMapa)
+	-- inimigo:setPosicaoAtual(novaPosicaoX, novaPosicaoY)
+	-- print("PSANTERIOR___" .. inimigo:getPosicaoAnterior())
 	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
 		cenario:getEstadoJogo():atualizarEstado(inimigo)
 	end
