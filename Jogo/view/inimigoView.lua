@@ -27,26 +27,26 @@ function inimigo:mover(argOrientacao)
 	if	argOrientacao == "up" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
 		inimigoGrafico:play()
-		passosY = -1.3
+		passosY = -1.9
 		passosX = 0
 
 	elseif argOrientacao == "down" then
 		inimigoGrafico:setSequence( "framesFrenteRun" )
 		inimigoGrafico:play()
-		passosY = 1.3
+		passosY = 1.9
 		passosX = 0
 	
 	elseif argOrientacao == "right" then
 		inimigoGrafico:setSequence( "framesLadoDireitoRun" )
 		inimigoGrafico:play()
 		passosY = 0
-		passosX = 1.3
+		passosX = 1.9
 
 	elseif argOrientacao == "left" then
 		inimigoGrafico:setSequence( "framesLadoEsquerdoRun" )
 		inimigoGrafico:play()
 		passosY = 0
-		passosX = -1.3
+		passosX = -1.9
 
 	end
 end
