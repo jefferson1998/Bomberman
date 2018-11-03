@@ -76,8 +76,8 @@ function frames:animacaoVencedor(imagem)
 
 	local frames = 
 	{
-		width = 18.4,
-		height = 32,
+		width = 24,
+		height = 48,
 		numFrames = 5
 	}
 
