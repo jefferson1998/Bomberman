@@ -29,6 +29,9 @@ function cenario:getInimigoView()
 	return inimigoView
 end
 local buscaEmLargura = require "Objects.buscaEmLargura"
+function cenario:buscaEmLargura()
+	return buscaEmLargura
+end
 
 estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
 
