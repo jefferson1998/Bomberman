@@ -1,5 +1,6 @@
 local framesBomberman = require "view.frames"
 local imagem = "imagens/framesDoBomberman.png"
+local imagemVencedor = "imagens/vencedor.png"
 local personagem = {id = 2}
 local passosX, passosY = 0, 0
 
@@ -16,6 +17,17 @@ function personagem:newPersonagem()
 		physics.setGravity( 0, 0 )
 
 	return personagem.bombermanSprite
+end
+
+function personagem:spriteVencedor(spriteBomberman)
+	local posX, posY = spriteBomberman.x, spriteBomberman.y
+	display.remove( spriteBomberman )
+	personagem.animacaoVencedor_run, personagem.animacaoVencedor = framesBomberman:animacaoVencedor(imagemVencedor)
+	personagem.vencedorSprite = display.newSprite( personagem.animacaoVencedor, personagem.animacaoVencedor_run)
+	personagem.vencedorSprite.x = posX
+	personagem.vencedorSprite.y = posY
+
+	return personagem.vencedorSprite
 end
 
 local personagemGrafico = personagem:newPersonagem()
@@ -74,6 +86,9 @@ function personagem:enterFrame()
 	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
 
 	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
+		if(cenario:getEstadoJogo()[novaPosicaoX][novaPosicaoY] == 3) then
+			personagem:morrer(personagem.id)
+		end
 		cenario:getEstadoJogo():atualizarEstado(personagem)
 	end
 
@@ -83,9 +98,13 @@ end
 function personagem:getSprite()
 	return personagemGrafico
 end
- 
+
 function personagem:getId()
 	return personagem.id
+end
+
+function personagem:animacaoVencedor()
+	-- body
 end
 
 function personagem:morrer(id)

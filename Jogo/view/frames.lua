@@ -72,6 +72,27 @@ function frames:tempoBomba(imagem)
 
 end
 
+function frames:animacaoVencedor(imagem)
+
+	local frames = 
+	{
+		width = 24,
+		height = 48,
+		numFrames = 5
+	}
+
+	local animacaoVencedor_run = {
+		name = "framesVencedorRun",
+		start = 1,
+		count = 5,
+		time = 650,
+		loopCount = 0,
+
+	}
+	print("VENCEDOR")
+	return animacaoVencedor_run, graphics.newImageSheet(imagem, frames)
+end
+
 function frames:explosaoBomba(imagem)
 	-- body
 end

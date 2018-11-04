@@ -1,9 +1,8 @@
 local framesBomberman = require "view.frames"
 local passosX, passosY = 0, 0
--- local buscaEmLargura = require "Objects.buscaEmLargura"
-
 local imagem = "imagens/framesDoInimigo.png"
 local posicaoAtualX, posicaoAtualY, posAntX, posAntY
+local imagemVencedor = "imagens/inimigoVencedor.png"
 
 local inimigo = {id = 4}
 
@@ -62,6 +61,17 @@ end
 
 function inimigo:getSprite()
 	return inimigoGrafico
+end
+
+function inimigo:spriteVencedor(spriteBomberman)
+	local posX, posY = spriteBomberman.x, spriteBomberman.y
+	display.remove( spriteBomberman )
+	inimigo.animacaoVencedor_run, inimigo.animacaoVencedor = framesBomberman:animacaoVencedor(imagemVencedor)
+	inimigo.vencedorSprite = display.newSprite( inimigo.animacaoVencedor, inimigo.animacaoVencedor_run)
+	inimigo.vencedorSprite.x = posX
+	inimigo.vencedorSprite.y = posY
+
+	return inimigo.vencedorSprite
 end
 
 function inimigo:morrer(id)
