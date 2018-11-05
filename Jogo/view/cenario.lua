@@ -33,7 +33,7 @@ function cenario:buscaEmLargura()
 	return buscaEmLargura
 end
 
-estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
+-- estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
 
 local direcional = require "view.botaoOrientacaoView"
 local botaoBomba = require "view.botaoBombaView"

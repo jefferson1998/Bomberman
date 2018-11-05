@@ -1,6 +1,6 @@
 local estadoDoJogo = cenario:getMapa():getEstado()
 local map = cenario:getMapa()
-local posX, posY = nil, nil
+local posPersonagemX, posPersonagemY, posInimigoX, posInimigoY, posBombaX, posBombaY = nil, nil, nil, nil, nil, nil
 local aux = 1
 --------------------------------------------------------------------------------------------
 -- Regras do Estado
@@ -29,40 +29,40 @@ end
 function estadoDoJogo:atualizarEstado(obj)
 	
 	if(obj:getId() == 2) then
-		if(posX ~= nil and posY ~= nil) then
-			self[posX][posY] = aux	
+		if(posPersonagemX ~= nil and posPersonagemY ~= nil) then
+			self[posPersonagemX][posPersonagemY] = aux	
 		end
-		posX, posY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
+		posPersonagemX, posPersonagemY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		
-		print (posX, posY)
+		print (posPersonagemX, posPersonagemY)
 
-		aux = self[posX][posY]
+		aux = self[posPersonagemX][posPersonagemY]
 
 		print(aux)
 
-		self[posX][posY] = obj:getId()
+		self[posPersonagemX][posPersonagemY] = obj:getId()
 	end
 
 	if (obj:getId() == 3) then
-		posX, posY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
+		posBombaX, posBombaY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 
-		self[posX][posY] = obj:getId()
-		aux = self[posX][posY]
+		self[posBombaX][posBombaY] = obj:getId()
+		aux = self[posBombaX][posBombaY]
 	end
 
 	if(obj:getId() == 4) then
-		if(posX ~= nil and posY ~= nil) then
-			self[posX][posY] = aux	
+		if(posInimigoX ~= nil and posInimigoY ~= nil) then
+			self[posInimigoX][posInimigoY] = aux	
 		end
-		posX, posY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
+		posInimigoX, posInimigoY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		
-		print (posX, posY)
+		print (posInimigoX, posInimigoY)
 
-		aux = self[posX][posY]
+		aux = self[posInimigoX][posInimigoY]
 
 		print(aux)
 
-		self[posX][posY] = obj:getId()
+		self[posInimigoX][posInimigoY] = obj:getId()
 	end
 
 	print(estadoDoJogo:mostrarTabuleiroDoJogo())

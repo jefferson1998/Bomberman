@@ -116,4 +116,5 @@ end
 
 cenario:getEstadoJogo():atualizarEstado(personagem)
 
+
 return personagem

@@ -27,26 +27,26 @@ function inimigo:mover(argOrientacao)
 	if	argOrientacao == "up" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
 		inimigoGrafico:play()
-		passosY = -2
+		passosY = -1.3
 		passosX = 0
 
 	elseif argOrientacao == "down" then
 		inimigoGrafico:setSequence( "framesFrenteRun" )
 		inimigoGrafico:play()
-		passosY = 2
+		passosY = 1.3
 		passosX = 0
 	
 	elseif argOrientacao == "right" then
 		inimigoGrafico:setSequence( "framesLadoDireitoRun" )
 		inimigoGrafico:play()
 		passosY = 0
-		passosX = 2
+		passosX = 1.3
 
 	elseif argOrientacao == "left" then
 		inimigoGrafico:setSequence( "framesLadoEsquerdoRun" )
 		inimigoGrafico:play()
 		passosY = 0
-		passosX = -2
+		passosX = -1.3
 
 	end
 end
@@ -105,9 +105,6 @@ function inimigo:enterFrame()
 	inimigoGrafico.y = inimigoGrafico.y + passosY 	
 	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 	
-	-- inimigo:setPosicaoAnterior(posicaoXAtualNoMapa, posicaoYAtualNoMapa)
-	-- inimigo:setPosicaoAtual(novaPosicaoX, novaPosicaoY)
-	-- print("PSANTERIOR___" .. inimigo:getPosicaoAnterior())
 	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
 		cenario:getEstadoJogo():atualizarEstado(inimigo)
 	end
