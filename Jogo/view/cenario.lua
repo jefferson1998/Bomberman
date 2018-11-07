@@ -28,8 +28,8 @@ local inimigoView = require "view.inimigoView"
 function cenario:getInimigoView()
 	return inimigoView
 end
-local buscaEmLargura = require "Objects.buscaEmLargura"
-function cenario:buscaEmLargura()
+local aEstrela = require "Objects.aEstrela"
+function cenario:aEstrela()
 	return buscaEmLargura
 end
 
@@ -49,7 +49,7 @@ function cenario:enterFrame()
 
 	if inimigoView:getSprite().x ~= nil then
 		inimigoView:enterFrame()
-		buscaEmLargura:enterFrame()
+		-- aEstrela:enterFrame()
 	else
 		cenario:removerEventos(personagemView:getId())
 		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()

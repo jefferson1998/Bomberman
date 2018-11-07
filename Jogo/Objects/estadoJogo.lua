@@ -74,7 +74,7 @@ function estadoDoJogo:estadoPadrao()
 	-- self[#self - 1][#self[1] - 2] = 4
 	-- print(estadoDoJogo:mostrarTabuleiroDoJogo())
 end
-
+	
 function estadoDoJogo:getEstado()
 	return self
 end
