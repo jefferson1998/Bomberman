@@ -54,7 +54,7 @@ function cenario:enterFrame()
 
 	if inimigoView:getSprite().x ~= nil then
 		inimigoView:enterFrame()
-		-- aEstrela:enterFrame()
+		--no:criarNo(cenario:getEstadoJogo())
 	else
 		cenario:removerEventos(personagemView:getId())
 		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()

@@ -45,7 +45,6 @@ function estadoDoJogo:atualizarEstado(obj)
 
 	if (obj:getId() == 3) then
 		posBombaX, posBombaY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
-
 		self[posBombaX][posBombaY] = obj:getId()
 		aux = self[posBombaX][posBombaY]
 	end

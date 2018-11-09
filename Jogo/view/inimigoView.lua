@@ -71,6 +71,7 @@ function inimigo:spriteVencedor(spriteBomberman)
 	inimigo.vencedorSprite = display.newSprite( inimigo.animacaoVencedor, inimigo.animacaoVencedor_run)
 	inimigo.vencedorSprite.x = posX
 	inimigo.vencedorSprite.y = posY
+	inimigo.vencedorSprite.anchorY = 0.85
 
 	return inimigo.vencedorSprite
 end
@@ -113,5 +114,7 @@ function inimigo:enterFrame()
 
 	return posicaoXAtualNoMapa , posicaoXAtualNoMapa
 end
+
+cenario:getEstadoJogo():atualizarEstado(inimigo)
 
 return inimigo
