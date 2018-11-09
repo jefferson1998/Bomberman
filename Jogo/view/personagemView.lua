@@ -1,22 +1,34 @@
 local framesBomberman = require "view.frames"
 local imagem = "imagens/framesDoBomberman.png"
+local imagemVencedor = "imagens/vencedor.png"
 local personagem = {id = 2}
-
 local passosX, passosY = 0, 0
 
 function personagem:newPersonagem()
-		personagem.animacaoBomberman_run, personagem.animacaoBomberman = framesBomberman:personagemBomberman(imagem)
-		personagem.bombermanSprite = display.newSprite( personagem.animacaoBomberman, personagem.animacaoBomberman_run);
-		personagem.bombermanSprite.x = 32 * 2.5
-		personagem.bombermanSprite.y = 32 * 2.6
- 		personagem.bombermanSprite.anchorY = 0.85
+	personagem.animacaoBomberman_run, personagem.animacaoBomberman = framesBomberman:personagemBomberman(imagem)
+	personagem.bombermanSprite = display.newSprite( personagem.animacaoBomberman, personagem.animacaoBomberman_run);
+	personagem.bombermanSprite.x = 32 * 2.5
+	personagem.bombermanSprite.y = 32 * 2.6
+	personagem.bombermanSprite.anchorY = 0.85
 
- 		local vertices = {-10,0, -10, 16, 10, 16, 10, 0}
-		physics.addBody( personagem.bombermanSprite, "dynamic", {shape = vertices})
-		personagem.bombermanSprite.isFixedRotation = true
-		physics.setGravity( 0, 0 )
+	local vertices = {-10,0, -10, 16, 10, 16, 10, 0}
+	physics.addBody( personagem.bombermanSprite, "dynamic", {shape = vertices})
+	personagem.bombermanSprite.isFixedRotation = true
+	physics.setGravity( 0, 0 )
 
 	return personagem.bombermanSprite
+end
+
+function personagem:spriteVencedor(spriteBomberman)
+	local posX, posY = spriteBomberman.x, spriteBomberman.y
+	display.remove( spriteBomberman )
+	personagem.animacaoVencedor_run, personagem.animacaoVencedor = framesBomberman:animacaoVencedor(imagemVencedor)
+	personagem.vencedorSprite = display.newSprite( personagem.animacaoVencedor, personagem.animacaoVencedor_run)
+	personagem.vencedorSprite.x = posX
+	personagem.vencedorSprite.y = posY
+	personagem.vencedorSprite.anchorY = 0.85
+
+	return personagem.vencedorSprite
 end
 
 local personagemGrafico = personagem:newPersonagem()
@@ -75,7 +87,14 @@ function personagem:enterFrame()
 	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
 
 	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
+		if(cenario:getEstadoJogo()[novaPosicaoX][novaPosicaoY] == 3) then
+			personagem:morrer(personagem.id)
+		end
 		cenario:getEstadoJogo():atualizarEstado(personagem)
+	end
+
+	if(cenario:getBombaView():getBombaModel().tempo == 0 and cenario:getEstadoJogo():getEstado()[posicaoXAtualNoMapa][posicaoYAtualNoMapa] == 3) then
+		self:morrer(self:getId())
 	end
 
 	return personagemGrafico.x , personagemGrafico.y
@@ -84,9 +103,13 @@ end
 function personagem:getSprite()
 	return personagemGrafico
 end
- 
+
 function personagem:getId()
 	return personagem.id
+end
+
+function personagem:animacaoVencedor()
+	-- body
 end
 
 function personagem:morrer(id)
@@ -97,5 +120,6 @@ function personagem:morrer(id)
 end
 
 cenario:getEstadoJogo():atualizarEstado(personagem)
+
 
 return personagem

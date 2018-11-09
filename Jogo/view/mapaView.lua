@@ -8,6 +8,7 @@ local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/testeT
 local map = tiled.new(mapData, "Objects/mapa/cenario1")
 
 function map:getEstado()
+	print("fazendo estado")
 	local matrizEstado = {
 		{},
 		{},

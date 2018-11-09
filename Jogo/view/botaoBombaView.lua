@@ -2,9 +2,7 @@ local widget = require "widget"
 local bombaView = cenario:getBombaView()
 local bombaModel = bombaView:getBombaModel()
 
-local botaoView = widget.newButton {
-	defaultFile = "imagens/botaoBomba.png"
-}
+local botaoView = display.newImage("imagens/botaoBomba.png")
 
 local w = display.contentWidth
 local h = display.contentHeight

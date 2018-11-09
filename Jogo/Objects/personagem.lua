@@ -1,6 +1,3 @@
-local personagemModel = {id = 2, vida = 3}
-
--- atualiza o jogo
-
+local personagemModel = {nome = "", vitoria = 0}
 
 return personagemBomberman
