@@ -28,11 +28,16 @@ local inimigoView = require "view.inimigoView"
 function cenario:getInimigoView()
 	return inimigoView
 end
+
 local aEstrela = require "Objects.aEstrela"
-function cenario:aEstrela()
-	return buscaEmLargura
+function cenario:getAEstrela()
+	return aEstrela
 end
 
+local no = require "Objects.no"
+function cenario:getNo()
+	return no
+end
 -- estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
 
 local direcional = require "view.botaoOrientacaoView"

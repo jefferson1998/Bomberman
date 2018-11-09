@@ -1,5 +1,7 @@
 local aEstrela = {distancia = {}, caminho = {}}
 
-function aEstrela:buscaEstrela(argOrigem, argDestino)
-	
+function aEstrela:enterFrame(argNo, argEstado)
+	argNo:criaNo(argEstado)
 end
+
+return aEstrela

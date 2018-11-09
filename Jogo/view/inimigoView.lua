@@ -24,6 +24,7 @@ end
 local inimigoGrafico = inimigo:newInimigo()
 
 function inimigo:mover(argOrientacao)
+
 	if	argOrientacao == "up" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
 		inimigoGrafico:play()
@@ -99,6 +100,7 @@ end
 -- end
 
 function inimigo:enterFrame()
+
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 
 	inimigoGrafico.x = inimigoGrafico.x + passosX

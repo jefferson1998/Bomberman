@@ -109,7 +109,7 @@ end
 
 function no:criarNo(estado)
 
-	if(!(self:estaNaBorda(self.posicaoDosJogadores(estado)))) then
+	if(self:estaNaBorda(self.posicaoDosJogadores(estado)) == false) then
 		self.estado = estado
 		self.distancia = self:calcularDistancia(self.estado)
 		self:gerarVizinhos(self.estado)
@@ -118,3 +118,4 @@ function no:criarNo(estado)
 		end
 	end
 end
+
