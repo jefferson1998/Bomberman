@@ -77,7 +77,7 @@ function cenario:removerEventos(id)
 	end
 end
 
-
+cenario:getAEstrela():percorrerVizinhos(cenario:getEstadoJogo())
 
 -- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
-Runtime:addEventListener("enterFrame", cenario)
+-- Runtime:addEventListener("enterFrame", cenario)

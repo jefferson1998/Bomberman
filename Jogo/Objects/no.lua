@@ -1,9 +1,34 @@
 local no = {
 	vizinhos = {},
-	estado =  cenario:getEstadoJogo(), 
+	estadoPrincipal =  nil, 
 	isBorda =  false, 
-	distancia = 0
+	distancia = 0,
+	explorado = false
 }
+
+function no:getValues(arg)
+	local newEstate = {
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+	}
+
+	for i = 1, #arg do
+		for j = 1, #arg[i] do
+			newEstate[i][j] = arg[i][j]
+		end
+	end
+
+	return newEstate
+		
+end
 
 function no:posicaoDosJogadores(estado)
 	-- print("POSICAO___" .. estado[1][1])
@@ -41,76 +66,103 @@ function no:validarVizinho(estado, direcao)
 end
 
 function no:newVizinho(estado, direcao)
+
+	print ("Estado que chega")
+	print (self:mostrarEstado(estado))
+
+	local novoEstado = self:getValues(estado)
+
+	print("Novo Estado")
+	print(print (self:mostrarEstado(novoEstado)))
+
 	local posX, posY = self:posicaoDosJogadores(estado)
 	local aux = nil
 
 	if(direcao == "cima") then
-		aux = estado[posX - 1][posY]
-		estado[posX - 1][posY] = estado[posX][posY]
-		estado[posX][posY] = aux
-		print("ESTADO ALTERADO: " .. estado[posX - 1][posY])
+		aux = novoEstado[posX - 1][posY]
+		novoEstado[posX - 1][posY] = novoEstado[posX][posY]
+		novoEstado[posX][posY] = aux
+		print("ESTADO ALTERADO: " .. novoEstado[posX - 1][posY])
 	end
 	if(direcao == "direita") then
-		aux = estado[posX][posY + 1]
-		estado[posX][posY + 1] = estado[posX][posY]
-		estado[posX][posY] = aux
-		print("ESTADO ALTERADO: " .. estado[posX][posY + 1])
+		aux = novoEstado[posX][posY + 1]
+		novoEstado[posX][posY + 1] = novoEstado[posX][posY]
+		novoEstado[posX][posY] = aux
+		print("ESTADO ALTERADO: " .. novoEstado[posX][posY + 1])
 	end
 	if(direcao == "baixo") then
-		aux = estado[posX + 1][posY]
-		estado[posX + 1][posY] = estado[posX][posY]
-		estado[posX][posY] = aux
-		print("ESTADO ALTERADO: " .. estado[posX + 1][posY])
+		aux = novoEstado[posX + 1][posY]
+		novoEstado[posX + 1][posY] = novoEstado[posX][posY]
+		novoEstado[posX][posY] = aux
+		print("ESTADO ALTERADO: " .. novoEstado[posX + 1][posY])
 	end
 	if(direcao == "esquerda") then
-		aux = estado[posX][posY - 1]
-		estado[posX][posY - 1] = estado[posX][posY]
-		estado[posX][posY] = aux
-		print("ESTADO ALTERADO: " .. estado[posX][posY - 1])
+		aux = novoEstado[posX][posY - 1]
+		novoEstado[posX][posY - 1] = novoEstado[posX][posY]
+		novoEstado[posX][posY] = aux
+		print("ESTADO ALTERADO: " .. novoEstado[posX][posY - 1])
 	end
-	print(no:mostrarEstado(estado))
-	return estado
+	print ("novoEstado que Sai")
+	print (self:mostrarEstado(novoEstado))
+	novoEstado.explorado = false
+	return novoEstado
 end
 
-function no:verificaEstadosIguais(estado, argVizinho)
-	for i=1,#estado do
-		for j=1,#estado[i] do
-			if estado[i][j] ~= argVizinho[i][j] then
+function no:verificaEstadosIguais(argEstado, argVizinho)
+	print ("Mostrando Estado")
+	print (self:mostrarEstado(argEstado))
+	print ("Mostrando Vizinho")
+	print (self:mostrarEstado(argVizinho))
+
+	for i=1,#argEstado do
+		for j=1,#argEstado[i] do
+			if argEstado[i][j] ~= argVizinho[i][j] then
 				print("DIFERENTE")
-				return true
+				return false
 			end
 		end
 	end
-	return false
+	return true
 end
 
-function no:addVizinho(argVizinho)	
-	if no:verificaEstadosIguais(self.estado, argVizinho) == true then
+function no:addVizinho(argVizinho)
+	print("Entrei no addVizinho()")
+	print ("Mostrando Estado")
+	print (self.estadoPrincipal)
+
+	print ("Mostrando Vizinho")
+	print (argVizinho.explorado)	
+	if (self:verificaEstadosIguais(self.estadoPrincipal, argVizinho) == false and argVizinho.explorado == false) then
 		print("ADD VIZINHOS")
 		table.insert(self.vizinhos, argVizinho)
+		argVizinho.explorado = true
 	end
-	-- if(argVizinho ~= self.estado) then
+	-- if(argVizinho ~= self.estadoPrincipal) then
 		
 	-- end
 end
 
 function no:gerarVizinho(estado)
+
+	print ("Mostrando Estado")
+	print (self:mostrarEstado(self.estadoPrincipal))
+	local vizinho = nil
 	
 	if(self:validarVizinho(estado, "cima") == true) then
-		self:addVizinho(self:newVizinho(estado, "cima"))
-		print("ENTREI CIMA")
+		vizinho = self:newVizinho(estado, "cima")
+		self:addVizinho(vizinho)
 	end
 	if(self:validarVizinho(estado, "direita") == true) then
-		self:addVizinho(self:newVizinho(estado, "direita"))
-		print("ENTREI DIREITA")
+		vizinho = self:newVizinho(estado, "direita")
+		self:addVizinho(vizinho)
 	end
 	if(self:validarVizinho(estado, "baixo") == true) then
-		self:addVizinho(self:newVizinho(estado, "baixo"))
-		print("ENTREI BAIXO")
+		vizinho = self:newVizinho(estado, "baixo")
+		self:addVizinho(vizinho)
 	end
 	if(self:validarVizinho(estado, "esquerda") == true) then
-		self:addVizinho(self:newVizinho(estado, "esquerda"))
-		print("ENTREI EQUERS")
+		vizinho = self:newVizinho(estado, "esquerda")
+		self:addVizinho(vizinho)
 	end
 end
 
@@ -138,14 +190,21 @@ function no:estaNaBorda(inimigoPosX, inimigoPosY, personagemPosX, personagemPosY
 	return false
 end
 
-function no:criarNo(estado)
-	if(self:estaNaBorda(self:posicaoDosJogadores(estado)) == false) then
-		self.estado = estado
-		self.distancia = self:calcularDistancia(self.estado)
-		self:gerarVizinho(self.estado)
+function no:criarNo(estadoDoJogo)
+
+	if(self:estaNaBorda(self:posicaoDosJogadores(estadoDoJogo)) == false) then
+		print( self.estadoPrincipal )
+		self.estadoPrincipal = estadoDoJogo
+		print (self:mostrarEstado(self.estadoPrincipal))
+		self.explorado = true
+		self.distancia = self:calcularDistancia(self.estadoPrincipal)
+		self:gerarVizinho(self.estadoPrincipal)
 		for i = 1, #self.vizinhos do
-			self:criarNo(vizinhos[i])
 			print("CRIEI VIZINHOS")
+			print ("Vizinho ".. i)
+			print (self:mostrarEstado(self.vizinhos[i]))
+
+			self:criarNo(self.vizinhos[1])
 		end
 	end
 end
