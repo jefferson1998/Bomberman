@@ -1,11 +1,22 @@
 local aEstrela = {distancia = {}, caminho = {}}
+local no = require "Objects.no"
+local contador = 1
 
-function aEstrela:enterFrame(argNo, argEstado)
-	argNo:criaNo(argEstado)
+function aEstrela:percorrerVizinhos(estado)
+	no:criarNo(estado)
+	repeat
+		for i=1, #no.vizinho do
+			local menor = 100
+			if (menor > contador + no.distancia) then
+				table.insert( self.caminho, no.vizinho[i])
+			end
+		end
+
+		contador = contador + 1
+	until no.isBorda == true
 end
 
 return aEstrela
-
 
 
 -- 1:	percorrer a lista de vizinhos 

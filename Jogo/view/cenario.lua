@@ -34,10 +34,6 @@ function cenario:getAEstrela()
 	return aEstrela
 end
 
-local no = require "Objects.no"
-function cenario:getNo()
-	return no
-end
 -- estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
 
 local direcional = require "view.botaoOrientacaoView"
@@ -54,7 +50,6 @@ function cenario:enterFrame()
 
 	if inimigoView:getSprite().x ~= nil then
 		inimigoView:enterFrame()
-		--no:criarNo(cenario:getEstadoJogo())
 	else
 		cenario:removerEventos(personagemView:getId())
 		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()

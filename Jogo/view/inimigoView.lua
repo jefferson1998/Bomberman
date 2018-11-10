@@ -114,7 +114,6 @@ function inimigo:enterFrame()
 
 	return posicaoXAtualNoMapa , posicaoXAtualNoMapa
 end
-
 cenario:getEstadoJogo():atualizarEstado(inimigo)
-
+cenario:getAEstrela():percorrerVizinhos(cenario:getEstadoJogo())
 return inimigo

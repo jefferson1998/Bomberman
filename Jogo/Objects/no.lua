@@ -1,7 +1,7 @@
 local no = {
 	vizinhos = {},
 	estado =  cenario:getEstadoJogo(), 
-	explorado =  false, 
+	isBorda =  false, 
 	distancia = 0
 }
 
@@ -102,6 +102,7 @@ end
 
 function no:estaNaBorda(inimigoPosX, inimigoPosY, personagemPosX, personagemPosY)
 	if(inimigoPosX == personagemPosX and inimigoPosY == personagemPosY) then
+		self.isBorda = true
 		return true
 	end
 	return false
@@ -119,3 +120,4 @@ function no:criarNo(estado)
 	end
 end
 
+return no
