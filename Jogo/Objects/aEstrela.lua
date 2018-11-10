@@ -4,19 +4,19 @@ local contador = 1
 
 function aEstrela:percorrerVizinhos(estado)
 	no:criarNo(estado)
-	repeat
-		for i=1, #no.vizinhos do
-			local menor = 100
-			if (menor > contador + no.distancia) then
-				table.insert( self.caminho, no.vizinho[i])
-				menor = contador + no.distancia
-			end
-		end
+	-- repeat
+	-- 	for i=1, #no.vizinhos do
+	-- 		local menor = 100
+	-- 		if (menor > contador + no.distancia) then
+	-- 			table.insert( self.caminho, no.vizinho[i])
+	-- 			menor = contador + no.distancia
+	-- 		end
+	-- 	end
 
-		contador = contador + 1
-		print(contador)
-	until no.isBorda == true
-		contador = 0
+	-- 	contador = contador + 1
+	-- 	print(contador)
+	-- until no.isBorda == true
+	-- -- 	contador = 1
 end
 
 return aEstrela

@@ -67,7 +67,6 @@ function personagem:touch( e )
 
 		end
 
-	cenario:getAEstrela():percorrerVizinhos(cenario:getEstadoJogo())
 		-- quando soltar o botão ele para
 	elseif (e.phase == "ended" or e.phase == "canceled") then
 				
