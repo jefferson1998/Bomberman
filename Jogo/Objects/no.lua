@@ -5,6 +5,24 @@ local no = {
 	distancia = 0
 }
 
+function no:posicaoDosJogadores(estado)
+	-- print("POSICAO___" .. estado[1][1])
+	local inimigoPosX, inimigoPosY, personagemPosX, personagemPosY = nil, nil, nil, nil
+
+	for i = 1, #estado do
+		for j = 1, #estado[i] do
+			if(estado[i][j] == 2) then
+				personagemPosX, personagemPosY = i, j
+			elseif(estado[i][j] == 4) then
+				inimigoPosX, inimigoPosY = i, j
+			end
+			if(personagemPosX ~= nil and personagemPosY ~= nil and inimigoPosX ~= nil and inimigoPosY ~= nil) then
+				return inimigoPosX, inimigoPosY, personagemPosX, personagemPosY
+			end
+		end
+	end
+end
+
 function no:validarVizinho(estado, direcao)
 	local inimigoPosX, inimigoPosY = self:posicaoDosJogadores(estado)
 
@@ -48,6 +66,12 @@ function no:newVizinho(estado, direcao)
 	return estado
 end
 
+function no:addVizinho(argVizinho)
+	if(argVizinho ~= self.estado) then
+		table.insert(self.vizinhos, argVizinho)
+	end
+end
+
 function no:gerarVizinho(estado)
 	
 	if(self:validarVizinho(estado, "cima") == true) then
@@ -72,48 +96,28 @@ function no:getExplorado()
 	return self.explorado
 end
 
-function no:addVizinho(argVizinho)
-	if(argVizinho ~= self.estado) then
-		table.insert(self.vizinhos, argVizinho)
-	end
-end
-
-function no:posicaoDosJogadores(estado)
-	local inimigoPosX, inimigoPosY, personagemPosX, personagemPosY = nil, nil, nil, nil
-
-	for i = 1, #estado do
-		for j = 1, #estado[i] do
-			if(estado[i][j] == 2) then
-				personagemPosX, personagemPosY = i, j
-			elseif(estado[i][j] == 4) then
-				inimigoPosX, inimigoPosY = i, j
-			end
-			if(personagemPosX ~= nil and personagemPosY ~= nil and inimigoPosX ~= nil and inimigoPosY ~= nil) then
-				return inimigoPosX, inimigoPosY, personagemPosX, personagemPosY
-			end
-		end
-	end
-end
-
 function no:calcularDistancia(estado)
 	local inimigoPosX, inimigoPosY, personagemPosX, personagemPosY = self:posicaoDosJogadores(estado)
 	return math.abs(inimigoPosX - personagemPosX) + math.abs(inimigoPosY - personagemPosY)
 end
 
 function no:estaNaBorda(inimigoPosX, inimigoPosY, personagemPosX, personagemPosY)
+	
 	if(inimigoPosX == personagemPosX and inimigoPosY == personagemPosY) then
 		self.isBorda = true
+		print("ENTREI NA BORDA")
 		return true
+
 	end
 	return false
 end
 
 function no:criarNo(estado)
-
-	if(self:estaNaBorda(self.posicaoDosJogadores(estado)) == false) then
+	print("ESTADO NA CRIAÇÃO DO NO___" .. estado[3][3])
+	if(self:estaNaBorda(self:posicaoDosJogadores(estado)) == false) then
 		self.estado = estado
 		self.distancia = self:calcularDistancia(self.estado)
-		self:gerarVizinhos(self.estado)
+		self:gerarVizinho(self.estado)
 		for i = 1, #self.vizinhos do
 			self:criarNo(vizinho[i])
 		end

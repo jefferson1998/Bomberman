@@ -5,19 +5,21 @@ local contador = 1
 function aEstrela:percorrerVizinhos(estado)
 	no:criarNo(estado)
 	repeat
-		for i=1, #no.vizinho do
+		for i=1, #no.vizinhos do
 			local menor = 100
 			if (menor > contador + no.distancia) then
 				table.insert( self.caminho, no.vizinho[i])
+				menor = contador + no.distancia
 			end
 		end
 
 		contador = contador + 1
+		print(contador)
 	until no.isBorda == true
+		contador = 0
 end
 
 return aEstrela
-
 
 -- 1:	percorrer a lista de vizinhos 
 -- 2:	ver qual vizinho tem menor distancia (heuristicia),	
