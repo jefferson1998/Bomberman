@@ -78,6 +78,7 @@ function no:verificaEstadosIguais(estado, argVizinho)
 			if estado[i][j] ~= argVizinho[i][j] then
 				print("DIFERENTE")
 				return true
+
 			end
 		end
 	end
