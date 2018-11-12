@@ -66,7 +66,7 @@ function personagem:touch( e )
 			passosY = 0
 
 		end
-
+		
 		-- quando soltar o botão ele para
 	elseif (e.phase == "ended" or e.phase == "canceled") then
 				
