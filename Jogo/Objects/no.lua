@@ -1,6 +1,6 @@
 local no = {
-	vizinhos = {},
-	estado =  cenario:getEstadoJogo(), 
+	estado = cenario:getEstadoJogo(),
+	pai = nil, 
 	isBorda =  false, 
 	distancia = 0
 }

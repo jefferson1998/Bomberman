@@ -1,22 +1,50 @@
-local aEstrela = {distancia = {}, caminho = {}}
-local no = require "Objects.no"
+local aEstrela = {listaAberta = {}, listaFechada = {}}
+local node = require "Objects.node"
 local contador = 1
 
-function aEstrela:percorrerVizinhos(estado)
-	no:criarNo(estado)
-	-- repeat
-	-- 	for i=1, #no.vizinhos do
-	-- 		local menor = 100
-	-- 		if (menor > contador + no.distancia) then
-	-- 			table.insert( self.caminho, no.vizinho[i])
-	-- 			menor = contador + no.distancia
-	-- 		end
-	-- 	end
+function aEstrela:equals(no, outroNo)
+	if(no.px == outroNo.px and no.py == outroNo.py) then
+		return true
+	end
+end
 
-	-- 	contador = contador + 1
-	-- 	print(contador)
-	-- until no.isBorda == true
-	-- -- 	contador = 1
+function aEstrela:addListaAberta(no)
+	if (listaAberta) then
+
+
+
+		else table.insert( self.listaAberta, no)
+	end
+end
+
+function aEstrela:run()
+	local no = node:new(cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite())), nil, 0)
+	self:addListaAberta(no)
+end
+
+function aEstrela:addListaFechada(no)
+	if (listaFechada) then 
+
+
+	end
+end
+
+function aEstrela:pathFinding(listaAberta, listaFechada)
+	local menorF = 1000
+	local posMenor = 0
+
+	if(listaAberta) then
+		for i = 1, #listaAberta do
+			if (listaAberta[i].F <= menorF) then
+				menorF = listaAberta[i].F
+				posMenor = i
+			end
+		end
+	end
+
+	self:addListaFechada(listaAberta[posMenor])
+	self:continuarProcura(listaAberta[posMenor])
+
 end
 
 return aEstrela
