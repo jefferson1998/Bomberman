@@ -1,7 +1,7 @@
 local no = {}
 
 function no:calcularDistancia(px, py)
-	local personagemPosX, personagemPosY = cenario:getMapa():pixelToBoard(cenario:getPersonagem():getSprite())
+	local personagemPosX, personagemPosY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
 	return math.abs(px - personagemPosX) + math.abs(py - personagemPosY)
 end
 
