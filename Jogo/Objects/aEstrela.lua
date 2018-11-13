@@ -6,26 +6,66 @@ function aEstrela:equals(no, outroNo)
 	if(no.px == outroNo.px and no.py == outroNo.py) then
 		return true
 	end
+	return false
 end
 
 function aEstrela:addListaAberta(no)
-	if (listaAberta) then
+	local contains = false
+	if (#self.listaAberta ~= 0) then
+		for i = 1, #self.listaAberta do
+			if(self:equals(self.listaAberta[i], no) == true) then
+				contains = true
+				break
+			end
+		end
 
-
-
-		else table.insert( self.listaAberta, no)
+		if(contains == false) then
+			if (#self.listaFechada ~= 0) then 
+				for i = 1, #self.listaFechada do
+					if(self.equals(self.listaFechada[i], no) == true) then
+						contains = true
+						break
+					end
+				end
+			end
+			if(contains == false) then
+				table.insert( self.listaAberta, no)
+			end
+		end
+	else 
+		table.insert( self.listaAberta, no)
 	end
 end
 
 function aEstrela:run()
-	local no = node:new(cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite())), nil, 0)
+	local px, py = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite()))
+	local no = node:new(px, py , nil, 0)
 	self:addListaAberta(no)
+	self:pathFinding(self.listaAberta, self.listaFechada)
 end
 
 function aEstrela:addListaFechada(no)
-	if (listaFechada) then 
+	local contains = false
+	if (#self.listaFechada ~= 0) then 
+		for i=1, #self.listaFechada do
+			if(self.equals(self.listaFechada[i], no) == true) then
+				contains = true
+				break
+			end
+		end
+		if(contains == false) then
+			table.insert( self.listaFechada, no)
+		end
+	else
+		table.insert(self.listaFechada, no)
+	end
+end
 
+function aEstrela:continuarProcura(no)
+	local vizinhos = node:gerarVizinhos(no)
 
+	for i = 1, #vizinhos do
+		self:addListaAberta(vizinhos[i])		
 	end
 end
 
@@ -44,6 +84,7 @@ function aEstrela:pathFinding(listaAberta, listaFechada)
 
 	self:addListaFechada(listaAberta[posMenor])
 	self:continuarProcura(listaAberta[posMenor])
+	self:pathFinding(self.listaAberta, self.listaFechada)
 
 end
 

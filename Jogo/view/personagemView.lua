@@ -78,10 +78,13 @@ function personagem:touch( e )
 		-- print(personagemGrafico.x / 32)
 	end
 end
-
+local cont = 1
 function personagem:enterFrame()
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
-
+	if cont == 1 then
+		cont = 2
+		cenario:getAEstrela():run()
+	end
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
 
