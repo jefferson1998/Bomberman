@@ -17,3 +17,5 @@ function no:new(argPx, argPy, argPai, argG)
 
 	return node
 end
+
+return no
