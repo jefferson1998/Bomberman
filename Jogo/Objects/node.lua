@@ -15,5 +15,5 @@ function no:new(argPx, argPy, argPai, argG)
 		F = H + G
 	}
 
-	return no
+	return node
 end
