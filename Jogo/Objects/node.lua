@@ -28,18 +28,26 @@ function no:gerarVizinhos(no)
 	if(self:validarVizinho(no.px, no.py, "cima") == true) then
 		table.insert(listaVizinhos, self:new(no.px - 1, no.py, no, no.G + 1))
 		print("ENTREI CIMA")
+		-- print("Y __" .. no.py)
+		-- print("X __" .. no.px)
 	end
 	if(self:validarVizinho(no.px, no.py, "direita") == true) then
 		table.insert(listaVizinhos, self:new(no.px, no.py + 1, no, no.G + 1))
 		print("ENTREI DIREITA")
+		-- print("X __" .. no.px)
+		-- print("Y __" .. no.py)
 	end
 	if(self:validarVizinho(no.px, no.py, "baixo") == true) then
 		table.insert(listaVizinhos, self:new(no.px + 1, no.py, no, no.G + 1))
 		print("ENTREI BAIXO")
+		-- print("X __" .. no.px)
+		-- print("Y __" .. no.py)
 	end
 	if(self:validarVizinho(no.px, no.py, "esquerda") == true) then
 		table.insert(listaVizinhos, self:new(no.px, no.py - 1, no, no.G + 1))
 		print("ENTREI ESQUERDA")
+		-- print("X __" .. no.px)
+		-- print("Y __" .. no.py)
 	end
 
 	return listaVizinhos

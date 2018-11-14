@@ -51,7 +51,7 @@ function cenario:enterFrame()
 		cenario:removerEventos(personagemView:getId())
 		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
 
-	end
+	end 
 
 	if inimigoView:getSprite().x ~= nil then
 		inimigoView:enterFrame()

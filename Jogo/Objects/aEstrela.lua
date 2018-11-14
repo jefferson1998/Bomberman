@@ -13,6 +13,10 @@ end
 
 function aEstrela:addListaFechada(no)
 	print ("Rodando o addListaFechada")
+	-- print("NO LISTA FECHADA")
+	-- for k,v in pairs(no) do
+	-- 	print(k,v)
+	-- end
 	local contains = false
 	if (#self.listaFechada ~= 0) then 
 		for i=1, #self.listaFechada do
@@ -27,11 +31,26 @@ function aEstrela:addListaFechada(no)
 	else
 		table.insert(self.listaFechada, no)
 	end
+	-- print("ITENS LISTA FECHADA ")
+	-- for k,v in pairs(self.listaFechada) do
+	-- 	for k,v in pairs(v) do
+	-- 		print(k,v)
+	-- 	end
+	-- end
 	self:removerDaListaAberta(no)
+	print("ITENS LISTA FECHADA ")
+	for k,v in pairs(self.listaFechada) do
+		for k,v in pairs(v) do
+			print(k,v)
+		end
+	end
 end
 
 function aEstrela:addListaAberta(argNo)
 	print ("Rodando o addListaAberta")
+	for k,v in pairs(argNo) do
+		print(k,v)
+	end
 	local contains = false
 	if (#self.listaAberta ~= 0) then
 		for i = 1, #self.listaAberta do
@@ -43,10 +62,15 @@ function aEstrela:addListaAberta(argNo)
 
 		if(contains == false) then
 			print ("quant elementos ListaFechada " ..tostring(#self.listaFechada))
+			print("NO que chega")
+			for k,v in pairs(argNo) do
+				print(k,v)
+			end
 			if (#self.listaFechada ~= 0) then 
 				for i = 1, #self.listaFechada do
-					print ("ListaFechada " ..tostring(self.listaFechada[i]))
+					print ("ListaFechada " ..tostring(self.listaFechada[i][1]))
 					print ("NO " ..tostring(argNo))
+
 					if(self.equals(self.listaFechada[i], argNo) == true) then
 						contains = true
 						break
@@ -59,6 +83,12 @@ function aEstrela:addListaAberta(argNo)
 		end
 	else 
 		table.insert( self.listaAberta, argNo)
+	end
+	print("ITENS LISTA ABERTA ")
+	for k,v in pairs(self.listaAberta) do
+		for k,v in pairs(v) do
+			print(k,v)
+		end
 	end
 end
 
@@ -73,10 +103,11 @@ end
 function aEstrela:continuarProcura(no)
 	print ("Rodando o continuarProcura")
 	local vizinhos = node:gerarVizinhos(no)
-
+	print("VIZINHOS GERADOS " .. #vizinhos)
 	for i = 1, #vizinhos do
 		self:addListaAberta(vizinhos[i])		
 	end
+
 end
 
 function aEstrela:removerDaListaAberta(no)
@@ -89,6 +120,7 @@ function aEstrela:removerDaListaAberta(no)
 			end
 		end
 	end
+
 end
 
 function aEstrela:pathFinding(listaAberta, listaFechada)
