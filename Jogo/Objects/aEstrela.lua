@@ -134,8 +134,6 @@ function aEstrela:pathFinding(listaAberta, listaFechada)
 		self:continuarProcura(listaAberta[posMenor])
 		self:addListaFechada(listaAberta[posMenor])
 		self:pathFinding(self.listaAberta, self.listaFechada)
-	else
-		return self.listaFechada
 	end
 
 end
