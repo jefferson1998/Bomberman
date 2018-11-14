@@ -34,11 +34,11 @@ function estadoDoJogo:atualizarEstado(obj)
 		end
 		posPersonagemX, posPersonagemY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		
-		print (posPersonagemX, posPersonagemY)
+		-- print (posPersonagemX, posPersonagemY)
 
 		aux = self[posPersonagemX][posPersonagemY]
 
-		print(aux)
+		-- print(aux)
 
 		self[posPersonagemX][posPersonagemY] = obj:getId()
 	end
@@ -55,23 +55,23 @@ function estadoDoJogo:atualizarEstado(obj)
 		end
 		posInimigoX, posInimigoY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		
-		print (posInimigoX, posInimigoY)
+		-- print (posInimigoX, posInimigoY)
 
 		aux = self[posInimigoX][posInimigoY]
 
-		print(aux)
+		-- print(aux)
 
 		self[posInimigoX][posInimigoY] = obj:getId()
 	end
 
-	print(estadoDoJogo:mostrarTabuleiroDoJogo())
+	-- print(estadoDoJogo:mostrarTabuleiroDoJogo())
 
 end
 
 function estadoDoJogo:estadoPadrao()
 	-- estadoDoJogo[3][3] = 2
 	-- self[#self - 1][#self[1] - 2] = 4
-	-- print(estadoDoJogo:mostrarTabuleiroDoJogo())
+	-- -- print(estadoDoJogo:mostrarTabuleiroDoJogo())
 end
 	
 function estadoDoJogo:getEstado()

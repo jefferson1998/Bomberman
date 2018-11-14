@@ -78,7 +78,7 @@ end
 
 function inimigo:morrer(id)
 	if(id == 4) then
-		print( "INIMIGO MORTO" )
+		-- print( "INIMIGO MORTO" )
 		cenario:removerEventos()
 		display.remove(inimigo:getSprite())
 	end

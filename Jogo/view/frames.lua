@@ -7,7 +7,7 @@ function frames:personagemBomberman(imagem)
 	height = 35,
 	numFrames = 32
 }
-print (imagem.height)
+-- print (imagem.height)
 -- faz a animação acontecer: star - determina de que recorte deve começar
 	--count determina até quanto deve contar
 	--time é o tempo em milisegundos
@@ -89,7 +89,7 @@ function frames:animacaoVencedor(imagem)
 		loopCount = 0,
 
 	}
-	print("VENCEDOR")
+	-- print("VENCEDOR")
 	return animacaoVencedor_run, graphics.newImageSheet(imagem, frames)
 end
 

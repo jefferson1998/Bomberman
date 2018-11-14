@@ -1,10 +1,9 @@
-local aEstrela = {listaAberta = {}, listaFechada = {}}
+local aEstrela = {listaAberta = {}, listaFechada = {}, caminho = {}}
 local node = require "Objects.node"
 local contador = 1
 
 function aEstrela:equals(no, outroNo)
-	print ("Rodando o Equals")
-	print (no, outroNo)
+	-- -- print ("Rodando o Equals")
 	if(no.px == outroNo.px and no.py == outroNo.py) then
 		return true
 	end
@@ -12,15 +11,11 @@ function aEstrela:equals(no, outroNo)
 end
 
 function aEstrela:addListaFechada(no)
-	print ("Rodando o addListaFechada")
-	-- print("NO LISTA FECHADA")
-	-- for k,v in pairs(no) do
-	-- 	print(k,v)
-	-- end
+	-- -- print ("Rodando o addListaFechada")
 	local contains = false
 	if (#self.listaFechada ~= 0) then 
 		for i=1, #self.listaFechada do
-			if(self.equals(self.listaFechada[i], no) == true) then
+			if(self:equals(self.listaFechada[i], no) == true) then
 				contains = true
 				break
 			end
@@ -31,26 +26,11 @@ function aEstrela:addListaFechada(no)
 	else
 		table.insert(self.listaFechada, no)
 	end
-	-- print("ITENS LISTA FECHADA ")
-	-- for k,v in pairs(self.listaFechada) do
-	-- 	for k,v in pairs(v) do
-	-- 		print(k,v)
-	-- 	end
-	-- end
 	self:removerDaListaAberta(no)
-	print("ITENS LISTA FECHADA ")
-	for k,v in pairs(self.listaFechada) do
-		for k,v in pairs(v) do
-			print(k,v)
-		end
-	end
 end
 
 function aEstrela:addListaAberta(argNo)
-	print ("Rodando o addListaAberta")
-	for k,v in pairs(argNo) do
-		print(k,v)
-	end
+	-- -- print ("Rodando o addListaAberta")
 	local contains = false
 	if (#self.listaAberta ~= 0) then
 		for i = 1, #self.listaAberta do
@@ -61,17 +41,11 @@ function aEstrela:addListaAberta(argNo)
 		end
 
 		if(contains == false) then
-			print ("quant elementos ListaFechada " ..tostring(#self.listaFechada))
-			print("NO que chega")
-			for k,v in pairs(argNo) do
-				print(k,v)
-			end
+			-- -- print ("quant elementos ListaFechada " ..tostring(#self.listaFechada))
+			-- -- print("NO que chega")
 			if (#self.listaFechada ~= 0) then 
 				for i = 1, #self.listaFechada do
-					print ("ListaFechada " ..tostring(self.listaFechada[i][1]))
-					print ("NO " ..tostring(argNo))
-
-					if(self.equals(self.listaFechada[i], argNo) == true) then
+					if(self:equals(self.listaFechada[i], argNo) == true) then
 						contains = true
 						break
 					end
@@ -84,16 +58,14 @@ function aEstrela:addListaAberta(argNo)
 	else 
 		table.insert( self.listaAberta, argNo)
 	end
-	print("ITENS LISTA ABERTA ")
-	for k,v in pairs(self.listaAberta) do
-		for k,v in pairs(v) do
-			print(k,v)
-		end
-	end
 end
 
 function aEstrela:run()
-	print ("Rodando o run")
+	-- -- print ("Rodando o run")
+
+	self.listaFechada = {}
+	self.listaAberta = {}
+
 	local px, py = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite()))
 	local no = node:new(px, py , nil, 0)
 	self:addListaAberta(no)
@@ -101,17 +73,33 @@ function aEstrela:run()
 end
 
 function aEstrela:continuarProcura(no)
-	print ("Rodando o continuarProcura")
+	-- -- print ("Rodando o continuarProcura")
+
 	local vizinhos = node:gerarVizinhos(no)
-	print("VIZINHOS GERADOS " .. #vizinhos)
 	for i = 1, #vizinhos do
 		self:addListaAberta(vizinhos[i])		
 	end
+end
 
+function aEstrela:isBorda(no)
+	if (no.H == 0) then
+		return true
+	end
+	return false 
+end
+
+function aEstrela:retornarCaminho(caminho, no)
+	-- -- print("Rodando o retornarCaminho")
+	if (no.pai ~= nil) then
+		table.insert(caminho, no)
+		return self:retornarCaminho(caminho, no.pai)
+	else
+		return caminho
+	end
 end
 
 function aEstrela:removerDaListaAberta(no)
-	print ("Rodando o removerDaListaAberta")
+	-- -- print ("Rodando o removerDaListaAberta")
 	if(#self.listaAberta ~= 0) then
 		for i = 1, #self.listaAberta do
 			if(self:equals(self.listaAberta[i], no) == true) then
@@ -120,26 +108,35 @@ function aEstrela:removerDaListaAberta(no)
 			end
 		end
 	end
-
 end
 
 function aEstrela:pathFinding(listaAberta, listaFechada)
-	print ("Rodando o PathFinding")
-	local menorF = listaAberta[1].F
-	local posMenor = 1
+	-- -- print ("Rodando o PathFinding")
+	-- -- print ("Lista Aberta " ..#self.listaAberta)
+	-- -- print ("Lista Fechada " ..#self.listaFechada)
 
-	if(listaAberta) then
+	if(#self.listaAberta ~= 0) then
+		local menorF = listaAberta[1].F
+		local posMenor = 1
+
 		for i = 1, #listaAberta do
 			if (listaAberta[i].F <= menorF) then
 				menorF = listaAberta[i].F
 				posMenor = i
 			end
 		end
-	end
 
-	self:continuarProcura(listaAberta[posMenor])
-	self:addListaFechada(listaAberta[posMenor])
-	self:pathFinding(self.listaAberta, self.listaFechada)
+		if (self:isBorda(listaAberta[posMenor]) == true) then
+			self.caminho = self:retornarCaminho(self.caminho, listaAberta[posMenor])
+			return caminho
+		end
+
+		self:continuarProcura(listaAberta[posMenor])
+		self:addListaFechada(listaAberta[posMenor])
+		self:pathFinding(self.listaAberta, self.listaFechada)
+	else
+		return self.listaFechada
+	end
 
 end
 

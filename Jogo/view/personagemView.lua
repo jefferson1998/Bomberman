@@ -74,17 +74,14 @@ function personagem:touch( e )
 		passosY = 0
 		personagemGrafico:setFrame(1)
 		personagemGrafico:pause()
-		-- print(math.floor(personagemGrafico.x / 32))
-		-- print(personagemGrafico.x / 32)
+		-- -- print(math.floor(personagemGrafico.x / 32))
+		-- -- print(personagemGrafico.x / 32)
 	end
 end
-local cont = 1
+
 function personagem:enterFrame()
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
-	if cont == 1 then
-		cont = 2
-		cenario:getAEstrela():run()
-	end
+	
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
 
@@ -95,6 +92,7 @@ function personagem:enterFrame()
 			personagem:morrer(personagem.id)
 		end
 		cenario:getEstadoJogo():atualizarEstado(personagem)
+		cenario:getAEstrela():run()
 	end
 
 	if(cenario:getBombaView():getBombaModel().tempo == 0 and cenario:getEstadoJogo():getEstado()[posicaoXAtualNoMapa][posicaoYAtualNoMapa] == 3) then
