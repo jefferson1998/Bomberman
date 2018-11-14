@@ -23,33 +23,71 @@ end
 
 local inimigoGrafico = inimigo:newInimigo()
 
-function inimigo:mover(argOrientacao)
+function inimigo:determinarOrientacao(posX, posY, caminhoX, caminhoY)
 
-	if	argOrientacao == "up" then
+	print (posX - caminhoX)
+	print (posY - caminhoY)
+
+	if (posX - caminhoX == 0 and posY - caminhoY > 0) then
+		return "direita"
+	end
+	if (posX - caminhoX == 0 and posY - caminhoY < 0) then
+		return "esquerda"
+	end
+	if (posX - caminhoX > 0 and posY - caminhoY == 0) then
+		return "baixo"
+	end
+	if (posX - caminhoX < 0 and posY - caminhoY == 0) then
+		return "cima"
+	end
+end
+	local cont = 1
+
+function inimigo:mover(px, py)
+
+	local posXnoMapa, posYnoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+
+	local orientacao = self:determinarOrientacao(posYnoMapa, posXnoMapa, px, py)
+
+	if	orientacao == "cima" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
 		inimigoGrafico:play()
 		passosY = -1.3
 		passosX = 0
 
-	elseif argOrientacao == "down" then
+	elseif orientacao == "baixo" then
 		inimigoGrafico:setSequence( "framesFrenteRun" )
 		inimigoGrafico:play()
 		passosY = 1.3
 		passosX = 0
 	
-	elseif argOrientacao == "right" then
+	elseif orientacao == "direita" then
 		inimigoGrafico:setSequence( "framesLadoDireitoRun" )
 		inimigoGrafico:play()
 		passosY = 0
 		passosX = 1.3
 
-	elseif argOrientacao == "left" then
+	elseif orientacao == "esquerda" then
 		inimigoGrafico:setSequence( "framesLadoEsquerdoRun" )
 		inimigoGrafico:play()
 		passosY = 0
 		passosX = -1.3
-
 	end
+	local posXpixel, posYpixel = cenario:getMapa():boardToPixel(px, py)
+	print ("TESTE")
+		if(cont == 1) then
+			cont = 2
+			
+		while math.abs(inimigoGrafico.x - posXpixel) > math.abs(passosX) and math.abs(inimigoGrafico.y - posYpixel) > math.abs(passosY) do
+			inimigoGrafico.x = inimigoGrafico.x + passosX
+			inimigoGrafico.y = inimigoGrafico.y + passosY
+
+		end
+	end
+	passosX = 0
+	passosY = 0
+	inimigoGrafico:setFrame(1)
+	inimigoGrafico:pause()
 end
 
 function inimigo:posicao()
@@ -102,20 +140,14 @@ end
 
 function inimigo:enterFrame()
 
-	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+	local caminho = cenario:getAEstrela():getCaminho()
 
-	inimigoGrafico.x = inimigoGrafico.x + passosX
-	inimigoGrafico.y = inimigoGrafico.y + passosY 	
-	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
-	
-	if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
+	for i = 1, #caminho do
+		self:mover(caminho[i].px, caminho[i].py)
 		cenario:getEstadoJogo():atualizarEstado(inimigo)
 	end
-
-	--cenario:getAEstrela():percorrerVizinhos(cenario:getEstadoJogo())
-
-	return posicaoXAtualNoMapa , posicaoXAtualNoMapa
 end
+
 cenario:getEstadoJogo():atualizarEstado(inimigo)
 
 return inimigo

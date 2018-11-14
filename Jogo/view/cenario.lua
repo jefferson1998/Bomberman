@@ -10,9 +10,19 @@ function cenario:getEstadoJogo()
 	return estadoJogo
 end
 
+local inimigoView = require "view.inimigoView"
+function cenario:getInimigoView()
+	return inimigoView
+end
+
 local personagemView = require "view.personagemView"
 function cenario:getPersonagem()
 	return personagemView
+end
+
+local aEstrela = require "Objects.aEstrela"
+function cenario:getAEstrela()
+	return aEstrela
 end
 
 function cenario:getDirecional()
@@ -26,17 +36,6 @@ end
 local bombaView = require "view.bombaView"
 function cenario:getBombaView()
 	return bombaView
-end
-
-
-local aEstrela = require "Objects.aEstrela"
-function cenario:getAEstrela()
-	return aEstrela
-end
-
-local inimigoView = require "view.inimigoView"
-function cenario:getInimigoView()
-	return inimigoView
 end
 
 -- estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
