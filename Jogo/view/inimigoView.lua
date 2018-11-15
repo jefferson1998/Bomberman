@@ -4,13 +4,15 @@ local imagem = "imagens/framesDoInimigo.png"
 local posicaoAtualX, posicaoAtualY, posAntX, posAntY
 local imagemVencedor = "imagens/inimigoVencedor.png"
 
+local posXpixel, posYpixel = 0, 0
+
 local inimigo = {id = 4}
 
 function inimigo:newInimigo()
 	inimigo.animacaoBomberman_run, inimigo.animacaoBomberman = framesBomberman:personagemBomberman(imagem)
 	inimigo.bombermanSprite = display.newSprite( inimigo.animacaoBomberman, inimigo.animacaoBomberman_run);
-	inimigo.bombermanSprite.x = 32 * 13
-	inimigo.bombermanSprite.y = 32 * 8.7
+	inimigo.bombermanSprite.x = 400
+	inimigo.bombermanSprite.y = 272
 	inimigo.bombermanSprite.anchorY = 0.85
 
 	local vertices = {-10,0, -10, 16, 10, 16, 10, 0}
@@ -25,8 +27,8 @@ local inimigoGrafico = inimigo:newInimigo()
 
 function inimigo:determinarOrientacao(posX, posY, caminhoX, caminhoY)
 
-	print (posY - caminhoX)
 	print (posX - caminhoY)
+	print (posY - caminhoX)
 
 	if (posX - caminhoY == 0 and posY - caminhoX > 0) then
 		return "cima"
@@ -44,9 +46,12 @@ end
 
 function inimigo:mover(px, py)
 
-	local posXnoMapa, posYnoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+	-- print (px, py)
 
+	local posXnoMapa, posYnoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+	posXpixel, posYpixel = cenario:getMapa():boardToPixel(px, py)
 	local orientacao = self:determinarOrientacao(posYnoMapa, posXnoMapa, px, py)
+	print (orientacao)
 
 	if	orientacao == "cima" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
@@ -72,18 +77,39 @@ function inimigo:mover(px, py)
 		passosY = 0
 		passosX = -1.3
 	end
-	local posXpixel, posYpixel = cenario:getMapa():boardToPixel(px, py)
-	print ("TESTE")
-			
-	while math.abs(inimigoGrafico.x - posXpixel) > math.abs(passosX) and math.abs(inimigoGrafico.y - posYpixel) > math.abs(passosY) do
-		print (tostring(math.abs(inimigoGrafico.x - posXpixel)), math.abs(inimigoGrafico.y - posYpixel))
-		inimigoGrafico.x = inimigoGrafico.x + passosX
-		inimigoGrafico.y = inimigoGrafico.y + passosY
+
+	print (passosX, passosY)
+
+end
+
+function inimigo:enterFrame()
+	
+	if(posXpixel and posYpixel)then
+		
+		if (math.abs(inimigoGrafico.x - posXpixel) <= math.abs(passosX) and math.abs(inimigoGrafico.y - posYpixel) <= math.abs(passosY)) then
+
+			passosX = 0
+			passosY = 0
+			inimigoGrafico:setFrame(1)
+			inimigoGrafico:pause()
+
+		else
+
+			local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+	
+			inimigoGrafico.x = inimigoGrafico.x + passosX
+			inimigoGrafico.y = inimigoGrafico.y + passosY
+
+			local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+
+			if(novaPosicaoX ~= posicaoXAtualNoMapa or novaPosicaoY ~= posicaoYAtualNoMapa) then
+				if(cenario:getEstadoJogo()[novaPosicaoX][novaPosicaoY] == 3) then
+					inimigo:morrer(inimigo.id)
+				end
+				cenario:getEstadoJogo():atualizarEstado(inimigo)
+			end
+		end
 	end
-	passosX = 0
-	passosY = 0
-	inimigoGrafico:setFrame(1)
-	inimigoGrafico:pause()
 end
 
 function inimigo:posicao()
@@ -126,15 +152,28 @@ local function compare(no1, no2)
 end
 
 function inimigo:run()
+	print ("Rodando o Run no inimigo")
 	local caminho = {}
 
-	caminho = cenario:getAEstrela():getCaminho()
+	caminho = getAEstrela():getCaminho()
 	table.sort(caminho, compare)
 
-	for i = 1, #caminho do
+	print(caminho[1].px, caminho[1].py)
+
+	-- for i = 1, #caminho do
 		self:mover(caminho[1].px, caminho[1].py)
-		cenario:getEstadoJogo():atualizarEstado(inimigo)
-	end
+		self:mover(caminho[2].px, caminho[2].py)
+		self:mover(caminho[3].px, caminho[3].py)
+		self:mover(caminho[4].px, caminho[4].py)
+		self:mover(caminho[5].px, caminho[5].py)
+		self:mover(caminho[6].px, caminho[6].py)
+		self:mover(caminho[7].px, caminho[7].py)
+		self:mover(caminho[8].px, caminho[8].py)
+		self:mover(caminho[9].px, caminho[9].py)
+		self:mover(caminho[10].px, caminho[10].py)
+		self:mover(caminho[11].px, caminho[11].py)
+		self:mover(caminho[12].px, caminho[12].py)
+	--  end
 end
 
 cenario:getEstadoJogo():atualizarEstado(inimigo)

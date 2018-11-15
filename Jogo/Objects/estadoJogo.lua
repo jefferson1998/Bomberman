@@ -64,7 +64,7 @@ function estadoDoJogo:atualizarEstado(obj)
 		self[posInimigoX][posInimigoY] = obj:getId()
 	end
 
-	-- print(estadoDoJogo:mostrarTabuleiroDoJogo())
+	-- print(self:mostrarTabuleiroDoJogo())
 
 end
 

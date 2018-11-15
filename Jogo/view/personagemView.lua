@@ -92,8 +92,10 @@ function personagem:enterFrame()
 			personagem:morrer(personagem.id)
 		end
 		cenario:getEstadoJogo():atualizarEstado(personagem)
-		cenario:getAEstrela():run()
-		cenario:getInimigoView():run()
+		if(getAEstrela) then
+			getAEstrela():run()
+			cenario:getInimigoView():run()
+		end
 	end
 
 	if(cenario:getBombaView():getBombaModel().tempo == 0 and cenario:getEstadoJogo():getEstado()[posicaoXAtualNoMapa][posicaoYAtualNoMapa] == 3) then

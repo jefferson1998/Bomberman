@@ -20,8 +20,8 @@ function cenario:getPersonagem()
 	return personagemView
 end
 
-local aEstrela = require "Objects.aEstrela"
-function cenario:getAEstrela()
+aEstrela = require "Objects.aEstrela"
+function getAEstrela()
 	return aEstrela
 end
 
@@ -52,12 +52,12 @@ function cenario:enterFrame()
 
 	end 
 
-	-- if inimigoView:getSprite().x ~= nil then
-	-- 	inimigoView:enterFrame()
-	-- else
-	-- 	cenario:removerEventos(personagemView:getId())
-	-- 	cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
-	-- end
+	if inimigoView:getSprite().x ~= nil then
+		inimigoView:enterFrame()
+	else
+		cenario:removerEventos(personagemView:getId())
+		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
+	end
 
 end
 
