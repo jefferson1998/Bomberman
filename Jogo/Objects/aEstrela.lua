@@ -136,17 +136,13 @@ function aEstrela:pathFinding(listaAberta, listaFechada)
 	end
 end
 
-function compare(no1, no2)
-	return no1.G < no2.G
-end
-
 function aEstrela:getCaminho()
-	if (#self.caminho ~= 0) then 
-		return table.sort(self.caminho, compare)
+	if (#self.caminho ~= 0) then
+		return self.caminho
 	else
 		self:run()
 	end
-	return table.sort(self.caminho, compare)
+	return self.caminho
 end
 
 return aEstrela

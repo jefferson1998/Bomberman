@@ -93,6 +93,7 @@ function personagem:enterFrame()
 		end
 		cenario:getEstadoJogo():atualizarEstado(personagem)
 		cenario:getAEstrela():run()
+		cenario:getInimigoView():run()
 	end
 
 	if(cenario:getBombaView():getBombaModel().tempo == 0 and cenario:getEstadoJogo():getEstado()[posicaoXAtualNoMapa][posicaoYAtualNoMapa] == 3) then

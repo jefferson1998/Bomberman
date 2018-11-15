@@ -25,23 +25,22 @@ local inimigoGrafico = inimigo:newInimigo()
 
 function inimigo:determinarOrientacao(posX, posY, caminhoX, caminhoY)
 
-	print (posX - caminhoX)
-	print (posY - caminhoY)
+	print (posY - caminhoX)
+	print (posX - caminhoY)
 
-	if (posX - caminhoX == 0 and posY - caminhoY > 0) then
-		return "direita"
-	end
-	if (posX - caminhoX == 0 and posY - caminhoY < 0) then
-		return "esquerda"
-	end
-	if (posX - caminhoX > 0 and posY - caminhoY == 0) then
-		return "baixo"
-	end
-	if (posX - caminhoX < 0 and posY - caminhoY == 0) then
+	if (posX - caminhoY == 0 and posY - caminhoX > 0) then
 		return "cima"
 	end
+	if (posX - caminhoY == 0 and posY - caminhoX < 0) then
+		return "baixo"
+	end
+	if (posX - caminhoY > 0 and posY - caminhoX == 0) then
+		return "esquerda"
+	end
+	if (posX - caminhoY < 0 and posY - caminhoX == 0) then
+		return "direita"
+	end
 end
-	local cont = 1
 
 function inimigo:mover(px, py)
 
@@ -75,14 +74,11 @@ function inimigo:mover(px, py)
 	end
 	local posXpixel, posYpixel = cenario:getMapa():boardToPixel(px, py)
 	print ("TESTE")
-		if(cont == 1) then
-			cont = 2
 			
-		while math.abs(inimigoGrafico.x - posXpixel) > math.abs(passosX) and math.abs(inimigoGrafico.y - posYpixel) > math.abs(passosY) do
-			inimigoGrafico.x = inimigoGrafico.x + passosX
-			inimigoGrafico.y = inimigoGrafico.y + passosY
-
-		end
+	while math.abs(inimigoGrafico.x - posXpixel) > math.abs(passosX) and math.abs(inimigoGrafico.y - posYpixel) > math.abs(passosY) do
+		print (tostring(math.abs(inimigoGrafico.x - posXpixel)), math.abs(inimigoGrafico.y - posYpixel))
+		inimigoGrafico.x = inimigoGrafico.x + passosX
+		inimigoGrafico.y = inimigoGrafico.y + passosY
 	end
 	passosX = 0
 	passosY = 0
@@ -122,28 +118,21 @@ function inimigo:morrer(id)
 	end
 end
 
--- function inimigo:setPosicaoAtual(posicaoX, posicaoY)
--- 	posicaoAtualX, posicaoAtualY =  posicaoX, posicaoY
--- end
+local function compare(no1, no2)
+	if (no1.G < no2.G) then
+		return true
+	end
+	return false
+end
 
--- function inimigo:setPosicaoAnterior(posicaoX, posicaoY)
--- 	posAntX, posAntY =  posicaoX, posicaoY
--- end
+function inimigo:run()
+	local caminho = {}
 
--- function inimigo:getPosicaoAtual()
--- 	return posicaoAtualX, posicaoAtualY
--- end
-
--- function inimigo:getPosicaoAnterior()
--- 	return posAntX, posAntY
--- end
-
-function inimigo:enterFrame()
-
-	local caminho = cenario:getAEstrela():getCaminho()
+	caminho = cenario:getAEstrela():getCaminho()
+	table.sort(caminho, compare)
 
 	for i = 1, #caminho do
-		self:mover(caminho[i].px, caminho[i].py)
+		self:mover(caminho[1].px, caminho[1].py)
 		cenario:getEstadoJogo():atualizarEstado(inimigo)
 	end
 end
