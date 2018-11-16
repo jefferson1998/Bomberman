@@ -24,33 +24,38 @@ function inimigo:newInimigo()
 end
 
 local inimigoGrafico = inimigo:newInimigo()
+local posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+function inimigo:determinarOrientacao(caminhoX, caminhoY)
 
-function inimigo:determinarOrientacao(posX, posY, caminhoX, caminhoY)
+	local orientacao = ""
+	print (posX, posY, caminhoX, caminhoY)
+	print (posX - caminhoX)
+	print (posY - caminhoY)
 
-	print (posX - caminhoY)
-	print (posY - caminhoX)
+	if (posX - caminhoX == 0 and posY - caminhoY > 0) then
+		orientacao = "esquerda"
+	end
+	if (posX - caminhoX == 0 and posY - caminhoY < 0) then
+		orientacao = "direita"
+	end
+	if (posX - caminhoX > 0 and posY - caminhoY == 0) then
+		orientacao = "cima"
+	end
+	if (posX - caminhoX < 0 and posY - caminhoY == 0) then
+		orientacao = "baixo"
+	end
 
-	if (posX - caminhoY == 0 and posY - caminhoX > 0) then
-		return "cima"
-	end
-	if (posX - caminhoY == 0 and posY - caminhoX < 0) then
-		return "baixo"
-	end
-	if (posX - caminhoY > 0 and posY - caminhoX == 0) then
-		return "esquerda"
-	end
-	if (posX - caminhoY < 0 and posY - caminhoX == 0) then
-		return "direita"
-	end
+	posX,posY = caminhoX, caminhoY
+	return orientacao
+
 end
 
 function inimigo:mover(px, py)
 
 	-- print (px, py)
 
-	local posXnoMapa, posYnoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 	posXpixel, posYpixel = cenario:getMapa():boardToPixel(px, py)
-	local orientacao = self:determinarOrientacao(posYnoMapa, posXnoMapa, px, py)
+	local orientacao = self:determinarOrientacao(px, py)
 	print (orientacao)
 
 	if	orientacao == "cima" then
@@ -86,7 +91,7 @@ function inimigo:enterFrame()
 	
 	if(posXpixel and posYpixel)then
 		
-		if (math.abs(inimigoGrafico.x - posXpixel) <= math.abs(passosX) and math.abs(inimigoGrafico.y - posYpixel) <= math.abs(passosY)) then
+		if (math.floor(math.abs(inimigoGrafico.x - posXpixel)) <= 1.3 and math.floor(math.abs(inimigoGrafico.y - posYpixel)) <= 1.3) then
 
 			passosX = 0
 			passosY = 0
@@ -94,6 +99,7 @@ function inimigo:enterFrame()
 			inimigoGrafico:pause()
 
 		else
+			--print (math.abs(inimigoGrafico.x - posXpixel), math.abs(passosX), math.abs(inimigoGrafico.y - posYpixel), math.abs(passosY))
 
 			local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 	
@@ -158,8 +164,6 @@ function inimigo:run()
 	caminho = getAEstrela():getCaminho()
 	table.sort(caminho, compare)
 
-	print(caminho[1].px, caminho[1].py)
-
 	-- for i = 1, #caminho do
 		self:mover(caminho[1].px, caminho[1].py)
 		self:mover(caminho[2].px, caminho[2].py)
@@ -171,8 +175,8 @@ function inimigo:run()
 		self:mover(caminho[8].px, caminho[8].py)
 		self:mover(caminho[9].px, caminho[9].py)
 		self:mover(caminho[10].px, caminho[10].py)
-		self:mover(caminho[11].px, caminho[11].py)
-		self:mover(caminho[12].px, caminho[12].py)
+		-- self:mover(caminho[11].px, caminho[11].py)
+		-- self:mover(caminho[12].px, caminho[12].py)
 	--  end
 end
 
