@@ -4,6 +4,7 @@ local imagem = "imagens/framesDoInimigo.png"
 local posicaoAtualX, posicaoAtualY, posAntX, posAntY
 local imagemVencedor = "imagens/inimigoVencedor.png"
 
+local chamada = nil
 local posXpixel, posYpixel = 0, 0
 
 local inimigo = {id = 4}
@@ -139,12 +140,15 @@ function inimigo:spriteVencedor(spriteBomberman)
 	inimigo.vencedorSprite.y = posY
 	inimigo.vencedorSprite.anchorY = 0.85
 
+	timer.cancel( chamada )
+
 	return inimigo.vencedorSprite
 end
 
 function inimigo:morrer(id)
 	if(id == 4) then
 		-- print( "INIMIGO MORTO" )
+		timer.cancel( chamada )
 		cenario:removerEventos()
 		display.remove(inimigo:getSprite())
 	end
@@ -156,6 +160,12 @@ local function compare(no1, no2)
 	end
 	return false
 end
+local index = 1
+function inimigo:timer(event)
+	local rota = event.source.param
+	self:mover(rota[index].px, rota[index].py)
+	index = index + 1
+end
 
 function inimigo:run()
 	print ("Rodando o Run no inimigo")
@@ -163,18 +173,26 @@ function inimigo:run()
 
 	caminho = getAEstrela():getCaminho()
 	table.sort(caminho, compare)
+	index = 1
+
+	if (chamada) then
+		timer.cancel(chamada)
+	end
+
+	chamada = timer.performWithDelay( 400, inimigo, #caminho)
+	chamada.param = caminho
 
 	-- for i = 1, #caminho do
-		self:mover(caminho[1].px, caminho[1].py)
-		self:mover(caminho[2].px, caminho[2].py)
-		self:mover(caminho[3].px, caminho[3].py)
-		self:mover(caminho[4].px, caminho[4].py)
-		self:mover(caminho[5].px, caminho[5].py)
-		self:mover(caminho[6].px, caminho[6].py)
-		self:mover(caminho[7].px, caminho[7].py)
-		self:mover(caminho[8].px, caminho[8].py)
-		self:mover(caminho[9].px, caminho[9].py)
-		self:mover(caminho[10].px, caminho[10].py)
+		-- self:mover(caminho[1].px, caminho[1].py)
+		-- self:mover(caminho[2].px, caminho[2].py)
+		-- self:mover(caminho[3].px, caminho[3].py)
+		-- self:mover(caminho[4].px, caminho[4].py)
+		-- self:mover(caminho[5].px, caminho[5].py)
+		-- self:mover(caminho[6].px, caminho[6].py)
+		-- self:mover(caminho[7].px, caminho[7].py)
+		-- self:mover(caminho[8].px, caminho[8].py)
+		-- self:mover(caminho[9].px, caminho[9].py)
+		-- self:mover(caminho[10].px, caminho[10].py)
 		-- self:mover(caminho[11].px, caminho[11].py)
 		-- self:mover(caminho[12].px, caminho[12].py)
 	--  end
