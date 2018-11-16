@@ -14,16 +14,9 @@ function director:changeScene (moduleName)
         localGroup = display.newGroup()
 
 
-        background = display.newRect(localGroup, 300, 140, w + 150, h+50)
-        background:setFillColor(255, 255, 255)
-        background.alpha = 1
-
 
         if self.scene == "main" then
-            logo = display.newImageRect(localGroup, "imagens/Bomberman_Branco.png", 250, 180)
-            logo.x = w * .5
-            logo.y = h * .5
-
+            logo = display.newImage(localGroup, "imagens/abertura.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)
             -- determina o modo de transição da imagem
             transition.from(logo, {delay=300, time=300, alpha=0, xScale=.5, yScale=.5, transition=easing.outExpo})
             transition.from(background, {delay=400, time=300, alpha=0})

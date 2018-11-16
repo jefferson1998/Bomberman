@@ -13,4 +13,6 @@
 --local director = require ("Sources.diretorio")
 --local inimigo = require ("Objects.inimigo")
 --system.setIdleTimer( false ) -- impede a tela de apagar;
-local cenario = require("view.cenario")
+-- local cenario = require("view.cenario")
+local diretorio = require ("Sources.diretorio")
+diretorio:changeScene ("Sources.menu")

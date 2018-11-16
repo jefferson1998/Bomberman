@@ -12,42 +12,29 @@ function _M.new()
 
 	--Functions--------------->
 
-	-- Evento de toque no botão ir para a próxima tela
-	local touchEvent
-	-- Evento de limpar memória, ou seja, limpar as variáveis
-	local freeMemory
-
 	------------------//----------------------------
 	
 	local localGroup = display.newGroup()
     local settingsGroup = display.newGroup()
 	
-	local background = display.newRect(localGroup, 0, 0, w, h)
-	background.x = w * .5
-	background.y = h * .5
-	background:setFillColor(255, 255, 255)         
+	local background = display.newImage(localGroup,"imagens/projeçãoDaTelaInicial.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.6)    
 
-
-	local button = display.newImageRect(localGroup, "imagens/botaoDoJogo.png", 150, 50 )
-	button.x = w *.5 
-	button.y = h *.5 
-	button.myName = "play"
-
-
-	touchEvent = function(event)
-		local t = event.target
-		if t.myName == "play" then 
-			freeMemory()
+	local buttonPlay = display.newImage(localGroup, "imagens/start.png", display.actualContentWidth * 0.7, display.actualContentHeight * 0.7 )
+	
+	function _M:touch(e)
+		if e.phase == "began" then
+			print("entrei")
+			_M:freeMemory()
 			director:changeScene("Sources.gamePlay")
 		end
-	end
+	end 
 
-	freeMemory = function()
+	function _M:freeMemory()
 		display.remove(localGroup)
 		localGroup = nil 
 	end
 
-	button:addEventListener("tap", touchEvent )
+	buttonPlay:addEventListener("touch", _M )
 
 	return localGroup
 end
