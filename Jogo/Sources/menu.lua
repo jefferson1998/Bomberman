@@ -22,8 +22,8 @@ function scene:create( event )
     local buttonPlay = display.newImage("imagens/start.png", display.actualContentWidth * 0.5, display.actualContentHeight * 0.7 )
     local buttonSounds = display.newImage("imagens/sounds.png", display.actualContentWidth * 0.5, display.actualContentHeight * 1.02)
     local buttonRanking = display.newImage("imagens/ranking.png", display.actualContentWidth * 0.5, display.actualContentHeight * 0.85 )
-    local buttonCredits
-    local son = audio.loadSound("sons/teste.mp3")
+    local buttonCredits = display.newImage("imagens/creditos.png", display.actualContentWidth * 0.87, display.actualContentHeight * 1.0)
+    local son = audio.loadSound("sons/Blue_Dot_Sessions_-_04_-_Cupcake_Marshall.mp3")
     audio.play(son)
 
     buttonPlay:addEventListener( "touch", scene)
@@ -33,6 +33,7 @@ function scene:create( event )
     sceneGroup:insert(buttonPlay)
     sceneGroup:insert(buttonRanking)
     sceneGroup:insert(buttonSounds)
+    sceneGroup:insert(buttonCredits)
 
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
