@@ -18,7 +18,8 @@ local scene = composer.newScene()
 function scene:create( event )
  
     local sceneGroup = self.view
-    local cenario = require("view.cenario")
+    local brackgound = display.newImage("imagens/planoDeFundo.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)    
+    sceneGroup:insert(brackgound)
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
 end

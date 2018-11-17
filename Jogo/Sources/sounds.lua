@@ -7,9 +7,6 @@ local scene = composer.newScene()
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
  
- 
- 
- 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -18,9 +15,26 @@ local scene = composer.newScene()
 function scene:create( event )
  
     local sceneGroup = self.view
-    local cenario = require("view.cenario")
+    local brackgound = display.newImage("imagens/planoDeFundo.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)    
+    local resumeSon
+    local pauseSon
+    sceneGroup:insert(brackgound)
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
+end
+
+function scene:stopSon(event)
+    if event.phase == "began" then
+        print("entrei")
+         audio.stop()
+    end
+end
+
+function scene:playSon(event)
+    if event.phase == "began" then
+        print("entrei")
+         audio.play()
+    end
 end
 
 -- show()
