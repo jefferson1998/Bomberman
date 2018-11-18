@@ -29,6 +29,7 @@ function scene:create( event )
     buttonPlay:addEventListener( "touch", scene)
     buttonSounds:addEventListener( "touch", sceneSounds)
     buttonRanking:addEventListener( "touch", sceneRanking)
+    buttonCredits:addEventListener( "touch", sceneCredits)
     sceneGroup:insert(background)
     sceneGroup:insert(buttonPlay)
     sceneGroup:insert(buttonRanking)
@@ -67,6 +68,16 @@ function sceneRanking(event)
             time = 10,
         }
         composer.gotoScene("Sources.ranking", options)
+    end
+end
+
+function sceneCredits(event)
+    if event.phase == "began" then
+        local options = {
+            effect = "fromBottom",
+            time = 10,
+        }
+        composer.gotoScene("Sources.credit", options)
     end
 end
  

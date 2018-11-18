@@ -16,7 +16,19 @@ function scene:create( event )
  
     local sceneGroup = self.view
     local brackgound = display.newImage("imagens/planoDeFundo.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)   
+    local textGraphics = display.newImage("imagens/graficos.png",display.actualContentWidth * 0.19, display.actualContentHeight * 0.18)
+    local graphics = display.newImage("imagens/nomeDosDesigns.png",display.actualContentWidth * 0.69, display.actualContentHeight * 0.27)
+    local textDesenvolpers = display.newImage("imagens/desenvolvedores.png",display.actualContentWidth * 0.235, display.actualContentHeight * 0.53)
+    local desenvolvedores = display.newImage("imagens/desenvolvedor.png",display.actualContentWidth * 0.735, display.actualContentHeight * 0.53)
+    local database =  display.newImage("imagens/database.png",display.actualContentWidth * 0.19, display.actualContentHeight * 0.75)
+    local testSoftware = display.newImage("imagens/testsoft.png",display.actualContentWidth * 0.275, display.actualContentHeight * 0.95)
     sceneGroup:insert(brackgound)
+    sceneGroup:insert(textGraphics)
+    sceneGroup:insert(graphics)
+    sceneGroup:insert(textDesenvolpers)
+    sceneGroup:insert(desenvolvedores)
+    sceneGroup:insert(database)
+    sceneGroup:insert(testSoftware)
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
 end

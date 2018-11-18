@@ -25,6 +25,7 @@ function scene:create( event )
     function scene:timer( event )
         composer.gotoScene( "Sources.menu", options )
     end
+    --800 time
     timer.performWithDelay( 800, scene )
 
     -- Code here runs when the scene is first created but has not yet appeared on screen
