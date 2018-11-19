@@ -1,7 +1,8 @@
 local framesBomberman = require "view.frames"
+local personagemModel = require "Objects.personagem"
 local imagem = "imagens/framesDoBomberman.png"
 local imagemVencedor = "imagens/vencedor.png"
-local personagem = {id = 2}
+local personagem = personagemModel
 local passosX, passosY = 0, 0
 
 function personagem:newPersonagem()
@@ -27,6 +28,7 @@ function personagem:spriteVencedor(spriteBomberman)
 	personagem.vencedorSprite.x = posX
 	personagem.vencedorSprite.y = posY
 	personagem.vencedorSprite.anchorY = 0.85
+	personagem.vitorias = personagem.vitorias + 1
 
 	return personagem.vencedorSprite
 end

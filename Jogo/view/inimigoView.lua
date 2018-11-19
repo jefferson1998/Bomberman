@@ -140,7 +140,7 @@ function inimigo:spriteVencedor(spriteBomberman)
 	inimigo.vencedorSprite.y = posY
 	inimigo.vencedorSprite.anchorY = 0.85
 
-	timer.cancel( chamada )
+	timer.cancel( movimentacao )
 
 	return inimigo.vencedorSprite
 end
@@ -148,7 +148,7 @@ end
 function inimigo:morrer(id)
 	if(id == 4) then
 		-- print( "INIMIGO MORTO" )
-		timer.cancel( chamada )
+		timer.cancel( movimentacao )
 		cenario:removerEventos()
 		display.remove(inimigo:getSprite())
 	end
@@ -178,12 +178,17 @@ function inimigo:run()
 	if (movimentacao) then
 		timer.cancel(movimentacao)
 	end
-	
-	if(#caminho == 1) then
+
+	print ("Tamanho Caminho: " ..tostring(#caminho))
+	if(#caminho ~= 0)then
 		self:mover(caminho[index].px, caminho[index].py)
-	else
-		movimentacao = timer.performWithDelay( 400, inimigo, #caminho - 1)
-		movimentacao.param = caminho
+		
+		if(#caminho == 1) then
+			self:mover(caminho[index].px, caminho[index].py)
+		else
+			movimentacao = timer.performWithDelay( 400, inimigo, #caminho - 1)
+			movimentacao.param = caminho
+		end
 	end
 
 	-- for i = 1, #caminho do
