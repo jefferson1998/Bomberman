@@ -4,7 +4,7 @@ local imagem = "imagens/framesDoInimigo.png"
 local posicaoAtualX, posicaoAtualY, posAntX, posAntY
 local imagemVencedor = "imagens/inimigoVencedor.png"
 
-local chamada = nil
+local movimentacao = nil
 local posXpixel, posYpixel = 0, 0
 
 local inimigo = {id = 4}
@@ -163,8 +163,8 @@ end
 local index = 1
 function inimigo:timer(event)
 	local rota = event.source.param
-	self:mover(rota[index].px, rota[index].py)
 	index = index + 1
+	self:mover(rota[index].px, rota[index].py)
 end
 
 function inimigo:run()
@@ -175,12 +175,16 @@ function inimigo:run()
 	table.sort(caminho, compare)
 	index = 1
 
-	if (chamada) then
-		timer.cancel(chamada)
+	if (movimentacao) then
+		timer.cancel(movimentacao)
 	end
-
-	chamada = timer.performWithDelay( 400, inimigo, #caminho)
-	chamada.param = caminho
+	
+	if(#caminho == 1) then
+		self:mover(caminho[index].px, caminho[index].py)
+	else
+		movimentacao = timer.performWithDelay( 400, inimigo, #caminho - 1)
+		movimentacao.param = caminho
+	end
 
 	-- for i = 1, #caminho do
 		-- self:mover(caminho[1].px, caminho[1].py)
