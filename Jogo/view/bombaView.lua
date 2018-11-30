@@ -53,7 +53,7 @@ function bomba:getSprite()
 end
 
 function bomba:getId()
-    return 3
+    return 5
 end
 
 return bomba

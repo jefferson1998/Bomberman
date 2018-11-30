@@ -26,16 +26,16 @@ end
 function no:validarVizinho(estado, direcao)
 	local inimigoPosX, inimigoPosY = self:posicaoDosJogadores(estado)
 
-	if(direcao == "cima" and estado[inimigoPosX - 1][inimigoPosY] ~= 0) then
+	if(direcao == "cima" and estado[inimigoPosX - 1][inimigoPosY] ~= 0 and estado[inimigoPosX - 1][inimigoPosY] ~= 5) then
 		return true
 	end
-	if(direcao == "direita" and estado[inimigoPosX][inimigoPosY + 1] ~= 0) then
+	if(direcao == "direita" and estado[inimigoPosX][inimigoPosY + 1] ~= 0 and estado[inimigoPosX][inimigoPosY + 1] ~= 5) then
 		return true
 	end
-	if(direcao == "baixo" and estado[inimigoPosX + 1][inimigoPosY] ~= 0) then
+	if(direcao == "baixo" and estado[inimigoPosX + 1][inimigoPosY] ~= 0 and estado[inimigoPosX + 1][inimigoPosY] ~= 5) then
 		return true
 	end
-	if(direcao == "esquerda" and estado[inimigoPosX][inimigoPosY - 1] ~= 0) then
+	if(direcao == "esquerda" and estado[inimigoPosX][inimigoPosY - 1] ~= 0 and estado[inimigoPosX][inimigoPosY - 1] ~= 5) then
 		return true
 	end
 end
@@ -99,7 +99,7 @@ function no:gerarVizinho(estado)
 	
 	if(self:validarVizinho(estado, "cima") == true) then
 		self:addVizinho(self:newVizinho(estado, "cima"))
-		-- print("ENTREI CIMA")
+		print("ENTREI CIMA")
 	end
 	if(self:validarVizinho(estado, "direita") == true) then
 		self:addVizinho(self:newVizinho(estado, "direita"))

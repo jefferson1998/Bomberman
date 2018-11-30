@@ -7,9 +7,9 @@ local aux = 1
 -- 0 = PAREDE
 -- 1 = Area Caminhável
 -- 2 = Protagonista
--- 3 = Bomba e Explosão
+-- 3 = Explosão
 -- 4 = Inimigo
--- 5 = Destrutíveis
+-- 5 = Bomba
 ------------------------------------------------------------------------------------------
 
 function estadoDoJogo:mostrarTabuleiroDoJogo()
@@ -43,7 +43,7 @@ function estadoDoJogo:atualizarEstado(obj)
 		self[posPersonagemX][posPersonagemY] = obj:getId()
 	end
 
-	if (obj:getId() == 3) then
+	if (obj:getId() == 5) then
 		posBombaX, posBombaY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		self[posBombaX][posBombaY] = obj:getId()
 		aux = self[posBombaX][posBombaY]

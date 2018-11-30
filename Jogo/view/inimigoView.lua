@@ -92,7 +92,7 @@ function inimigo:enterFrame()
 	
 	if(posXpixel and posYpixel)then
 		
-		if (math.floor(math.abs(inimigoGrafico.x - posXpixel)) <= 1.3 and math.floor(math.abs(inimigoGrafico.y - posYpixel)) <= 1.3) then
+		if (math.floor(math.abs(inimigoGrafico.x - posXpixel)) <= 1.5 and math.floor(math.abs(inimigoGrafico.y - posYpixel)) <= 1.5) then
 
 			passosX = 0
 			passosY = 0

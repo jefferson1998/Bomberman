@@ -15,6 +15,8 @@ function explosaoBomba:explodir(objBomba, estado)
 
 	local cima, baixo, direita, esquerda = true, true, true, true
 	
+	estado:setEstado(3, origemX, origemY)
+
 	for i = 1, cenario:getBombaView():getBombaModel().tamanho do
 			-- print("CHEGUEI AKI ______________________________"..cenario:getBombaView():getBombaModel().tamanho)
 
@@ -26,7 +28,7 @@ function explosaoBomba:explodir(objBomba, estado)
 			elseif (estado[origemX + i][origemY] == 4) then
 				cenario:getInimigoView():morrer(estado[origemX + i][origemY])
 			end
-			estado:setEstado(objBomba:getId(), origemX + i, origemY)
+			estado:setEstado(3, origemX + i, origemY)
 			-- print("Setei o Estado")
 		else
 			baixo = false
@@ -40,7 +42,7 @@ function explosaoBomba:explodir(objBomba, estado)
 			elseif (estado[origemX - i][origemY] == 4) then
 				cenario:getInimigoView():morrer(estado[origemX - i][origemY])
 			end
-			estado:setEstado(objBomba:getId(), origemX - i, origemY)
+			estado:setEstado(3, origemX - i, origemY)
 			-- print("Setei o Estado")
 		else 
 			cima = false
@@ -53,7 +55,7 @@ function explosaoBomba:explodir(objBomba, estado)
 			elseif (estado[origemX][origemY + i] == 4) then
 				cenario:getInimigoView():morrer(estado[origemX][origemY + i])
 			end
-			estado:setEstado(objBomba:getId(), origemX, origemY + i)
+			estado:setEstado(3, origemX, origemY + i)
 			-- print("Setei o Estado")
 		else
 			direita = false
@@ -66,7 +68,7 @@ function explosaoBomba:explodir(objBomba, estado)
 			elseif (estado[origemX][origemY - i] == 4) then
 				cenario:getInimigoView():morrer(estado[origemX][origemY - i])
 			end
-			estado:setEstado(objBomba:getId(), origemX, origemY - i)
+			estado:setEstado(3, origemX, origemY - i)
 			-- print("Setei o Estado")
 		else
 			esquerda = false
