@@ -8,8 +8,6 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
  
  
- 
- 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
@@ -20,21 +18,32 @@ function scene:create( event )
     local sceneGroup = self.view
     local background = display.newImage("imagens/projeçãoDaTelaInicial.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.65)    
     local buttonPlay = display.newImage("imagens/start.png", display.actualContentWidth * 0.5, display.actualContentHeight * 0.7 )
+    buttonPlay.id = "bp"
     local buttonSounds = display.newImage("imagens/sounds.png", display.actualContentWidth * 0.5, display.actualContentHeight * 1.02)
+    buttonSounds.id = "bs"
     local buttonRanking = display.newImage("imagens/ranking.png", display.actualContentWidth * 0.5, display.actualContentHeight * 0.85 )
+    buttonRanking.id = "br"
     local buttonCredits = display.newImage("imagens/creditos.png", display.actualContentWidth * 0.87, display.actualContentHeight * 1.0)
+    buttonCredits.id = "bc"
+    local buttonExit = display.newImage("imagens/exit.png", display.actualContentWidth * 0.1, display.actualContentHeight * 1.0)
+    buttonExit.id = "be"
     local son = audio.loadSound("sons/Blue_Dot_Sessions_-_04_-_Cupcake_Marshall.mp3")
     audio.play(son)
 
     buttonPlay:addEventListener( "touch", scene)
-    buttonSounds:addEventListener( "touch", sceneSounds)
-    buttonRanking:addEventListener( "touch", sceneRanking)
-    buttonCredits:addEventListener( "touch", sceneCredits)
+    buttonSounds:addEventListener( "touch", scene)
+    buttonRanking:addEventListener( "touch", scene)
+    buttonCredits:addEventListener( "touch", scene)
+    buttonExit:addEventListener("touch", scene)
+
     sceneGroup:insert(background)
     sceneGroup:insert(buttonPlay)
     sceneGroup:insert(buttonRanking)
     sceneGroup:insert(buttonSounds)
     sceneGroup:insert(buttonCredits)
+    sceneGroup:insert(buttonExit)
+
+
 
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
@@ -42,42 +51,22 @@ end
  
 function scene:touch(event)
     if event.phase == "began" then
-            print("entrei")
         local options = {
-            effect = "fromBottom",
-            time = 10,
+            effect = "fade",
+            time = 250,
         }
-        composer.gotoScene("Sources.gamePlay", options)
-    end
-end
-
-function sceneSounds(event)
-    if event.phase == "began" then
-        local options = {
-            effect = "fromBottom",
-            time = 10,
-        }
-        composer.gotoScene("Sources.sounds", options)
-    end
-end
-
-function sceneRanking(event)
-    if event.phase == "began" then
-        local options = {
-            effect = "fromBottom",
-            time = 10,
-        }
-        composer.gotoScene("Sources.ranking", options)
-    end
-end
-
-function sceneCredits(event)
-    if event.phase == "began" then
-        local options = {
-            effect = "fromBottom",
-            time = 10,
-        }
-        composer.gotoScene("Sources.credit", options)
+        if event.target.id == "bs" then
+            composer.setVariable( "son", son )
+            composer.gotoScene("Sources.sounds", options)
+        elseif event.target.id== "bp" then
+            composer.gotoScene("Sources.gamePlay", options)
+        elseif event.target.id == "bc" then
+            composer.gotoScene("Sources.credit", options)
+        elseif event.target.id == "br" then
+            composer.gotoScene( "Sources.ranking", options)
+        elseif event.target.id == "be" then
+            native.requestExit()
+        end 
     end
 end
  
@@ -85,15 +74,8 @@ end
 function scene:show( event )
  
     local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is still off screen (but is about to come on screen)
- 
-    elseif ( phase == "did" ) then
-        -- Code here runs when the scene is entirely on screen
- 
-    end
+    sceneGroup.isVisible = true
+
 end
  
  
@@ -101,15 +83,8 @@ end
 function scene:hide( event )
  
     local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is on screen (but is about to go off screen)
- 
-    elseif ( phase == "did" ) then
-        -- Code here runs immediately after the scene goes entirely off screen
- 
-    end
+    sceneGroup.isVisible = false
+
 end
  
  
@@ -117,6 +92,8 @@ end
 function scene:destroy( event )
  
     local sceneGroup = self.view
+
+    display.remove( sceneGroup )
     -- Code here runs prior to the removal of scene's view
  
 end

@@ -12,28 +12,57 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
  
 -- create()
+
+
 function scene:create( event )
- 
+
+    local function onSwitchPress( event )
+        local switch = event.target
+        if switch.isOn == false then
+             audio.pause()
+        else 
+            audio.resume()
+        end
+        -- print( "Switch with ID '"..switch.id.."' is on: "..tostring() )
+    end
+
     local sceneGroup = self.view
-    local brackgound = display.newImage("imagens/planoDeFundo.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)    
-    local resumeSon
-    local pauseSon
+    local brackgound = display.newImage("imagens/planoDeFundo.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)   
+    local textSon = display.newImage("imagens/son.png",display.actualContentWidth * 0.1, display.actualContentHeight * 0.2)
+    local son = composer.getVariable("son")
+    local widget = require( "widget" )
+    local buttonReturn = display.newImage("imagens/botaoVoltar.png",display.actualContentWidth * 0.055, display.actualContentHeight * 1.0)
+    buttonReturn:addEventListener( "touch", scene )
+    -- Handle press events for the checkbox
+
+    -- Create the widget
+    local onOffSwitch = widget.newSwitch(
+        {
+            left = display.actualContentWidth * 0.2,
+            top = display.actualContentHeight * 0.15,
+            style = "onOff",
+            id = "onOffSwitch",
+            onPress = onSwitchPress
+        }
+    )
     sceneGroup:insert(brackgound)
+    sceneGroup:insert(textSon)
+    sceneGroup:insert(buttonReturn)
+    sceneGroup:insert(onOffSwitch)
+
+
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
 end
 
-function scene:stopSon(event)
+function scene:touch(event)
     if event.phase == "began" then
-        print("entrei")
-         audio.stop()
-    end
-end
-
-function scene:playSon(event)
-    if event.phase == "began" then
-        print("entrei")
-         audio.play()
+        local options = {
+            effect = "fade",
+            time = 250,
+        }
+        composer.removeScene("Sources.sounds")
+        composer.gotoScene("Sources.menu", options)
     end
 end
 
@@ -41,15 +70,7 @@ end
 function scene:show( event )
  
     local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is still off screen (but is about to come on screen)
- 
-    elseif ( phase == "did" ) then
-        -- Code here runs when the scene is entirely on screen
- 
-    end
+    sceneGroup.isVisible = true
 end
  
  
@@ -57,15 +78,7 @@ end
 function scene:hide( event )
  
     local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is on screen (but is about to go off screen)
- 
-    elseif ( phase == "did" ) then
-        -- Code here runs immediately after the scene goes entirely off screen
- 
-    end
+    sceneGroup.isVisible = false
 end
  
  
@@ -74,7 +87,7 @@ function scene:destroy( event )
  
     local sceneGroup = self.view
     -- Code here runs prior to the removal of scene's view
- 
+    display.remove(sceneGroup)
 end
  
  

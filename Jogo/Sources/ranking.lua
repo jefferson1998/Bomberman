@@ -15,25 +15,31 @@ local scene = composer.newScene()
 function scene:create( event )
  
     local sceneGroup = self.view
-    local brackgound = display.newImage("imagens/planoDeFundo.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)    
+    local brackgound = display.newImage("imagens/planoDeFundo.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)   
+    local buttonReturn = display.newImage("imagens/botaoVoltar.png",display.actualContentWidth * 0.055, display.actualContentHeight * 1.0)
     sceneGroup:insert(brackgound)
+    sceneGroup:insert(buttonReturn)
+    buttonReturn:addEventListener( "touch", scene )
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
+end
+
+function scene:touch(event)
+    if event.phase == "began" then
+        local options = {
+            effect = "fade",
+            time = 250,
+        }
+        composer.removeScene("Sources.ranking")
+        composer.gotoScene("Sources.menu", options)
+    end
 end
 
 -- show()
 function scene:show( event )
  
     local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is still off screen (but is about to come on screen)
- 
-    elseif ( phase == "did" ) then
-        -- Code here runs when the scene is entirely on screen
- 
-    end
+    sceneGroup.isVisible = true
 end
  
  
@@ -41,15 +47,8 @@ end
 function scene:hide( event )
  
     local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is on screen (but is about to go off screen)
- 
-    elseif ( phase == "did" ) then
-        -- Code here runs immediately after the scene goes entirely off screen
- 
-    end
+    sceneGroup.isVisible = false
+
 end
  
  
@@ -57,6 +56,7 @@ end
 function scene:destroy( event )
  
     local sceneGroup = self.view
+    display.remove( sceneGroup )
     -- Code here runs prior to the removal of scene's view
  
 end

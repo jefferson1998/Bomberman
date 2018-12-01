@@ -19,3 +19,28 @@
 local composer = require ("composer")
 composer.gotoScene("Sources.diretorio")
 
+-- local function onKeyEvent( event )
+-- 	-- Print which key was pressed down/up to the log.
+-- 	local message = "'" .. event.keyName .. "' is " .. event.phase
+-- 	print( message )
+
+-- 	-- Display the key event's information onscreen.
+-- 	if event.device then
+-- 		message = event.device.displayName .. "\n" .. message
+-- 	end
+-- 	eventTxt.text = message
+
+-- 	-- If the "back" key was pressed, then prevent it from backing out of the app.
+-- 	-- We do this by returning true, telling the operating system that we are overriding the key.
+-- 	if (event.keyName == "back") then
+-- 		return true
+-- 	end
+
+-- 	-- Return false to indicate that this app is not overriding the received key.
+-- 	-- This lets the operating system execute its default handling of this key.
+-- 	return false
+-- end
+
+-- -- Add the key callback
+-- Runtime:addEventListener( "key", onKeyEvent );
+

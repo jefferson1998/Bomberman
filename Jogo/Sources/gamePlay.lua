@@ -18,6 +18,7 @@ local scene = composer.newScene()
 function scene:create( event )
  
     local sceneGroup = self.view
+    system.activate( "multitouch" )
     local cenario = require("view.cenario")
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
