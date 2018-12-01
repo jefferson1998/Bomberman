@@ -1,4 +1,4 @@
-local framesBomberman = require "view.frames"
+	local framesBomberman = require "view.frames"
 local personagemModel = require "Objects.personagem"
 local imagem = "imagens/framesDoBomberman.png"
 local imagemVencedor = "imagens/vencedor.png"
@@ -121,7 +121,7 @@ end
 
 function personagem:morrer(id)
 	if(id == 2) then
-		cenario:removerEventos()
+ 		cenario:removerEventos(id)
 		display.remove(personagem:getSprite())
 	end
 end

@@ -71,6 +71,7 @@ function cenario:removerEventos(id)
 		-- print ("chamei remover evento")
 		direcional:removerEvento()
 		botaoBomba:removerEvento()
+		
 	elseif (id == 4) then
 		cenario:removerEvento()
 	end

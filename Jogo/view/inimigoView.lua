@@ -133,6 +133,7 @@ end
 
 function inimigo:spriteVencedor(spriteBomberman)
 	local posX, posY = spriteBomberman.x, spriteBomberman.y
+	timer.cancel( movimentacao )
 	display.remove( spriteBomberman )
 	inimigo.animacaoVencedor_run, inimigo.animacaoVencedor = framesBomberman:animacaoVencedor(imagemVencedor)
 	inimigo.vencedorSprite = display.newSprite( inimigo.animacaoVencedor, inimigo.animacaoVencedor_run)
@@ -140,7 +141,6 @@ function inimigo:spriteVencedor(spriteBomberman)
 	inimigo.vencedorSprite.y = posY
 	inimigo.vencedorSprite.anchorY = 0.85
 
-	timer.cancel( movimentacao )
 
 	return inimigo.vencedorSprite
 end
