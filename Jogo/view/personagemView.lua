@@ -1,7 +1,8 @@
-local framesBomberman = require "view.frames"
+	local framesBomberman = require "view.frames"
+local personagemModel = require "Objects.personagem"
 local imagem = "imagens/framesDoBomberman.png"
 local imagemVencedor = "imagens/vencedor.png"
-local personagem = {id = 2}
+local personagem = personagemModel
 local passosX, passosY = 0, 0
 
 function personagem:newPersonagem()
@@ -27,6 +28,7 @@ function personagem:spriteVencedor(spriteBomberman)
 	personagem.vencedorSprite.x = posX
 	personagem.vencedorSprite.y = posY
 	personagem.vencedorSprite.anchorY = 0.85
+	personagem.vitorias = personagem.vitorias + 1
 
 	return personagem.vencedorSprite
 end
@@ -66,6 +68,7 @@ function personagem:touch( e )
 			passosY = 0
 
 		end
+		
 		-- quando soltar o botão ele para
 	elseif (e.phase == "ended" or e.phase == "canceled") then
 				
@@ -73,14 +76,14 @@ function personagem:touch( e )
 		passosY = 0
 		personagemGrafico:setFrame(1)
 		personagemGrafico:pause()
-		-- print(math.floor(personagemGrafico.x / 32))
-		-- print(personagemGrafico.x / 32)
+		-- -- print(math.floor(personagemGrafico.x / 32))
+		-- -- print(personagemGrafico.x / 32)
 	end
 end
 
 function personagem:enterFrame()
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
-
+	
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
 
@@ -91,6 +94,10 @@ function personagem:enterFrame()
 			personagem:morrer(personagem.id)
 		end
 		cenario:getEstadoJogo():atualizarEstado(personagem)
+		if(getAEstrela) then
+			getAEstrela():run()
+			cenario:getInimigoView():run()
+		end
 	end
 
 	if(cenario:getBombaView():getBombaModel().tempo == 0 and cenario:getEstadoJogo():getEstado()[posicaoXAtualNoMapa][posicaoYAtualNoMapa] == 3) then
@@ -114,12 +121,11 @@ end
 
 function personagem:morrer(id)
 	if(id == 2) then
-		cenario:removerEventos(personagem:getId())
+ 		cenario:removerEventos(personagem:getId())
 		display.remove(personagem:getSprite())
 	end
 end
 
 cenario:getEstadoJogo():atualizarEstado(personagem)
-
 
 return personagem
