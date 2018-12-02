@@ -114,7 +114,7 @@ end
 
 function personagem:morrer(id)
 	if(id == 2) then
-		cenario:removerEventos()
+		cenario:removerEventos(personagem:getId())
 		display.remove(personagem:getSprite())
 	end
 end

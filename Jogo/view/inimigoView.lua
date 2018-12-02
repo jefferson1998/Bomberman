@@ -57,7 +57,7 @@ function inimigo:posicao()
 end
 
 function inimigo:getId()
-		return inimigo.id
+	return inimigo.id
 end
 
 function inimigo:getSprite()
@@ -79,7 +79,7 @@ end
 function inimigo:morrer(id)
 	if(id == 4) then
 		print( "INIMIGO MORTO" )
-		cenario:removerEventos()
+		cenario:removerEventos(inimigo:getId())
 		display.remove(inimigo:getSprite())
 	end
 end
