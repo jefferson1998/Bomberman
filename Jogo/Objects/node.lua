@@ -8,7 +8,7 @@ end
 function no:validarVizinho(px, py, direcao)
 	local estado = cenario:getEstadoJogo():getEstado()
 
-	if(direcao == "cima" and estado[px - 1][py] ~= 0 and estado[px - 1][py] ~= 3 and estado[px - 1][py] ~= 5) then
+	if(direcao == "cima" and estado[px - 1][py] == 1 and estado[px - 1][py] ~= 3 and estado[px - 1][py] ~= 5) then
 		return true
 	end
 	if(direcao == "direita" and estado[px][py + 1] ~= 0 and estado[px][py + 1] ~= 3 and estado[px][py + 1] ~= 5) then

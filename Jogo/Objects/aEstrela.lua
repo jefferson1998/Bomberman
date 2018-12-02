@@ -61,14 +61,13 @@ function aEstrela:addListaAberta(argNo)
 end
 
 function aEstrela:run()
-	print ("Rodando o run")
+	-- print ("Rodando o run")
 
 	self.listaFechada = {}
 	self.listaAberta = {}
 	self.caminho = {}
 
 	local px, py = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite()))
-	print (px, py)
 	local no = node:new(px, py , nil, 0)
 	self:addListaAberta(no)
 	self:pathFinding(self.listaAberta, self.listaFechada)
@@ -113,7 +112,7 @@ function aEstrela:removerDaListaAberta(no)
 end
 
 function aEstrela:pathFinding(listaAberta, listaFechada)
-	-- -- print ("Rodando o PathFinding")
+	-- print ("Rodando o PathFinding")
 	-- -- print ("Lista Aberta " ..#self.listaAberta)
 	-- -- print ("Lista Fechada " ..#self.listaFechada)
 
@@ -143,20 +142,8 @@ function aEstrela:pathFinding(listaAberta, listaFechada)
 end
 
 function aEstrela:getCaminho()
-	if (#self.caminho ~= 0) then
-		return self.caminho
-	else
-		self:run()
-	end
+	self:run()
 	return self.caminho
 end
 
 return aEstrela
-
--- 1:	percorrer a lista de vizinhos 
--- 2:	ver qual vizinho tem menor distancia (heuristicia),	
--- 3:	Lembrar de atualizar a distancia somando o quanto foi andado + a heuristica
--- 3:	escolher o nó de menor heuristica para avançar
--- 4:	adicionar numa lista de estados (caminho)
--- 5:	repita os passos de 1 a 4 até encontrar o nó da borda
--- 6:	retornar o caminho para o personagem seguir	

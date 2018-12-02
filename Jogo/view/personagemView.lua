@@ -94,17 +94,13 @@ function personagem:enterFrame()
 			personagem:morrer(personagem.id)
 		end
 		cenario:getEstadoJogo():atualizarEstado(personagem)
-		if(getAEstrela) then
-			getAEstrela():run()
-			cenario:getInimigoView():run()
-		end
 	end
 
 	if(cenario:getBombaView():getBombaModel().tempo == 0 and cenario:getEstadoJogo():getEstado()[posicaoXAtualNoMapa][posicaoYAtualNoMapa] == 3) then
 		self:morrer(self:getId())
 	end
 
-	return personagemGrafico.x , personagemGrafico.y
+	--return personagemGrafico.x , personagemGrafico.y
 end
 
 function personagem:getSprite()
@@ -121,8 +117,8 @@ end
 
 function personagem:morrer(id)
 	if(id == 2) then
- 		cenario:removerEventos(id)
 		display.remove(personagem:getSprite())
+ 		cenario:removerEventos(id)
 	end
 end
 

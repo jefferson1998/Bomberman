@@ -44,18 +44,20 @@ local direcional = require "view.botaoOrientacaoView"
 local botaoBomba = require "view.botaoBombaView"
 
 function cenario:enterFrame()
+	-- print(personagemView:getSprite().x ~= nil)
 	if personagemView:getSprite().x ~= nil then
 		personagemView:enterFrame()
 	else 
 		cenario:removerEventos(personagemView:getId())
+		print("sprite vencedor")
 		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
-
 	end 
 
 	if inimigoView:getSprite().x ~= nil then
 		inimigoView:enterFrame()
 	else
 		cenario:removerEventos(personagemView:getId())
+		print("sprite vencedor")
 		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
 	end
 
@@ -76,8 +78,6 @@ function cenario:removerEventos(id)
 		cenario:removerEvento()
 	end
 end
-
-
 
 -- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", cenario)
