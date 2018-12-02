@@ -1,74 +1,90 @@
-local director = {scene = 'main'}
-function director:changeScene (moduleName)
-    
-    local loading 
+local composer = require( "composer" )
+ 
+local scene = composer.newScene()
+ 
+-- -----------------------------------------------------------------------------------
+-- Code outside of the scene event functions below will only be executed ONCE unless
+-- the scene is removed entirely (not recycled) via "composer.removeScene()"
+-- -----------------------------------------------------------------------------------
+ 
+-- -----------------------------------------------------------------------------------
+-- Scene event functions
+-- -----------------------------------------------------------------------------------
+ 
+-- create()
+function scene:create( event )
+ 
+    local sceneGroup = self.view
+    local logo = display.newImage("imagens/abertura.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)
+    sceneGroup:insert(logo)
 
-    local w = display.contentWidth
-    local h = display.contentHeight
+    local options = {
+        time = 1500,
+    }
 
-    local background
-    local logo
-    local localGroup
-
-    local loadFunction = function()
-        localGroup = display.newGroup()
-
-
-        background = display.newRect(localGroup, 300, 140, w + 150, h+50)
-        background:setFillColor(255, 255, 255)
-        background.alpha = 1
-
-
-        if self.scene == "main" then
-            logo = display.newImageRect(localGroup, "imagens/Bomberman_Branco.png", 250, 180)
-            logo.x = w * .5
-            logo.y = h * .5
-
-            -- determina o modo de transição da imagem
-            transition.from(logo, {delay=300, time=300, alpha=0, xScale=.5, yScale=.5, transition=easing.outExpo})
-            transition.from(background, {delay=400, time=300, alpha=0})
-        end
+    function scene:timer( event )
+        composer.gotoScene( "Sources.menu", options )
     end
+    --800 time
+    timer.performWithDelay( 800, scene )
 
+    -- Code here runs when the scene is first created but has not yet appeared on screen
+ 
+end
+ 
+ 
+-- show()
+function scene:show( event )
+ 
+    local sceneGroup = self.view
+    local phase = event.phase
+ 
+    if ( phase == "will" ) then
 
+        -- Code here runs when the scene is still off screen (but is about to come on screen)
+ 
+    elseif ( phase == "did" ) then
 
-    loadFunction()
-
-    loading = function()              
-        local loadedModule = package.loaded[self.scene]
-            
-        if type(loadedModule) == 'table' and type(loadedModule.clean) == 'function' then
-            loadedModule.clean()
-        end
-            
-        local group = self.view
-            
-        if self.scene ~= 'main' and type(loadedModule) == 'table' then
-            display.remove(group)
-            package.loaded[self.scene], group, loadedModule = nil
-            collectgarbage('collect')
-        end
-
-        self.scene = moduleName
-        require(moduleName).new()
-
-        display.remove(background)
-        background = nil
-
-        display.remove(logo)
-        logo = nil
-
-        display.remove(localGroup)
-        localGroup = nil
-
-        loading = nil
-    end
-
-    if self.scene == "main" then
-        timer.performWithDelay(2000, loading)
-    else 
-        transition.from(localGroup, {time=100, alpha=1, onComplete=loading})
+        -- Code here runs when the scene is entirely on screen
+ 
     end
 end
+ 
+ 
+-- hide()
+function scene:hide( event )
+ 
+    local sceneGroup = self.view
+    local phase = event.phase
+ 
+    if ( phase == "will" ) then
+        -- Code here runs when the scene is on screen (but is about to go off screen)
 
-return director
+ 
+    elseif ( phase == "did" ) then
+
+        -- Code here runs immediately after the scene goes entirely off screen
+ 
+    end
+end
+ 
+ 
+-- destroy()
+function scene:destroy( event )
+ 
+    local sceneGroup = self.view
+    -- Code here runs prior to the removal of scene's view
+ 
+end
+ 
+ 
+-- -----------------------------------------------------------------------------------
+-- Scene event function listeners
+-- -----------------------------------------------------------------------------------
+scene:addEventListener( "create", scene )
+scene:addEventListener( "show", scene )
+scene:addEventListener( "hide", scene )
+scene:addEventListener( "destroy", scene )
+-- -----------------------------------------------------------------------------------
+ 
+return scene
