@@ -8,7 +8,7 @@ local mapData = json.decodeFile(system.pathForFile("Objects/mapa/cenario1/testeT
 local map = tiled.new(mapData, "Objects/mapa/cenario1")
 
 function map:getEstado()
-	print("fazendo estado")
+	-- print("fazendo estado")
 	local matrizEstado = {
 		{},
 		{},
@@ -34,7 +34,7 @@ function map:getEstado()
 			str = str .. "\n"
 		 end
 	end
-	-- print("MATRIZ____" .. "\n" .. str)
+	-- -- print("MATRIZ____" .. "\n" .. str)
 	return matrizEstado
 end
 

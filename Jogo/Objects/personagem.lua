@@ -1,3 +1,5 @@
-local personagemModel = {nome = "", vitoria = 0}
+local personagemModel = {id = 2, nome = "", vitorias = 0}
 
-return personagemBomberman
+
+
+return personagemModel
