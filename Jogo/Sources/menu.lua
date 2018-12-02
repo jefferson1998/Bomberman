@@ -28,7 +28,7 @@ function scene:create( event )
     local buttonExit = display.newImage("imagens/exit.png", display.actualContentWidth * 0.1, display.actualContentHeight * 1.0)
     buttonExit.id = "be"
     local son = audio.loadSound("sons/Blue_Dot_Sessions_-_04_-_Cupcake_Marshall.mp3")
-    audio.play(son)
+    -- audio.play(son)
 
     buttonPlay:addEventListener( "touch", scene)
     buttonSounds:addEventListener( "touch", scene)

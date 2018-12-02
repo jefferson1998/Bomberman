@@ -38,13 +38,18 @@ function cenario:getBombaView()
 	return bombaView
 end
 
+local bombaModel = require "Objects.bomba"
+function cenario:getBombaModel()
+	return bombaModel
+end
+
 -- estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
 
 local direcional = require "view.botaoOrientacaoView"
 local botaoBomba = require "view.botaoBombaView"
 
 function cenario:enterFrame()
-	if personagemView:getSprite().x ~= nil then
+	if personagemView:getSprite() ~= nil then
 		personagemView:enterFrame()
 	else 
 		cenario:removerEventos(personagemView:getId())
@@ -52,10 +57,11 @@ function cenario:enterFrame()
 
 	end 
 
-	if inimigoView:getSprite().x ~= nil then
+	if inimigoView:getSprite() ~= nil then
 		inimigoView:enterFrame()
 	else
 		cenario:removerEventos(personagemView:getId())
+		print("entrei")
 		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
 	end
 

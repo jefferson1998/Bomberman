@@ -3,6 +3,9 @@ local passosX, passosY = 0, 0
 local imagem = "imagens/framesDoInimigo.png"
 local posicaoAtualX, posicaoAtualY, posAntX, posAntY
 local imagemVencedor = "imagens/inimigoVencedor.png"
+local bombaView = require "view.bombaView"
+local bomba = require "Objects.bomba"
+local bombaModel = bomba:newBomba()
 
 local movimentacao = nil
 local posXpixel, posYpixel = 0, 0
@@ -61,6 +64,7 @@ function inimigo:mover(px, py)
 
 	if	orientacao == "cima" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
+		inimigo:soltarBomba()
 		inimigoGrafico:play()
 		passosY = -1.3
 		passosX = 0
@@ -86,6 +90,15 @@ function inimigo:mover(px, py)
 
 	print (passosX, passosY)
 
+end
+
+function inimigo:soltarBomba()
+	if bombaModel.tempo == 0 then
+		bombaModel.tempo = 4
+		bombaView.bombaSprite = bombaView:newBomba(inimigoGrafico.x, inimigoGrafico.y)
+		inimigoGrafico:toFront()
+		bombaView.bombaSprite:play()
+	end
 end
 
 function inimigo:enterFrame()
@@ -149,7 +162,7 @@ function inimigo:morrer(id)
 	if(id == 4) then
 		-- print( "INIMIGO MORTO" )
 		timer.cancel( movimentacao )
-		cenario:removerEventos(inimigo:getId())
+		cenario:removerEventos(cenario:getPersonagem():getId())
 		display.remove(inimigo:getSprite())
 	end
 end

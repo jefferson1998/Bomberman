@@ -1,17 +1,34 @@
 local frames = require "view.frames"
 local mapa = cenario:getMapa()
-local bombaModel = require "Objects.bomba"
+local bomba = require "Objects.bomba"
+local listaDeBombas = {}
 local explosao = require "view.explosaoBomba"
-
+local bombaModel = bomba:newBomba()
 local bomba = {bombaSprite = 0,tempoBomba_run = 0, animacaoBomba = 0, sprite = 0}
 
 local imagem = "imagens/animacaoBomba.png"
 
 local function tempoDaBomba()
     --Decrementando os segundos
+    -- for i=1,#listaDeBombas do
+    --     listaDeBombas[i].tempo = listaDeBombas[i].tempo - 1
+    -- end
     bombaModel.tempo = bombaModel.tempo - 1
     -- print("tempo bomba _____" .. bombaModel.tempo)
-    --se o tempo for igual a 0 então      
+    --se o tempo for igual a 0 então    
+    -- for i=1,#listaDeBombas do
+          -- if  listaDeBombas[i].tempo == 0 then
+            -- remove a imagem da bomba
+            -- print("entrei")
+            -- bombaSprite:removeSelf()
+
+            -- print("BOMBAMODEL___" .. bombaModel.tempo)
+            -------------------------------------------------------------
+            -- Cria a sprite da explosao e nela ve se tem algum objeto --
+            -------------------------------------------------------------
+            -- explosao:explodir(bomba, cenario:getEstadoJogo())
+        -- end     
+    -- end  
     if  bombaModel.tempo == 0 then
         -- remove a imagem da bomba
         -- print("entrei")
@@ -35,7 +52,8 @@ function bomba:newBomba(argPosicaoX, argPosicaoY)
     -- print(bombaSprite.x,  bombaSprite.y)
     cenario:getEstadoJogo():atualizarEstado(bomba)
     local countDownTimer = timer.performWithDelay( 1000, tempoDaBomba, bombaModel.tempo)
-
+    -- local novaBomba = bomba:newBomba()
+    -- table.insert( listaDeBombas, novaBomba)
 	return bombaSprite
 
 end

@@ -123,6 +123,8 @@ function personagem:morrer(id)
 	if(id == 2) then
  		cenario:removerEventos(personagem:getId())
 		display.remove(personagem:getSprite())
+		print("SPRITEE")
+		print(personagem:getSprite())
 	end
 end
 
