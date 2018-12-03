@@ -94,9 +94,9 @@ end
 function inimigo:soltarBomba()
 	if bombaModel.tempo == 0 then
 		bombaModel.tempo = 4
-		bombaView.bombaSprite = bombaView:newBombaInimigo(inimigoGrafico.x, inimigoGrafico.y)
+		bombaView.bombaInimigo.bombaSprite = bombaView:newBombaInimigo(inimigoGrafico.x, inimigoGrafico.y)
 		inimigoGrafico:toFront()
-		bombaView.bombaSprite:play()
+		bombaView.bombaInimigo.bombaSprite:play()
 	end
 end
 
