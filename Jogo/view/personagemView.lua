@@ -100,7 +100,7 @@ function personagem:enterFrame()
 		end
 	end
 
-	if(cenario:getBombaView():getBombaModel().tempo == 0 and cenario:getEstadoJogo():getEstado()[posicaoXAtualNoMapa][posicaoYAtualNoMapa] == 3) then
+	if(cenario:getBombaView():getBombaPersonagem().tempo == 0 and cenario:getEstadoJogo():getEstado()[posicaoXAtualNoMapa][posicaoYAtualNoMapa] == 3) then
 		self:morrer(self:getId())
 	end
 

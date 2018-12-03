@@ -4,8 +4,7 @@ local imagem = "imagens/framesDoInimigo.png"
 local posicaoAtualX, posicaoAtualY, posAntX, posAntY
 local imagemVencedor = "imagens/inimigoVencedor.png"
 local bombaView = require "view.bombaView"
-local bomba = require "Objects.bomba"
-local bombaModel = bomba:newBomba()
+local bombaModel = bombaView:getBombaInimigo()
 
 local movimentacao = nil
 local posXpixel, posYpixel = 0, 0
@@ -95,7 +94,7 @@ end
 function inimigo:soltarBomba()
 	if bombaModel.tempo == 0 then
 		bombaModel.tempo = 4
-		bombaView.bombaSprite = bombaView:newBomba(inimigoGrafico.x, inimigoGrafico.y)
+		bombaView.bombaSprite = bombaView:newBombaInimigo(inimigoGrafico.x, inimigoGrafico.y)
 		inimigoGrafico:toFront()
 		bombaView.bombaSprite:play()
 	end
