@@ -71,10 +71,6 @@ function estadoDoJogo:atualizarEstado(obj)
 			cenario:getInimigoView():pegarCaminho()
 		end
 	end
-
-	if(cenario:getInimigoView()) then
-		cenario:getInimigoView():run()
-	end
 end
 
 function estadoDoJogo:pegarCaminho(  )

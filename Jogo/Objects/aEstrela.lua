@@ -61,7 +61,7 @@ function aEstrela:addListaAberta(argNo)
 end
 
 function aEstrela:run()
-	-- print ("Rodando o run")
+	print ("Rodando o run")
 
 	self.listaFechada = {}
 	self.listaAberta = {}
@@ -142,7 +142,10 @@ function aEstrela:pathFinding(listaAberta, listaFechada)
 end
 
 function aEstrela:getCaminho()
-	self:run()
+	if(not(self.caminho))then
+		self:run()
+	end
+	
 	return self.caminho
 end
 
