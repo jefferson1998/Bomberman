@@ -142,9 +142,8 @@ function aEstrela:pathFinding(listaAberta, listaFechada)
 end
 
 function aEstrela:getCaminho()
-	if(not(self.caminho))then
+	
 		self:run()
-	end
 	
 	return self.caminho
 end

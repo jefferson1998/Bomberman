@@ -12,8 +12,7 @@ local inimigo = {id = 4}
 function inimigo:newInimigo()
 	inimigo.animacaoBomberman_run, inimigo.animacaoBomberman = framesBomberman:personagemBomberman(imagem)
 	inimigo.bombermanSprite = display.newSprite( inimigo.animacaoBomberman, inimigo.animacaoBomberman_run);
-	inimigo.bombermanSprite.x = 400
-	inimigo.bombermanSprite.y = 272
+	inimigo.bombermanSprite.x, inimigo.bombermanSprite.y = cenario:getMapa():boardToPixel(9, 13)
 	inimigo.bombermanSprite.anchorY = 0.85
 
 	-- local vertices = {-10,0, -10, 16, 10, 16, 10, 0}
@@ -59,26 +58,26 @@ function inimigo:mover(px, py)
 	if	orientacao == "cima" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
 		inimigoGrafico:play()
-		passosY = -1.3
+		passosY = -1
 		passosX = 0
 
 	elseif orientacao == "baixo" then
 		inimigoGrafico:setSequence( "framesFrenteRun" )
 		inimigoGrafico:play()
-		passosY = 1.3
+		passosY = 1
 		passosX = 0
 	
 	elseif orientacao == "direita" then
 		inimigoGrafico:setSequence( "framesLadoDireitoRun" )
 		inimigoGrafico:play()
 		passosY = 0
-		passosX = 1.3
+		passosX = 1
 
 	elseif orientacao == "esquerda" then
 		inimigoGrafico:setSequence( "framesLadoEsquerdoRun" )
 		inimigoGrafico:play()
 		passosY = 0
-		passosX = -1.3
+		passosX = -1
 	end
 
 end
@@ -91,27 +90,36 @@ local function compare(no1, no2)
 end
 
 local pegarCaminho = true
+local caminhoFeito = true
+local caminhoParaFazer
 function inimigo:enterFrame()
 	
 	if(posXpixel and posYpixel)then
 
-		if(#caminho > 0)then
+		if(#caminhoDoInimigo > 0)then
+			table.sort( caminhoDoInimigo, compare)
 
-			self:mover(caminho[1].px, caminho[1].py)
-			print (#caminho)
+			if(caminhoFeito == true) then
 
-			if (math.floor(math.fmod(inimigoGrafico.x, posXpixel)) == 0 and math.floor(math.fmod(inimigoGrafico.y, posYpixel)) == 0) then
+				caminhoParaFazer = caminhoDoInimigo[1]
+
+				self:mover(caminhoParaFazer.px, caminhoParaFazer.py)
+
+			end
+
+			if (inimigoGrafico.x == posXpixel and inimigoGrafico.y == posYpixel) then
 				print ("entrei no IF")
-				-- table.remove(caminho, 1)
+				table.remove(caminhoDoInimigo, 1)
+				caminhoFeito = true
 				passosX = 0
 				passosY = 0
 				inimigoGrafico:setFrame(1)
 				inimigoGrafico:pause()
 
 			else
-				print ("estou no else")
-				--print (math.abs(inimigoGrafico.x - posXpixel), math.abs(passosX), math.abs(inimigoGrafico.y - posYpixel), math.abs(passosY))
-
+				-- print ("estou no else")
+				-- print (math.abs(inimigoGrafico.x - posXpixel), math.abs(passosX), math.abs(inimigoGrafico.y - posYpixel), math.abs(passosY))
+				caminhoFeito = false
 				local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 		
 				inimigoGrafico.x = inimigoGrafico.x + passosX
@@ -127,12 +135,8 @@ function inimigo:enterFrame()
 				end
 			end
 		else
-			passosX = 0
-			passosY = 0
 			inimigoGrafico:setFrame(1)
 			inimigoGrafico:pause()
-			pegarCaminho = false
-			cenario:getEstadoJogo():pegarCaminho()
 		end
 	end
 	-- pegarCaminho = true
@@ -143,7 +147,7 @@ function inimigo:posicao()
 end
 
 function inimigo:getId()
-		return inimigo.id
+	return inimigo.id
 end
 
 function inimigo:getSprite()

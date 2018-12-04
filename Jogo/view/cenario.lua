@@ -25,6 +25,8 @@ function getAEstrela()
 	return aEstrela
 end
 
+caminhoDoInimigo = {}
+
 function cenario:getDirecional()
 	return direcional
 end

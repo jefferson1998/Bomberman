@@ -42,6 +42,11 @@ function estadoDoJogo:atualizarEstado(obj)
 		-- print(aux)
 
 		self[posPersonagemX][posPersonagemY] = obj:getId()
+
+		if(aEstrela) then
+			caminhoDoInimigo = getAEstrela():getCaminho()
+		end
+
 	end
 
 	if (obj:getId() == 5) then
@@ -66,11 +71,6 @@ function estadoDoJogo:atualizarEstado(obj)
 	end
 
 	-- print(self:mostrarTabuleiroDoJogo())
-	if(pegarCaminho == true) then
-		if(cenario:getInimigoView()) then
-			cenario:getInimigoView():pegarCaminho()
-		end
-	end
 end
 
 function estadoDoJogo:pegarCaminho(  )
