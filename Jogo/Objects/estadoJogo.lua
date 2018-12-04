@@ -2,6 +2,7 @@ local estadoDoJogo = cenario:getMapa():getEstado()
 local map = cenario:getMapa()
 local posPersonagemX, posPersonagemY, posInimigoX, posInimigoY, posBombaX, posBombaY = nil, nil, nil, nil, nil, nil
 local aux = 1
+local pegarCaminho = false
 --------------------------------------------------------------------------------------------
 -- Regras do Estado
 -- 0 = PAREDE
@@ -41,6 +42,11 @@ function estadoDoJogo:atualizarEstado(obj)
 		-- print(aux)
 
 		self[posPersonagemX][posPersonagemY] = obj:getId()
+
+		if(aEstrela) then
+			caminhoDoInimigo = getAEstrela():getCaminho()
+		end
+
 	end
 
 	if (obj:getId() == 5) then
@@ -75,7 +81,10 @@ function estadoDoJogo:atualizarEstado(obj)
 	end
 
 	-- print(self:mostrarTabuleiroDoJogo())
+end
 
+function estadoDoJogo:pegarCaminho(  )
+	pegarCaminho = true
 end
 
 function estadoDoJogo:estadoPadrao()

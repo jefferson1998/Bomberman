@@ -25,6 +25,8 @@ function getAEstrela()
 	return aEstrela
 end 
 
+caminhoDoInimigo = {}
+
 function cenario:getDirecional()
 	return direcional
 end 
@@ -54,23 +56,42 @@ local direcional = require "view.botaoOrientacaoView"
 local botaoBomba = require "view.botaoBombaView"
 
 function cenario:enterFrame()
-	if personagemView:getSprite() ~= nil then
-		personagemView:enterFrame()
+
+	-- print(personagemView:getSprite().x ~= nil)
+	if cenario:getPersonagem():getSprite().x ~= nil then
+		cenario:getPersonagem():enterFrame()
 	else 
 		cenario:removerEventos(personagemView:getId())
+		print("sprite vencedor")
 		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
-
+		cenario:limparCenario()
 	end 
 
-	if inimigoView:getSprite() ~= nil then
-		inimigoView:enterFrame()
+	if cenario:getInimigoView():getSprite().x ~= nil then
+		cenario:getInimigoView():enterFrame()
 	else
 		cenario:removerEventos(personagemView:getId())
-		print("entrei")
 		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
+		cenario:limparCenario()
 	end
 
 end
+
+function cenario:limparCenario()
+	if cenario:getInimigoView():getSprite() ~= nil then
+		display.remove(cenario:getInimigoView():getSprite())
+	end
+
+	if cenario:getPersonagem():getSprite() ~= nil then
+		display.remove(cenario:getInimigoView():getSprite())
+	end
+
+	if cenario:getPersonagem():getSpriteVencedor() ~= nil then
+		display.remove(cenario:getPersonagem():getSpriteVencedor())
+	end
+	display.remove(cenario:getMapa())
+end
+
 
 function cenario:removerEvento()
 	Runtime:removeEventListener("enterFrame", cenario)
@@ -78,17 +99,15 @@ end
 
 function cenario:removerEventos(id)
 	if(id == 2) then
-		cenario:removerEvento()
 		-- print ("chamei remover evento")
 		direcional:removerEvento()
 		botaoBomba:removerEvento()
+		cenario:removerEvento()
 		
 	elseif (id == 4) then
 		cenario:removerEvento()
 	end
 end
-
-
 
 -- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", cenario)
