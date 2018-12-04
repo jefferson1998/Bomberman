@@ -30,25 +30,29 @@ function bomba:timer(event)
     if event.source.params ~= nil then
 
         if (event.source.params.bombaDoPersonagem ~= nil) then
+            print("duração bomba personagem" .. event.source.params.bombaDoPersonagem.duracao)
             event.source.params.bombaDoPersonagem.duracao = event.source.params.bombaDoPersonagem.duracao - 1
             if  event.source.params.bombaDoPersonagem.duracao == 0 then
                 -- remove a imagem da bomba
                 -- print("entrei")
                 event.source.params.bombaDoPersonagem.bombaSprite:removeSelf()
+                print("BOMBAMODEL PERSONAGEM___")
 
-                -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
                 -------------------------------------------------------------
                 -- Cria a sprite da explosao e nela ve se tem algum objeto --
                 -------------------------------------------------------------
                 explosao:explodir(cenario:getEstadoJogo(), event.source.params.bombaDoPersonagem)
+                event.source.params.bombaDoPersonagem = nil
+                cenario:getBotaoBomba():setBombaAtiva(false)
            	end  
         end 
 
         if (event.source.params.bombaDoInimigo ~= nil) then
+            print("duração bomba inimigo " .. event.source.params.bombaDoInimigo.duracao)
             event.source.params.bombaDoInimigo.duracao = event.source.params.bombaDoInimigo.duracao - 1
             if  event.source.params.bombaDoInimigo.duracao == 0 then
                 -- remove a imagem da bomba
-                -- print("entrei")
+                print("BOMBAMODEL inimigi _____")
                 event.source.params.bombaDoInimigo.bombaSprite:removeSelf()
 
                 -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
@@ -56,21 +60,13 @@ function bomba:timer(event)
                 -- Cria a sprite da explosao e nela ve se tem algum objeto --
                 -------------------------------------------------------------
                 explosao:explodir(cenario:getEstadoJogo(), event.source.params.bombaDoInimigo)
+                event.source.params.bombaDoInimigo = nil
+                cenario:getInimigoView():setBombaAtiva(false)
             end  
         end 
     else
         timer.cancel(tempoDaBomba)
     end
-end
-
-local function tempoDaBombaInimigo()
-
-    bombaInimigo.tempo = bombaInimigo.tempo - 1
-
-    if  bombaInimigo.tempo == 0 then
-        bombaInimigo.bombaSprite:removeSelf()
-        explosao:explodir(bomba, cenario:getEstadoJogo(), bombaInimigo)
-    end     
 end
 
 function bomba:newBombaPersonagem(argPosicaoX, argPosicaoY)
@@ -122,7 +118,7 @@ function bomba:getBombaPersonagem()
 end
 
 function bomba:getBombaInimigo()
-    return bombaInimigo
+    return bombaInimigo 
 end
 
 function bomba:addFisica()

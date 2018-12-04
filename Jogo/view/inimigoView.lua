@@ -10,7 +10,7 @@ local movimentacao = nil
 local posXpixel, posYpixel = 0, 0
 
 local inimigo = {id = 4}
-local bomba
+local bomba, bombaAtiva = nil, false
 
 function inimigo:newInimigo()
 	inimigo.animacaoBomberman_run, inimigo.animacaoBomberman = framesBomberman:personagemBomberman(imagem)
@@ -32,9 +32,9 @@ local posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoM
 function inimigo:determinarOrientacao(caminhoX, caminhoY)
 
 	local orientacao = ""
-	print (posX, posY, caminhoX, caminhoY)
-	print (posX - caminhoX)
-	print (posY - caminhoY)
+	-- print (posX, posY, caminhoX, caminhoY)
+	-- print (posX - caminhoX)
+	-- print (posY - caminhoY)
 
 	if (posX - caminhoX == 0 and posY - caminhoY > 0) then
 		orientacao = "esquerda"
@@ -60,7 +60,7 @@ function inimigo:mover(px, py)
 
 	posXpixel, posYpixel = cenario:getMapa():boardToPixel(px, py)
 	local orientacao = self:determinarOrientacao(px, py)
-	print (orientacao)
+	-- print (orientacao)
 
 	if	orientacao == "cima" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
@@ -88,13 +88,15 @@ function inimigo:mover(px, py)
 		passosX = -1.3
 	end
 
-	print (passosX, passosY)
+	-- print (passosX, passosY)
 
 end
 
 function inimigo:soltarBomba()
-	if bomba == nil then
+	print(bombaAtiva)
+	if bombaAtiva == false then
 		bomba = bombaView:newBombaInimigo(inimigoGrafico.x, inimigoGrafico.y)
+		bombaAtiva = true
 		inimigoGrafico:toFront()
 		bomba.bombaSprite:play()
 	end
@@ -136,7 +138,11 @@ function inimigo:posicao()
 end
 
 function inimigo:getId()
-		return inimigo.id
+	return inimigo.id
+end
+
+function inimigo:setBombaAtiva(condicao)
+	bombaAtiva = condicao
 end
 
 function inimigo:getSprite()
@@ -191,7 +197,7 @@ function inimigo:run()
 		timer.cancel(movimentacao)
 	end
 
-	print ("Tamanho Caminho: " ..tostring(#caminho))
+	-- print ("Tamanho Caminho: " ..tostring(#caminho))
 	if(#caminho ~= 0)then
 		self:mover(caminho[index].px, caminho[index].py)
 		

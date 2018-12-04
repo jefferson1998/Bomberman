@@ -68,7 +68,7 @@ function aEstrela:run()
 	self.caminho = {}
 
 	local px, py = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite()))
-	print (px, py)
+	-- print (px, py)
 	local no = node:new(px, py , nil, 0)
 	self:addListaAberta(no)
 	self:pathFinding(self.listaAberta, self.listaFechada)
