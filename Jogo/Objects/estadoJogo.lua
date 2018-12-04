@@ -71,6 +71,9 @@ function estadoDoJogo:atualizarEstado(obj)
 	end
 
 	-- print(self:mostrarTabuleiroDoJogo())
+	-- if(cenario:getInimigoView()) then
+	-- 	cenario:getInimigoView():pegarCaminho()
+	-- end
 end
 
 function estadoDoJogo:pegarCaminho(  )

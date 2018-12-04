@@ -120,7 +120,9 @@ function inimigo:enterFrame()
 			else
 				-- print ("estou no else")
 				-- print (math.abs(inimigoGrafico.x - posXpixel), math.abs(passosX), math.abs(inimigoGrafico.y - posYpixel), math.abs(passosY))
+				
 				caminhoFeito = false
+				
 				local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 		
 				inimigoGrafico.x = inimigoGrafico.x + passosX
