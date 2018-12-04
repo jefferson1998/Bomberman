@@ -5,6 +5,8 @@ local posicaoAtualX, posicaoAtualY, posAntX, posAntY
 local imagemVencedor = "imagens/inimigoVencedor.png"
 local bombaView = require "view.bombaView"
 local bombaModel = bombaView:getBombaInimigo()
+local tempoDaBomba
+
 
 local movimentacao = nil
 local posXpixel, posYpixel = 0, 0
@@ -54,6 +56,30 @@ function inimigo:determinarOrientacao(caminhoX, caminhoY)
 
 end
 
+-- function inimigo:timer(event)
+--     if event.source.params ~= nil then
+--         if (event.source.params.bombaDoInimigo ~= nil) then
+--             print("duração bomba inimigo " .. event.source.params.bombaDoInimigo.duracao)
+--             event.source.params.bombaDoInimigo.duracao = event.source.params.bombaDoInimigo.duracao - 1
+--             if  event.source.params.bombaDoInimigo.duracao == 0 then
+--                 -- remove a imagem da bomba
+--                 print("BOMBAMODEL inimigi _____")
+--                 event.source.params.bombaDoInimigo.bombaSprite:removeSelf()
+
+--                 -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
+--                 -------------------------------------------------------------
+--                 -- Cria a sprite da explosao e nela ve se tem algum objeto --
+--                 -------------------------------------------------------------
+--                 cenario:getExplosao():explodir(cenario:getEstadoJogo(), event.source.params.bombaDoInimigo)
+--                 event.source.params.bombaDoInimigo = nil
+--                 inimigo:setBombaAtiva(false)
+--             end  
+--         end 
+--     else
+--         timer.cancel(tempoDaBomba)
+--     end
+-- end
+
 function inimigo:mover(px, py)
 
 	-- print (px, py)
@@ -92,14 +118,18 @@ function inimigo:mover(px, py)
 
 end
 
-function inimigo:soltarBomba()
-	if bombaAtiva == false then
-		bomba = bombaView:newBombaInimigo(inimigoGrafico.x, inimigoGrafico.y)
-		bombaAtiva = true
-		inimigoGrafico:toFront()
-		bomba.bombaSprite:play()
-	end
-end
+-- function inimigo:soltarBomba()
+-- 	if bombaAtiva == false then
+-- 		bomba = bombaView:newBombaInimigo(inimigoGrafico.x, inimigoGrafico.y)
+-- 		bombaAtiva = true
+-- 		if tempoDaBomba == nil then
+--     		tempoDaBomba = timer.performWithDelay( 1000, inimigo, 0)
+-- 		end
+-- 	    tempoDaBomba.params = {bombaDoInimigo = bomba} 
+-- 		inimigoGrafico:toFront()
+-- 		bomba.bombaSprite:play()
+-- 	end
+-- end
 
 function inimigo:enterFrame()
 	

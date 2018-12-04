@@ -25,30 +25,6 @@ function bomba:newBomba(bombaSprite, tempo, animacaoBomba, id)
     return newBomba
 end
 
-function bomba:timer(event)
-    if event.source.params ~= nil then
-        if (event.source.params.bombaDoInimigo ~= nil) then
-            print("duração bomba inimigo " .. event.source.params.bombaDoInimigo.duracao)
-            event.source.params.bombaDoInimigo.duracao = event.source.params.bombaDoInimigo.duracao - 1
-            if  event.source.params.bombaDoInimigo.duracao == 0 then
-                -- remove a imagem da bomba
-                print("BOMBAMODEL inimigi _____")
-                event.source.params.bombaDoInimigo.bombaSprite:removeSelf()
-
-                -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
-                -------------------------------------------------------------
-                -- Cria a sprite da explosao e nela ve se tem algum objeto --
-                -------------------------------------------------------------
-                cenario:getExplosao():explodir(cenario:getEstadoJogo(), event.source.params.bombaDoInimigo)
-                event.source.params.bombaDoInimigo = nil
-                cenario:getInimigoView():setBombaAtiva(false)
-            end  
-        end 
-    else
-        timer.cancel(tempoDaBomba)
-    end
-end
-
 function bomba:newBombaPersonagem(argPosicaoX, argPosicaoY)
 	-- -- print(tempoBomba_run)
  --    -- print(bombaModel.tempo)
@@ -81,12 +57,6 @@ function bomba:newBombaInimigo(argPosicaoX, argPosicaoY)
     newBomba.bombaSprite.x, newBomba.bombaSprite.y = mapa:boardToPixel(mapa:pixelToBoard(argPosicaoX, argPosicaoY))
     -- print(bombaSprite.x,  bombaSprite.y)
     cenario:getEstadoJogo():atualizarEstado(newBomba)
-
-    if tempoDaBomba == nil then
-        tempoDaBomba = timer.performWithDelay( 1000, bomba, 0)
-    end
-
-    tempoDaBomba.params = {bombaDoInimigo = newBomba}
     -- local novaBomba = bomba:newBomba()
     -- table.insert( listaDeBombas, novaBomba)
     return newBomba
