@@ -1,30 +1,66 @@
 local frames = require "view.frames"
 local mapa = cenario:getMapa()
-local bomba = require "Objects.bomba"
+local bombaModel = require "Objects.bomba"
 local explosao = require "view.explosaoBomba"
-local bombaInimigo = bomba:newBomba()
-local bombaPersonagem = bomba:newBomba()
-local bomba = {bombaInimigo = {bombaSprite = 0,tempoBomba_run = 0, animacaoBomba = 0, sprite = 0},
-bombaPersonagem = {bombaSprite = 0,tempoBomba_run = 0, animacaoBomba = 0, sprite = 0},}
+local bombaInimigo = bombaModel:newBomba()
+local bombaPersonagem = bombaModel:newBomba()
+local tempoDaBomba
+
+
+local bomba = {}
 
 local imagem = "imagens/animacaoBomba.png"
 
 
-local function tempoDaBombaPersonagem()
-    
-    bombaPersonagem.tempo = bombaPersonagem.tempo - 1
-    
-    if  bombaPersonagem.tempo == 0 then
-        -- remove a imagem da bomba
-        -- print("entrei")
-        bombaPersonagem.bombaSprite:removeSelf()
+function bomba:newBomba(bombaSprite, tempo, animacaoBomba, id)
+    local newBomba = {bombaSprite = bombaSprite ,tempoBomba_run = tempo, animacaoBomba = animacaoBomba, idJogador = id, duracao = 4, tamanho = 4}
 
-        -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
-        -------------------------------------------------------------
-        -- Cria a sprite da explosao e nela ve se tem algum objeto --
-        -------------------------------------------------------------
-        explosao:explodir(bomba, cenario:getEstadoJogo(), bombaPersonagem)
-   	end     
+    function newBomba:getId()
+        return 5
+    end
+
+    function newBomba:getSprite()
+        return newBomba.bombaSprite
+    end
+
+    return newBomba
+end
+
+function bomba:timer(event)
+    if event.source.params ~= nil then
+
+        if (event.source.params.bombaDoPersonagem ~= nil) then
+            event.source.params.bombaDoPersonagem.duracao = event.source.params.bombaDoPersonagem.duracao - 1
+            if  event.source.params.bombaDoPersonagem.duracao == 0 then
+                -- remove a imagem da bomba
+                -- print("entrei")
+                event.source.params.bombaDoPersonagem.bombaSprite:removeSelf()
+
+                -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
+                -------------------------------------------------------------
+                -- Cria a sprite da explosao e nela ve se tem algum objeto --
+                -------------------------------------------------------------
+                explosao:explodir(cenario:getEstadoJogo(), event.source.params.bombaDoPersonagem)
+           	end  
+        end 
+
+        if (event.source.params.bombaDoInimigo ~= nil) then
+            event.source.params.bombaDoInimigo.duracao = event.source.params.bombaDoInimigo.duracao - 1
+            if  event.source.params.bombaDoInimigo.duracao == 0 then
+                -- remove a imagem da bomba
+                -- print("entrei")
+                event.source.params.bombaDoInimigo.bombaSprite:removeSelf()
+
+                -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
+                -------------------------------------------------------------
+                -- Cria a sprite da explosao e nela ve se tem algum objeto --
+                -------------------------------------------------------------
+                explosao:explodir(cenario:getEstadoJogo(), event.source.params.bombaDoInimigo)
+            end  
+        end 
+    else
+        timer.cancel(tempoDaBomba)
+    end
 end
 
 local function tempoDaBombaInimigo()
@@ -40,32 +76,44 @@ end
 function bomba:newBombaPersonagem(argPosicaoX, argPosicaoY)
 	-- -- print(tempoBomba_run)
  --    -- print(bombaModel.tempo)
-	bombaPersonagem.tempoBomba_run, bombaPersonagem.animacaoBomba = frames:tempoBomba(imagem)
+    local tempoBomba_run, animacaoBomba = frames:tempoBomba(imagem)
+    local bombaSprite = display.newSprite( animacaoBomba, tempoBomba_run);
 
-	bombaPersonagem.bombaSprite = display.newSprite( bombaPersonagem.animacaoBomba, bombaPersonagem.tempoBomba_run);
-	bombaPersonagem.bombaSprite.x, bombaPersonagem.bombaSprite.y = mapa:boardToPixel(mapa:pixelToBoard(argPosicaoX, argPosicaoY))
+    local newBomba = bomba:newBomba(bombaSprite, tempoBomba_run, animacaoBomba, cenario:getPersonagem():getId())
+
+	newBomba.bombaSprite.x, newBomba.bombaSprite.y = mapa:boardToPixel(mapa:pixelToBoard(argPosicaoX, argPosicaoY))
     -- print(bombaSprite.x,  bombaSprite.y)
-    cenario:getEstadoJogo():atualizarEstado(bomba)
-    local countDownTimer = timer.performWithDelay( 1000, tempoDaBombaPersonagem, bombaPersonagem.tempo)
-    -- local novaBomba = bomba:newBomba()
+    cenario:getEstadoJogo():atualizarEstado(newBomba)
+    if tempoDaBomba == nil then
+        tempoDaBomba = timer.performWithDelay( 1000, bomba, 0)
+    end
+    tempoDaBomba.params = {bombaDoPersonagem = newBomba} 
+    -- local novaBomba  bomba:newBomba()
     -- table.insert( listaDeBombas, novaBomba)
-	return bombaPersonagem.bombaSprite
+	return newBomba
 
 end
 
 function bomba:newBombaInimigo(argPosicaoX, argPosicaoY)
     -- -- print(tempoBomba_run)
  --    -- print(bombaModel.tempo)
-    bombaInimigo.tempoBomba_run, bombaInimigo.animacaoBomba = frames:tempoBomba(imagem)
+    local tempoBomba_run, animacaoBomba = frames:tempoBomba(imagem)
+    local bombaSprite = display.newSprite( animacaoBomba, tempoBomba_run);
 
-    bombaInimigo.bombaSprite = display.newSprite( bombaInimigo.animacaoBomba, bombaInimigo.tempoBomba_run);
-    bombaInimigo.bombaSprite.x, bombaInimigo.bombaSprite.y = mapa:boardToPixel(mapa:pixelToBoard(argPosicaoX, argPosicaoY))
+    local newBomba = bomba:newBomba(bombaSprite, tempoBomba_run, animacaoBomba, cenario:getInimigoView():getId())
+
+    newBomba.bombaSprite.x, newBomba.bombaSprite.y = mapa:boardToPixel(mapa:pixelToBoard(argPosicaoX, argPosicaoY))
     -- print(bombaSprite.x,  bombaSprite.y)
-    cenario:getEstadoJogo():atualizarEstado(bomba)
-    local countDownTimer = timer.performWithDelay( 1000, tempoDaBombaInimigo, bombaInimigo.tempo)
+    cenario:getEstadoJogo():atualizarEstado(newBomba)
+
+    if tempoDaBomba == nil then
+        tempoDaBomba = timer.performWithDelay( 1000, bomba, 0)
+    end
+
+    tempoDaBomba.params = {bombaDoInimigo = newBomba}
     -- local novaBomba = bomba:newBomba()
     -- table.insert( listaDeBombas, novaBomba)
-    return bombaInimigo.bombaSprite
+    return newBomba
 
 end
 

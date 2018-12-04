@@ -9,8 +9,9 @@ local explosaoBomba = {
 	duracao = 2
 }
 
-function explosaoBomba:explodir(spriteBomba, estado, objBomba)
-	local origemX, origemY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(spriteBomba:getSprite()))
+function explosaoBomba:explodir(estado, objBomba)
+	-- if spriteBomba.soltou
+	local origemX, origemY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(objBomba:getSprite()))
 	-- print (origemX,origemY)
 
 	local cima, baixo, direita, esquerda = true, true, true, true

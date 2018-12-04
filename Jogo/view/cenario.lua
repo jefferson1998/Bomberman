@@ -23,7 +23,7 @@ end
 aEstrela = require "Objects.aEstrela"
 function getAEstrela()
 	return aEstrela
-end
+end 
 
 function cenario:getDirecional()
 	return direcional

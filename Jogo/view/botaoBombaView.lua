@@ -2,6 +2,7 @@ local widget = require "widget"
 local bombaView = cenario:getBombaView()
 local bombaModel = bombaView:getBombaPersonagem()
 local botaoView = display.newImage("imagens/botaoBomba.png")
+local bomba
 
 local w = display.contentWidth
 local h = display.contentHeight
@@ -12,11 +13,10 @@ botaoView.y = h - 150
 
 function botaoView:touch(evento)
 	if evento.phase == "began" then
-		if bombaModel.tempo == 0 then
-			bombaModel.tempo = 4
-			bombaView.bombaPersonagem.bombaSprite = bombaView:newBombaPersonagem(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
+		if bomba == nil then
+			bomba = bombaView:newBombaPersonagem(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
 			cenario:getPersonagem():getSprite():toFront()
-			bombaView.bombaPersonagem.bombaSprite:play()
+			bomba.bombaSprite:play()
 		end
 	end
 end

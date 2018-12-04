@@ -25,7 +25,7 @@ function personagem:spriteVencedor(spriteBomberman)
 	display.remove( spriteBomberman )
 	personagem.animacaoVencedor_run, personagem.animacaoVencedor = framesBomberman:animacaoVencedor(imagemVencedor)
 	personagem.vencedorSprite = display.newSprite( personagem.animacaoVencedor, personagem.animacaoVencedor_run)
-	personagem.vencedorSprite.x = posX
+	personagem.vencedorSprite.x = posX 
 	personagem.vencedorSprite.y = posY
 	personagem.vencedorSprite.anchorY = 0.85
 	personagem.vitorias = personagem.vitorias + 1

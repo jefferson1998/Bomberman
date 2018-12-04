@@ -10,6 +10,7 @@ local movimentacao = nil
 local posXpixel, posYpixel = 0, 0
 
 local inimigo = {id = 4}
+local bomba
 
 function inimigo:newInimigo()
 	inimigo.animacaoBomberman_run, inimigo.animacaoBomberman = framesBomberman:personagemBomberman(imagem)
@@ -23,7 +24,7 @@ function inimigo:newInimigo()
 	inimigo.bombermanSprite.isFixedRotation = true
 	physics.setGravity( 0, 0 )
 
-	return inimigo.bombermanSprite
+	return inimigo.bombermanSprite 
 end
 
 local inimigoGrafico = inimigo:newInimigo()
@@ -92,11 +93,10 @@ function inimigo:mover(px, py)
 end
 
 function inimigo:soltarBomba()
-	if bombaModel.tempo == 0 then
-		bombaModel.tempo = 4
-		bombaView.bombaInimigo.bombaSprite = bombaView:newBombaInimigo(inimigoGrafico.x, inimigoGrafico.y)
+	if bomba == nil then
+		bomba = bombaView:newBombaInimigo(inimigoGrafico.x, inimigoGrafico.y)
 		inimigoGrafico:toFront()
-		bombaView.bombaInimigo.bombaSprite:play()
+		bomba.bombaSprite:play()
 	end
 end
 

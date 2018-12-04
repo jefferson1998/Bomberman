@@ -44,13 +44,18 @@ function estadoDoJogo:atualizarEstado(obj)
 	end
 
 	if (obj:getId() == 5) then
-		local bombaPersonagem, bombaInimigo = obj:getSprite()
-		if bombaPersonagem ~= 0 then
-			posBombaX, posBombaY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(bombaPersonagem))
+
+		if obj.id == 2 then
+			posBombaX, posBombaY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 			self[posBombaX][posBombaY] = obj:getId()
 			aux = self[posBombaX][posBombaY]
 		end
-		
+
+		-- if bombaInimigo ~= 0 then
+		-- 	posBombaX, posBombaY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(bombaInimigo))
+		-- 	self[posBombaX][posBombaY] = obj:getId()
+		-- 	aux = self[posBombaX][posBombaY]
+		-- end
 		
 	end
 

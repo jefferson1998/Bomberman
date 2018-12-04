@@ -41,7 +41,7 @@ end
 function map:configurandoMapa()
   	map.x = display.contentCenterX - map.designedWidth / 2
   	map.y = display.contentCenterY - map.designedHeight / 2
-end
+end 
 
 function map:matrizEstado()
 	return matrizEstado
