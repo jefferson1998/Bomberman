@@ -98,6 +98,7 @@ function inimigo:enterFrame()
 
 		if(#caminhoDoInimigo > 0)then
 			table.sort( caminhoDoInimigo, compare)
+			print (caminhoFeito)
 
 			if(caminhoFeito == true) then
 
@@ -137,6 +138,9 @@ function inimigo:enterFrame()
 		else
 			inimigoGrafico:setFrame(1)
 			inimigoGrafico:pause()
+			-- if(pode sortar bomba) then
+			-- 	soltarBomba()
+			-- end
 		end
 	end
 	-- pegarCaminho = true

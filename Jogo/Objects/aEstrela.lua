@@ -129,7 +129,7 @@ function aEstrela:pathFinding(listaAberta, listaFechada)
 
 		if (self:isBorda(listaAberta[posMenor]) == true) then
 			if(listaAberta[posMenor].pai ~= nil) then
-				self.caminho = self:retornarCaminho(self.caminho, listaAberta[posMenor].pai)
+				self.caminho = self:retornarCaminho(self.caminho, listaAberta[posMenor])
 			else
 				self.caminho = listaAberta[posMenor]
 			end
