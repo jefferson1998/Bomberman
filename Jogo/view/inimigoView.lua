@@ -93,7 +93,6 @@ function inimigo:mover(px, py)
 end
 
 function inimigo:soltarBomba()
-	print(bombaAtiva)
 	if bombaAtiva == false then
 		bomba = bombaView:newBombaInimigo(inimigoGrafico.x, inimigoGrafico.y)
 		bombaAtiva = true

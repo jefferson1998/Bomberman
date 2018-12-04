@@ -27,7 +27,7 @@ end
 
 function cenario:getDirecional()
 	return direcional
-end
+end 
 
 function cenario:getBotaoBomba()
 	return botaoBomba
@@ -41,6 +41,11 @@ end
 local bombaModel = require "Objects.bomba"
 function cenario:getBombaModel()
 	return bombaModel
+end
+
+local explosao = require "view.explosaoBomba"
+function cenario:getExplosao()
+	return explosao
 end
 
 -- estadoJogo:estadoPadrao(cenario:getInimigoView():getId())
