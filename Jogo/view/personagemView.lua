@@ -22,6 +22,7 @@ end
 function personagem:spriteVencedor(spriteBomberman)
 	local posX, posY = spriteBomberman.x, spriteBomberman.y
 	display.remove( spriteBomberman )
+	cenario:getBanco():vencedor()
 	personagem.animacaoVencedor_run, personagem.animacaoVencedor = framesBomberman:animacaoVencedor(imagemVencedor)
 	personagem.vencedorSprite = display.newSprite( personagem.animacaoVencedor, personagem.animacaoVencedor_run)
 	personagem.vencedorSprite.x = posX
@@ -115,6 +116,7 @@ end
 function personagem:morrer(id)
 	if(id == 2) then
 		cenario:removerEventos()
+		cenario:getBanco():perdedor()
 		display.remove(personagem:getSprite())
 	end
 end

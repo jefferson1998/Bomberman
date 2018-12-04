@@ -1,5 +1,10 @@
 cenario = {}
 
+local banco = require "bd.bancoDeDados"
+function cenario:getBanco()
+	return banco
+end
+
 local mapa = require "view.mapaView"
 function cenario:getMapa()
 	return mapa
