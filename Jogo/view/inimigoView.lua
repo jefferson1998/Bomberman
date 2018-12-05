@@ -92,15 +92,16 @@ end
 local pegarCaminho = true
 local caminhoFeito = true
 local caminhoParaFazer
+
+local contador = 0
 function inimigo:enterFrame()
 	
 	if(posXpixel and posYpixel)then
 
 		if(#caminhoDoInimigo > 0)then
 			table.sort( caminhoDoInimigo, compare)
-			print (caminhoFeito)
 
-			if(caminhoFeito == true) then
+			if(caminhoFeito == true or contador >= 30) then
 
 				caminhoParaFazer = caminhoDoInimigo[1]
 
@@ -111,17 +112,21 @@ function inimigo:enterFrame()
 			if (inimigoGrafico.x == posXpixel and inimigoGrafico.y == posYpixel) then
 				print ("entrei no IF")
 				table.remove(caminhoDoInimigo, 1)
+
 				caminhoFeito = true
+				contador = 0
+
 				passosX = 0
 				passosY = 0
 				inimigoGrafico:setFrame(1)
 				inimigoGrafico:pause()
 
 			else
-				-- print ("estou no else")
+				print ("estou no else")
 				-- print (math.abs(inimigoGrafico.x - posXpixel), math.abs(passosX), math.abs(inimigoGrafico.y - posYpixel), math.abs(passosY))
 				
 				caminhoFeito = false
+				contador = contador + 1
 				
 				local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 		
