@@ -1,5 +1,5 @@
 local composer = require( "composer" )
- 
+local banco = require "bd.bancoDeDados"
 local scene = composer.newScene()
  
 -- -----------------------------------------------------------------------------------
@@ -17,12 +17,17 @@ function scene:create( event )
     local sceneGroup = self.view
     local brackgound = display.newImage("imagens/planoDeFundo.png",display.actualContentWidth * 0.5, display.actualContentHeight * 0.5)  
     local victories =  display.newImage("imagens/vitorias.png",display.actualContentWidth * 0.25, display.actualContentHeight * 0.5)
+    local numeroVitorias = display.newText(banco:getVitorias(), display.actualContentWidth * 0.25, display.actualContentHeight * 0.65, "Courier New", 30)
     local defeats =  display.newImage("imagens/derrotas.png",display.actualContentWidth * 0.75, display.actualContentHeight * 0.5)
+    local numeroDerrotas = display.newText(banco:getDerrotas(), display.actualContentWidth * 0.75, display.actualContentHeight * 0.65, "Courier New", 30)
     local buttonReturn = display.newImage("imagens/botaoVoltar.png",display.actualContentWidth * 0.055, display.actualContentHeight * 1.0)
     sceneGroup:insert(brackgound)
     sceneGroup:insert(buttonReturn)
     sceneGroup:insert(victories)
     sceneGroup:insert(defeats)
+    sceneGroup:insert(numeroVitorias)
+    sceneGroup:insert(numeroDerrotas)
+
     buttonReturn:addEventListener( "touch", scene )
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
