@@ -16,6 +16,11 @@ function explosaoBomba:explodir(estado, objBomba)
 
 	local cima, baixo, direita, esquerda = true, true, true, true
 	
+	if(estado[origemX][origemY] == 2) then
+		cenario:getPersonagem():morrer(estado[origemX][origemY])
+	elseif (estado[origemX][origemY] == 4) then
+		cenario:getInimigoView():morrer(estado[origemX][origemY])
+	end
 	estado:setEstado(3, origemX, origemY)
  
 	for i = 1, objBomba.tamanho do

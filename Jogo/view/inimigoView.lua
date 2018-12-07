@@ -59,7 +59,6 @@ function inimigo:mover(px, py)
 	if	orientacao == "cima" then
 		inimigoGrafico:setSequence( "framesTrasRun" )
 		inimigoGrafico:play()
-		inimigo:soltarBomba()
 		passosY = -1
 		passosX = 0
 
@@ -100,7 +99,6 @@ function inimigo:enterFrame()
 
 		if(#caminhoDoInimigo > 0)then
 			table.sort( caminhoDoInimigo, compare)
-			print (caminhoFeito)
 
 			if(caminhoFeito == true) then
 
@@ -111,7 +109,6 @@ function inimigo:enterFrame()
 			end
 
 			if (inimigoGrafico.x == posXpixel and inimigoGrafico.y == posYpixel) then
-				print ("entrei no IF")
 				table.remove(caminhoDoInimigo, 1)
 				caminhoFeito = true
 				passosX = 0
@@ -140,9 +137,13 @@ function inimigo:enterFrame()
 		else
 			inimigoGrafico:setFrame(1)
 			inimigoGrafico:pause()
-			-- if(pode sortar bomba) then
-			-- 	soltarBomba()
-			-- end
+
+			local posicaoXPersonagem, posicaoYPersonagem = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
+			local posicaoXInimigo, posicaoYInimigo = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+			
+			if(posicaoXInimigo == posicaoXPersonagem and posicaoYInimigo == posicaoYPersonagem) then
+				inimigo:soltarBomba()
+			end
 		end
 	end
 	-- pegarCaminho = true
@@ -223,9 +224,8 @@ function inimigo:morrer(id)
 	if(id == 4) then
 		-- print( "INIMIGO MORTO" )
 		--timer.cancel( movimentacao )
-		cenario:removerEventos()
 		display.remove(inimigo:getSprite())
-		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
+		cenario:removerEventos()
 	end
 end
 
