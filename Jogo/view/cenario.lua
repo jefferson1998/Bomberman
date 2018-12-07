@@ -54,6 +54,7 @@ end
 
 local direcional = require "view.botaoOrientacaoView"
 local botaoBomba = require "view.botaoBombaView"
+cenario.tempo = nil
 
 function cenario:enterFrame()
 
@@ -64,7 +65,6 @@ function cenario:enterFrame()
 		cenario:removerEventos(personagemView:getId())
 		print("sprite vencedor")
 		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
-		cenario:limparCenario()
 	end 
 
 	if cenario:getInimigoView():getSprite().x ~= nil then
@@ -72,12 +72,11 @@ function cenario:enterFrame()
 	else
 		cenario:removerEventos(personagemView:getId())
 		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
-		cenario:limparCenario()
 	end
 
 end
 
-function cenario:limparCenario()
+function cenario:limparCenario() 
 	if cenario:getInimigoView():getSprite() ~= nil then
 		display.remove(cenario:getInimigoView():getSprite())
 	end
@@ -90,8 +89,13 @@ function cenario:limparCenario()
 		display.remove(cenario:getPersonagem():getSpriteVencedor())
 	end
 	display.remove(cenario:getMapa())
+	cenario = nil
+
 end
 
+function cenario:timer(event)
+	cenario:limparCenario()
+end
 
 function cenario:removerEvento()
 	Runtime:removeEventListener("enterFrame", cenario)

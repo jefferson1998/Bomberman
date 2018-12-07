@@ -225,6 +225,7 @@ function inimigo:morrer(id)
 		--timer.cancel( movimentacao )
 		cenario:removerEventos()
 		display.remove(inimigo:getSprite())
+		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
 	end
 end
 

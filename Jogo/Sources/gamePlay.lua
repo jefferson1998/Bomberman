@@ -1,4 +1,5 @@
 local composer = require( "composer" )
+local cenario = require("view.cenario")
  
 local scene = composer.newScene()
  
@@ -19,42 +20,24 @@ function scene:create( event )
  
     local sceneGroup = self.view
     system.activate( "multitouch" )
-    local cenario = require("view.cenario")
+
+    -- local restart = display.newImage("imagens/restartJogo.png", display.contentCenterX, display.contentCenterY)
+    -- local menu = display.newImage("imagens/menuJogo.png", display.contentCenterX, display.contentCenterY* 1.3)
+    -- local winner = display.newImage("imagens/loser.png", display.contentCenterX, display.contentCenterY* 0.3)
+    -- sceneGroup:insert(restart)
+    -- sceneGroup:insert(menu)
     -- Code here runs when the scene is first created but has not yet appeared on screen
- 
+    
 end
 
 -- show()
 function scene:show( event )
  
     local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is still off screen (but is about to come on screen)
- 
-    elseif ( phase == "did" ) then
-        -- Code here runs when the scene is entirely on screen
- 
+    if(event.phase == "will") then
+       
     end
 end
- 
- 
--- hide()
-function scene:hide( event )
- 
-    local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is on screen (but is about to go off screen)
- 
-    elseif ( phase == "did" ) then
-        -- Code here runs immediately after the scene goes entirely off screen
- 
-    end
-end
- 
  
 -- destroy()
 function scene:destroy( event )

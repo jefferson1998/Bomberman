@@ -123,6 +123,7 @@ function personagem:morrer(id)
 	if(id == 2) then
 		display.remove(personagem:getSprite())
  		cenario:removerEventos(personagem:getId())
+ 		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
 	end
 end
 
