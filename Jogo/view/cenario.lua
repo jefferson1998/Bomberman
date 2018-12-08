@@ -62,14 +62,6 @@ local botaoBomba = require "view.botaoBombaView"
 cenario.tempo = nil
 
 function cenario:enterFrame()
-
-	if cenario:getInimigoView():getSprite().x ~= nil then
-		cenario:getInimigoView():enterFrame()
-	else
-		cenario:removerEventos(personagemView:getId())
-		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
-	end
-
 	-- print(personagemView:getSprite().x ~= nil)
 	if cenario:getPersonagem():getSprite().x ~= nil then
 		cenario:getPersonagem():enterFrame()
@@ -78,6 +70,13 @@ function cenario:enterFrame()
 		print("sprite vencedor")
 		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
 	end 
+	
+	if cenario:getInimigoView():getSprite().x ~= nil then
+		cenario:getInimigoView():enterFrame()
+	else
+		cenario:removerEventos(personagemView:getId())
+		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
+	end
 end
 
 function cenario:limparCenario() 
