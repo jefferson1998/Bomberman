@@ -43,10 +43,6 @@ function estadoDoJogo:atualizarEstado(obj)
 
 		self[posPersonagemX][posPersonagemY] = obj:getId()
 
-		if(aEstrela) then
-			caminhoDoInimigo = getAEstrela():getCaminho()
-		end
-
 	end
 
 	if (obj:getId() == 5) then

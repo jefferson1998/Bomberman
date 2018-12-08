@@ -99,7 +99,7 @@ function inimigo:enterFrame()
 
 		if(#caminhoDoInimigo > 0)then
 			table.sort( caminhoDoInimigo, compare)
-
+			print(caminhoDoInimigo[1].px, caminhoDoInimigo[1].py)
 			if(caminhoFeito == true) then
 
 				caminhoParaFazer = caminhoDoInimigo[1]
@@ -115,10 +115,8 @@ function inimigo:enterFrame()
 				passosY = 0
 				inimigoGrafico:setFrame(1)
 				inimigoGrafico:pause()
-
+				caminhoDoInimigo = getAEstrela():getCaminho()
 			else
-				-- print ("estou no else")
-				-- print (math.abs(inimigoGrafico.x - posXpixel), math.abs(passosX), math.abs(inimigoGrafico.y - posYpixel), math.abs(passosY))
 				caminhoFeito = false
 				local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 		
@@ -144,9 +142,12 @@ function inimigo:enterFrame()
 			if(posicaoXInimigo == posicaoXPersonagem and posicaoYInimigo == posicaoYPersonagem) then
 				inimigo:soltarBomba()
 			end
+			
+			if(aEstrela) then
+				caminhoDoInimigo = getAEstrela():getCaminho()
+			end
 		end
 	end
-	-- pegarCaminho = true
 end
 
 function inimigo:posicao()
