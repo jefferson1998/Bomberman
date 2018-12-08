@@ -70,7 +70,7 @@ function cenario:enterFrame()
 		print("sprite vencedor")
 		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
 	end 
-	
+
 	if cenario:getInimigoView():getSprite().x ~= nil then
 		cenario:getInimigoView():enterFrame()
 	else
