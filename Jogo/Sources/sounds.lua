@@ -66,21 +66,6 @@ function scene:touch(event)
     end
 end
 
--- show()
-function scene:show( event )
- 
-    local sceneGroup = self.view
-    sceneGroup.isVisible = true
-end
- 
- 
--- hide()
-function scene:hide( event )
- 
-    local sceneGroup = self.view
-    sceneGroup.isVisible = false
-end
- 
  
 -- destroy()
 function scene:destroy( event )

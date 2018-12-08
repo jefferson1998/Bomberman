@@ -93,7 +93,7 @@ function cenario:limparCenario()
 		display.remove(cenario:getPersonagem():getSpriteVencedor())
 	end
 	display.remove(cenario:getMapa())
-	cenario = nil
+	-- cenario = nil
 
 end
 
