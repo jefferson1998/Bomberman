@@ -1,7 +1,10 @@
 local estadoDoJogo = cenario:getMapa():getEstado()
 local map = cenario:getMapa()
 local posPersonagemX, posPersonagemY, posInimigoX, posInimigoY, posBombaX, posBombaY = nil, nil, nil, nil, nil, nil
-local aux = 1
+local auxPersonagem = 1
+local auxInimigo = 1
+local auxBombaPersonagem = 1
+local auxBombaInimigo = 1
 local pegarCaminho = false
 --------------------------------------------------------------------------------------------
 -- Regras do Estado
@@ -31,13 +34,18 @@ function estadoDoJogo:atualizarEstado(obj)
 	
 	if(obj:getId() == 2) then
 		if(posPersonagemX ~= nil and posPersonagemY ~= nil) then
-			self[posPersonagemX][posPersonagemY] = aux	
+			if(auxBombaPersonagem == 5) then
+				self[posPersonagemX][posPersonagemY] = auxBombaPersonagem
+				auxBombaPersonagem = 1
+			else
+				self[posPersonagemX][posPersonagemY] = aux
+			end
 		end
 		posPersonagemX, posPersonagemY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		
 		-- print (posPersonagemX, posPersonagemY)
 
-		aux = self[posPersonagemX][posPersonagemY]
+		aux= self[posPersonagemX][posPersonagemY]
 
 		-- print(aux)
 
@@ -47,10 +55,16 @@ function estadoDoJogo:atualizarEstado(obj)
 
 	if (obj:getId() == 5) then
 
-		if obj.id == 2 then
+		if obj.idJogador == 2 then
 			posBombaX, posBombaY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 			self[posBombaX][posBombaY] = obj:getId()
-			aux = self[posBombaX][posBombaY]
+			auxBombaPersonagem = self[posBombaX][posBombaY]
+		end
+
+		if obj.idJogador == 4 then
+			posBombaX, posBombaY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
+			self[posBombaX][posBombaY] = obj:getId()
+			auxBombaInimigo = self[posBombaX][posBombaY]
 		end
 
 		-- if bombaInimigo ~= 0 then
@@ -63,20 +77,26 @@ function estadoDoJogo:atualizarEstado(obj)
 
 	if(obj:getId() == 4) then
 		if(posInimigoX ~= nil and posInimigoY ~= nil) then
-			self[posInimigoX][posInimigoY] = aux	
+			if(auxBombaInimigo == 5) then
+				self[posInimigoX][posInimigoY] = auxBombaInimigo
+				auxBombaInimigo = 1
+			else
+				self[posInimigoX][posInimigoY] = aux
+			end	
 		end
 		posInimigoX, posInimigoY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		
 		-- print (posInimigoX, posInimigoY)
-
+		-- if(self[posInimigoX][posInimigoY] == 5) then
 		aux = self[posInimigoX][posInimigoY]
+		-- end
 
-		-- print(aux)
+		-- print(auxInimigo)
 
 		self[posInimigoX][posInimigoY] = obj:getId()
 	end
 
-	-- print(self:mostrarTabuleiroDoJogo())
+	print(self:mostrarTabuleiroDoJogo())
 end
 
 function estadoDoJogo:pegarCaminho(  )

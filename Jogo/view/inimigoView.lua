@@ -99,7 +99,7 @@ function inimigo:enterFrame()
 
 		if(#caminhoDoInimigo > 0)then
 			table.sort( caminhoDoInimigo, compare)
-			print(caminhoDoInimigo[1].px, caminhoDoInimigo[1].py)
+			-- print(caminhoDoInimigo[1].px, caminhoDoInimigo[1].py)
 			if(caminhoFeito == true) then
 
 				caminhoParaFazer = caminhoDoInimigo[1]
@@ -139,7 +139,7 @@ function inimigo:enterFrame()
 			local posicaoXPersonagem, posicaoYPersonagem = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
 			local posicaoXInimigo, posicaoYInimigo = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 			
-			if(posicaoXInimigo == posicaoXPersonagem and posicaoYInimigo == posicaoYPersonagem) then
+			if(math.abs(posicaoXInimigo - posicaoXPersonagem) + math.abs(posicaoYInimigo - posicaoYPersonagem) == 1) then
 				inimigo:soltarBomba()
 			end
 			
@@ -176,6 +176,11 @@ function inimigo:timer(event)
             print("duração bomba inimigo " .. event.source.params.bombaDoInimigo.duracao)
             event.source.params.bombaDoInimigo.duracao = event.source.params.bombaDoInimigo.duracao - 1
             if  event.source.params.bombaDoInimigo.duracao == 0 then
+
+            	if (posXpixel == inimigoGrafico.x and posYpixel == inimigoGrafico.y) then
+            		inimigo:morrer()
+            	end
+
                 -- remove a imagem da bomba
                 print("BOMBAMODEL inimigi _____")
                 event.source.params.bombaDoInimigo.bombaSprite:removeSelf()

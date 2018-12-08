@@ -82,7 +82,7 @@ function explosaoBomba:explodir(estado, objBomba)
 	end
 	local explosaoSprite = explosaoBomba:pintarExplosao(origemX, origemY, estado, objBomba)
 	explosaoBomba:fimExplosao(origemX, origemY, explosaoSprite, objBomba)
-	-- print(estado:mostrarTabuleiroDoJogo())
+	print(estado:mostrarTabuleiroDoJogo())
 end
 
 function explosaoBomba:timer(event)

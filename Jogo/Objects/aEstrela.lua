@@ -61,7 +61,7 @@ function aEstrela:addListaAberta(argNo)
 end
 
 function aEstrela:run()
-	print ("Rodando o run")
+	-- print ("Rodando o run")
 
 	self.listaFechada = {}
 	self.listaAberta = {}
@@ -129,7 +129,7 @@ function aEstrela:pathFinding(listaAberta, listaFechada)
 
 		if (self:isBorda(listaAberta[posMenor]) == true) then
 			if(listaAberta[posMenor].pai ~= nil) then
-				self.caminho = self:retornarCaminho(self.caminho, listaAberta[posMenor])
+				self.caminho = self:retornarCaminho(self.caminho, listaAberta[posMenor].pai)
 			else
 				self.caminho = listaAberta[posMenor]
 			end
