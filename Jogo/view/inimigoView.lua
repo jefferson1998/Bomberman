@@ -150,6 +150,10 @@ function inimigo:enterFrame()
 	end
 end
 
+function inimigo:restartInimigoGrafico()
+	inimigoGrafico = inimigo:newInimigo()
+end
+
 function inimigo:posicao()
 	return inimigoGrafico.x , inimigoGrafico.y
 end
@@ -230,6 +234,7 @@ function inimigo:morrer(id)
 		--timer.cancel( movimentacao )
 		display.remove(inimigo:getSprite())
 		cenario:removerEventos()
+ 		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
 	end
 end
 

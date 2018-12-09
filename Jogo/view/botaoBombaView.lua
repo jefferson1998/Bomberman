@@ -59,7 +59,8 @@ end
 
 function botaoView:create()
 	botaoView = display.newImage("imagens/botaoBomba.png")
-
+	botaoView.x = w - 35
+	botaoView.y = h - 150
 	botaoView:addEventListener("touch", botaoView)
 end
 

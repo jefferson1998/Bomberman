@@ -1,11 +1,11 @@
 local composer = require( "composer" )
--- local cenario = require("view.cenario")
  
 local scene = composer.newScene()
  
 -- create()
 function scene:create( event )
  
+    composer.removeScene("Sources.gamePlay")
     local sceneGroup = self.view
     system.activate( "multitouch" )
 
@@ -26,7 +26,6 @@ function scene:touch(event)
             time = 250,
         }
         if event.target.id == "restart" then
-            composer.setVariable( "play", true )
             composer.gotoScene("Sources.gamePlay", options)
         elseif event.target.id== "menu" then
             composer.gotoScene("Sources.menu", options)

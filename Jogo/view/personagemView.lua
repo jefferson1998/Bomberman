@@ -40,13 +40,18 @@ end
 
 local personagemGrafico = personagem:newPersonagem()
 
+function personagem:restartPersonagemGrafico()
+	personagemGrafico = personagem:newPersonagem()
+	cenario:getEstadoJogo():atualizarEstado(personagem)
+end
+
+
 function personagem:touch( e ) 
 	
 	-- quando há clique ou clicar e arrastar para o lado
 	 if e.phase == "began" or e.phase == "moved" then
 
 		if e.target.myName == "up" then
-
 			personagemGrafico:setSequence( "framesTrasRun" )
 			personagemGrafico:play()
 			passosY = -1
@@ -54,6 +59,7 @@ function personagem:touch( e )
 
 		elseif e.target.myName == "down" then
 
+			print("baixo")
 			personagemGrafico:setSequence( "framesFrenteRun" )
 			personagemGrafico:play()
 			passosY = 1
@@ -88,7 +94,7 @@ end
 
 function personagem:enterFrame()
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
-	
+	print(cenario:getEstadoJogo():mostrarTabuleiroDoJogo())
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
 

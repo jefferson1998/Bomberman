@@ -69,8 +69,6 @@ function cenario:enterFrame()
 		cenario:getPersonagem():enterFrame()
 	else 
 		cenario:removerEventos(personagemView:getId())
-		print("sprite vencedor")
-		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
 	end 
 
 	if cenario:getInimigoView():getSprite().x ~= nil then
@@ -98,18 +96,25 @@ function cenario:limparCenario()
 		display.remove(cenario:getInimigoView():getSpriteVencedor())
 	end
 	cenario:getMapa().isVisible = false
+	cenario:setRestart(true)
 	composer.gotoScene("Sources.restart")
-	-- cenario:restart()
+end
+local restart = false
+function cenario:isRestart()
+	return restart
 end
 
-function cenario:isRestart()
-	return true
+function cenario:setRestart(argCondicao)
+	restart = argCondicao
 end
 
 function cenario:restart()
 	botaoBomba:create()
 	direcional:create()
 	cenario:getMapa().isVisible = true
+	cenario:getPersonagem():restartPersonagemGrafico()
+	cenario:getInimigoView():restartInimigoGrafico()
+	cenario:getMapa():getEstado()
 end
 
 function cenario:timer(event)
@@ -134,3 +139,4 @@ end
 
 -- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", cenario)
+return cenario
