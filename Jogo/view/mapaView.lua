@@ -58,8 +58,15 @@ function map:localizarNoMapa(object)
 end
 
 function map:verificarQuemEstaNaPosicao( posX, posY )
-	local personagemX, personagemY = self:pixelToBoard(self:localizarNoMapa(cenario:getPersonagem():getSprite()))
-	local inimigoX, inimigoY = self:pixelToBoard(self:localizarNoMapa(cenario:getInimigoView():getSprite()))
+	local inimigoX, inimigoY
+	local personagemX, personagemY
+	if (self:localizarNoMapa(cenario:getPersonagem():getSprite()) ~= nil) then
+		personagemX, personagemY = self:pixelToBoard(self:localizarNoMapa(cenario:getPersonagem():getSprite()))
+	end
+
+	if (self:localizarNoMapa(cenario:getInimigoView():getSprite()) ~= nil) then
+		inimigoX, inimigoY = self:pixelToBoard(self:localizarNoMapa(cenario:getInimigoView():getSprite()))
+	end
 
 	local hasPerson = false
 	local hasEnemy = false

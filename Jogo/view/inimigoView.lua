@@ -243,9 +243,10 @@ end
 
 function inimigo:morrer(id)
 	if(id == 4) then
-		--timer.cancel( movimentacao )
+		cenario.inimigoMorto = true
 		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
 		display.remove(inimigo:getSprite())
+		inimigoGrafico.x = -50
 		cenario:removerEventos(cenario:getPersonagem():getId())
  		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
 	end

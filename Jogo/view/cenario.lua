@@ -18,7 +18,7 @@ function cenario:getEstadoJogo()
 end
 
 local inimigoView = require "view.inimigoView"
-function cenario:getInimigoView()
+function cenario:getInimigoView()	
 	return inimigoView
 end
 
@@ -64,19 +64,13 @@ local botaoBomba = require "view.botaoBombaView"
 cenario.tempo = nil
 
 function cenario:enterFrame()
-	-- print(cenario:getEstadoJogo():mostrarTabuleiroDoJogo())
-	-- print(personagemView:getSprite().x ~= nil)
+
 	if cenario:getPersonagem():getSprite().x ~= nil then
 		cenario:getPersonagem():enterFrame()
-	else 
-		cenario:removerEventos(personagemView:getId())
 	end 
 
 	if cenario:getInimigoView():getSprite().x ~= nil then
 		cenario:getInimigoView():enterFrame()
-	else
-		cenario:removerEventos(personagemView:getId())
-		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
 	end
 end
 
@@ -138,6 +132,26 @@ function cenario:removerEventos(id)
 		
 	elseif (id == 4) then
 		cenario:removerEvento()
+	end
+
+	cenario:removerSprites()
+	
+end
+
+function cenario:removerSprites()
+	
+	if cenario:getPersonagem():getSprite().x ~= -50 and cenario:getInimigoView():getSprite().x == -50  then
+		display.remove(cenario:getInimigoView():getSpriteVencedor())
+	end
+	if cenario:getPersonagem():getSprite().x == -50 and cenario:getInimigoView():getSprite().x ~= -50 then
+		display.remove(cenario:getPersonagem():getSpriteVencedor())
+	end
+
+	if cenario.inimigoMorto == true and cenario.personagemMorto == true then
+		display.remove(cenario:getPersonagem():getSpriteVencedor())
+		display.remove(cenario:getInimigoView():getSpriteVencedor())
+		cenario.inimigoMorto = nil
+		cenario.personagemMorto = nil
 	end
 end
 
