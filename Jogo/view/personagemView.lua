@@ -137,6 +137,7 @@ function personagem:morrer(id)
 		personagemGrafico.x = -50
  		cenario:removerEventos(personagem:getId())
  		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
+ 		-- cenario.personagemMorto = nil
 	end
 end
 

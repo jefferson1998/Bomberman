@@ -140,19 +140,24 @@ end
 
 function cenario:removerSprites()
 	
-	if cenario:getPersonagem():getSprite().x ~= -50 and cenario:getInimigoView():getSprite().x == -50  then
-		display.remove(cenario:getInimigoView():getSpriteVencedor())
-	end
-	if cenario:getPersonagem():getSprite().x == -50 and cenario:getInimigoView():getSprite().x ~= -50 then
-		display.remove(cenario:getPersonagem():getSpriteVencedor())
-	end
+			if cenario:getPersonagem():getSprite().x ~= -50 and cenario:getInimigoView():getSprite().x == -50  then
+				print("INIMIGO MORTO")
+				display.remove(cenario:getInimigoView():getSpriteVencedor())
+			end
+			print(cenario:getPersonagem():getSprite().x)
+			if cenario:getPersonagem():getSprite().x == -50 and cenario:getInimigoView():getSprite().x ~= -50 then
+				print("PERSONAGEM MORTO")
+				display.remove(cenario:getPersonagem():getSpriteVencedor())
+			end
 
-	if cenario.inimigoMorto == true and cenario.personagemMorto == true then
-		display.remove(cenario:getPersonagem():getSpriteVencedor())
-		display.remove(cenario:getInimigoView():getSpriteVencedor())
-		cenario.inimigoMorto = nil
-		cenario.personagemMorto = nil
-	end
+			if cenario.inimigoMorto == true and cenario.personagemMorto == true then
+				print("DOIS MORTOS")
+				display.remove(cenario:getPersonagem():getSpriteVencedor())
+				display.remove(cenario:getInimigoView():getSpriteVencedor())
+				cenario.inimigoMorto = nil
+				cenario.personagemMorto = nil
+			end
+
 end
 
 -- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
