@@ -42,7 +42,7 @@ local personagemGrafico = personagem:newPersonagem()
 
 function personagem:restartPersonagemGrafico()
 	personagemGrafico = personagem:newPersonagem()
-	cenario:getEstadoJogo():atualizarEstado(personagem)
+	-- cenario:getEstadoJogo():atualizarEstado(personagem)
 end
 
 
@@ -94,9 +94,10 @@ end
 
 function personagem:enterFrame()
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
-	print(cenario:getEstadoJogo():mostrarTabuleiroDoJogo())
+	-- print(cenario:getEstadoJogo():mostrarTabuleiroDoJogo())
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
+	print(personagemGrafico.x, personagemGrafico.y)
 
 	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
 

@@ -61,6 +61,25 @@ function botaoView:create()
 	botaoView = display.newImage("imagens/botaoBomba.png")
 	botaoView.x = w - 35
 	botaoView.y = h - 150
+	function botaoView:touch(evento)
+		if evento.phase == "began" then
+			if bombaAtiva == false then
+				bomba = bombaView:newBombaPersonagem(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
+				botaoView:setBombaAtiva(true)
+				if tempoDaBomba == nil then
+	        		tempoDaBomba = timer.performWithDelay( 1000, botaoView, 0)
+	    		end
+			    tempoDaBomba.params = {bombaDoPersonagem = bomba} 
+				cenario:getPersonagem():getSprite():toFront()
+				bomba.bombaSprite:play() 
+			end
+		end
+	end
+	
+	function botaoView:setBombaAtiva(condicao)
+		bombaAtiva = condicao
+	end
+	
 	botaoView:addEventListener("touch", botaoView)
 end
 

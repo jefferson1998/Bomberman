@@ -27,8 +27,10 @@ function scene:touch(event)
         }
         if event.target.id == "restart" then
             composer.gotoScene("Sources.gamePlay", options)
+            composer.removeScene("Sources.restart")
         elseif event.target.id== "menu" then
             composer.gotoScene("Sources.menu", options)
+            composer.removeScene("Sources.restart")
         end 
     end
 end

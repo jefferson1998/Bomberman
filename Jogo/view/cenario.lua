@@ -115,6 +115,7 @@ function cenario:restart()
 	cenario:getPersonagem():restartPersonagemGrafico()
 	cenario:getInimigoView():restartInimigoGrafico()
 	cenario:getMapa():getEstado()
+	Runtime:addEventListener("enterFrame", cenario)
 end
 
 function cenario:timer(event)
