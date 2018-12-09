@@ -1,4 +1,4 @@
-	local framesBomberman = require "view.frames"
+local framesBomberman = require "view.frames"
 local personagemModel = require "Objects.personagem"
 local imagem = "imagens/framesDoBomberman.png"
 local imagemVencedor = "imagens/vencedor.png"
@@ -40,13 +40,20 @@ end
 
 local personagemGrafico = personagem:newPersonagem()
 
+function personagem:restartPersonagemGrafico()
+	personagemGrafico = personagem:newPersonagem()
+	personagem = personagemModel
+	cenario:getEstadoJogo():atualizarEstado(personagem)
+	passosX, passosY = 0, 0
+end
+
+
 function personagem:touch( e ) 
 	
 	-- quando há clique ou clicar e arrastar para o lado
 	 if e.phase == "began" or e.phase == "moved" then
 
 		if e.target.myName == "up" then
-
 			personagemGrafico:setSequence( "framesTrasRun" )
 			personagemGrafico:play()
 			passosY = -1
@@ -54,6 +61,7 @@ function personagem:touch( e )
 
 		elseif e.target.myName == "down" then
 
+			print("baixo")
 			personagemGrafico:setSequence( "framesFrenteRun" )
 			personagemGrafico:play()
 			passosY = 1
@@ -88,7 +96,7 @@ end
 
 function personagem:enterFrame()
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
-	
+	-- print(cenario:getEstadoJogo():mostrarTabuleiroDoJogo())
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
 
@@ -123,9 +131,10 @@ end
 function personagem:morrer(id)
 	if(id == 2) then
 		cenario:getBanco():perdedor()
+		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
+		display.remove(personagem:getSprite())
  		cenario:removerEventos(personagem:getId())
  		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
-		display.remove(personagem:getSprite())
 	end
 end
 

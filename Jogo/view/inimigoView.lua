@@ -150,6 +150,18 @@ function inimigo:enterFrame()
 	end
 end
 
+function inimigo:restartInimigoGrafico()
+	inimigoGrafico = inimigo:newInimigo()
+	posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+	cenario:getEstadoJogo():atualizarEstado(inimigo)
+	pegarCaminho = true
+	caminhoFeito = true
+	caminhoParaFazer = nil
+	passosX, passosY = 0, 0
+	posicaoAtualX, posicaoAtualY, posAntX, posAntY = nil,nil,nil,nil
+
+end
+
 function inimigo:posicao()
 	return inimigoGrafico.x , inimigoGrafico.y
 end
@@ -173,7 +185,7 @@ end
 function inimigo:timer(event)
     if event.source.params ~= nil then
         if (event.source.params.bombaDoInimigo ~= nil) then
-            print("duração bomba inimigo " .. event.source.params.bombaDoInimigo.duracao)
+            -- print("duração bomba inimigo " .. event.source.params.bombaDoInimigo.duracao)
             event.source.params.bombaDoInimigo.duracao = event.source.params.bombaDoInimigo.duracao - 1
             if  event.source.params.bombaDoInimigo.duracao == 0 then
 
@@ -182,7 +194,7 @@ function inimigo:timer(event)
             	end
 
                 -- remove a imagem da bomba
-                print("BOMBAMODEL inimigi _____")
+                -- print("BOMBAMODEL inimigi _____")
                 event.source.params.bombaDoInimigo.bombaSprite:removeSelf()
 
                 -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
@@ -214,7 +226,6 @@ end
 
 function inimigo:spriteVencedor(spriteBomberman)
 	local posX, posY = spriteBomberman.x, spriteBomberman.y
-	--timer.cancel( movimentacao )
 	display.remove( spriteBomberman )
 	inimigo.animacaoVencedor_run, inimigo.animacaoVencedor = framesBomberman:animacaoVencedor(imagemVencedor)
 	inimigo.vencedorSprite = display.newSprite( inimigo.animacaoVencedor, inimigo.animacaoVencedor_run)
@@ -226,12 +237,17 @@ function inimigo:spriteVencedor(spriteBomberman)
 	return inimigo.vencedorSprite
 end
 
+function inimigo:getSpriteVencedor()
+	return inimigo.vencedorSprite
+end
+
 function inimigo:morrer(id)
 	if(id == 4) then
-		-- print( "INIMIGO MORTO" )
 		--timer.cancel( movimentacao )
+		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
 		display.remove(inimigo:getSprite())
-		cenario:removerEventos()
+		cenario:removerEventos(cenario:getPersonagem():getId())
+ 		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
 	end
 end
 

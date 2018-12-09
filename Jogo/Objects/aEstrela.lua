@@ -59,7 +59,7 @@ function aEstrela:addListaAberta(argNo)
 		table.insert( self.listaAberta, argNo)
 	end
 end
-
+ 
 function aEstrela:run()
 	-- print ("Rodando o run")
 
