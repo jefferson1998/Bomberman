@@ -89,13 +89,14 @@ function cenario:limparCenario()
 		display.remove(cenario:getInimigoView():getSprite())
 	end
 
+	if cenario:getInimigoView():getSpriteVencedor() ~= nil then
+		display.remove(cenario:getInimigoView():getSpriteVencedor())
+	end
+	
 	if cenario:getPersonagem():getSpriteVencedor() ~= nil then
 		display.remove(cenario:getPersonagem():getSpriteVencedor())
 	end
 
-	if cenario:getInimigoView():getSpriteVencedor() ~= nil then
-		display.remove(cenario:getInimigoView():getSpriteVencedor())
-	end
 	cenario:getMapa().isVisible = false
 	cenario:setRestart(true)
 	composer.gotoScene("Sources.restart")
