@@ -104,9 +104,11 @@ function buttons:create()
 end
 
 function buttons:removerEvento()
-	for i = 1, #buttons do
-		buttons[i]:removeEventListener( "touch", buttons)
-		buttons[i]:removeSelf()	
+	if(buttons ~= nil) then
+		for i = 1, #buttons do
+			buttons[i]:removeEventListener( "touch", buttons)
+			buttons[i]:removeSelf()	
+		end
 	end
 end
 

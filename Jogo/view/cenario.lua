@@ -64,6 +64,7 @@ local botaoBomba = require "view.botaoBombaView"
 cenario.tempo = nil
 
 function cenario:enterFrame()
+		print(cenario:getEstadoJogo():mostrarTabuleiroDoJogo())
 	-- print(personagemView:getSprite().x ~= nil)
 	if cenario:getPersonagem():getSprite().x ~= nil then
 		cenario:getPersonagem():enterFrame()

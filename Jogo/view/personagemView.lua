@@ -1,4 +1,4 @@
-	local framesBomberman = require "view.frames"
+local framesBomberman = require "view.frames"
 local personagemModel = require "Objects.personagem"
 local imagem = "imagens/framesDoBomberman.png"
 local imagemVencedor = "imagens/vencedor.png"
@@ -42,7 +42,9 @@ local personagemGrafico = personagem:newPersonagem()
 
 function personagem:restartPersonagemGrafico()
 	personagemGrafico = personagem:newPersonagem()
-	-- cenario:getEstadoJogo():atualizarEstado(personagem)
+	personagem = personagemModel
+	cenario:getEstadoJogo():atualizarEstado(personagem)
+	passosX, passosY = 0, 0
 end
 
 
@@ -97,7 +99,6 @@ function personagem:enterFrame()
 	-- print(cenario:getEstadoJogo():mostrarTabuleiroDoJogo())
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
-	print(personagemGrafico.x, personagemGrafico.y)
 
 	local novaPosicaoX, novaPosicaoY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
 

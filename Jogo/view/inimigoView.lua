@@ -152,6 +152,14 @@ end
 
 function inimigo:restartInimigoGrafico()
 	inimigoGrafico = inimigo:newInimigo()
+	posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
+	cenario:getEstadoJogo():atualizarEstado(inimigo)
+	pegarCaminho = true
+	caminhoFeito = true
+	caminhoParaFazer = nil
+	passosX, passosY = 0, 0
+	posicaoAtualX, posicaoAtualY, posAntX, posAntY = nil,nil,nil,nil
+	
 end
 
 function inimigo:posicao()
@@ -230,10 +238,10 @@ end
 
 function inimigo:morrer(id)
 	if(id == 4) then
-		print( "INIMIGO MORTO" )
 		--timer.cancel( movimentacao )
+		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
 		display.remove(inimigo:getSprite())
-		cenario:removerEventos()
+		cenario:removerEventos(cenario:getPersonagem():getId())
  		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
 	end
 end
