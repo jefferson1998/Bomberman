@@ -1,0 +1,48 @@
+local composer = require( "composer" )
+-- local cenario = require("view.cenario")
+ 
+local scene = composer.newScene()
+ 
+-- create()
+function scene:create( event )
+ 
+    local sceneGroup = self.view
+    system.activate( "multitouch" )
+
+    local restart = display.newImage("imagens/restartJogo.png", display.contentCenterX, display.contentCenterY)
+    restart.id = "restart"
+    local menu = display.newImage("imagens/menuJogo.png", display.contentCenterX, display.contentCenterY* 1.3)
+    menu.id = "menu"
+    restart:addEventListener( "touch", scene )
+    menu:addEventListener( "touch", scene )
+    sceneGroup:insert(restart)
+    sceneGroup:insert(menu)    
+end
+
+function scene:touch(event)
+     if event.phase == "began" then
+        local options = {
+            effect = "fade",
+            time = 250,
+        }
+        if event.target.id == "restart" then
+            composer.setVariable( "play", true )
+            composer.gotoScene("Sources.gamePlay", options)
+        elseif event.target.id== "menu" then
+            composer.gotoScene("Sources.menu", options)
+        end 
+    end
+end
+ 
+-- destroy()
+function scene:destroy( event )
+ 
+    local sceneGroup = self.view
+    display.remove(sceneGroup)
+     
+end
+ 
+scene:addEventListener( "create", scene )
+scene:addEventListener( "destroy", scene )
+ 
+return scene

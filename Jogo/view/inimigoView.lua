@@ -173,11 +173,11 @@ end
 function inimigo:timer(event)
     if event.source.params ~= nil then
         if (event.source.params.bombaDoInimigo ~= nil) then
-            print("duração bomba inimigo " .. event.source.params.bombaDoInimigo.duracao)
+            -- print("duração bomba inimigo " .. event.source.params.bombaDoInimigo.duracao)
             event.source.params.bombaDoInimigo.duracao = event.source.params.bombaDoInimigo.duracao - 1
             if  event.source.params.bombaDoInimigo.duracao == 0 then
                 -- remove a imagem da bomba
-                print("BOMBAMODEL inimigi _____")
+                -- print("BOMBAMODEL inimigi _____")
                 event.source.params.bombaDoInimigo.bombaSprite:removeSelf()
 
                 -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
@@ -209,7 +209,6 @@ end
 
 function inimigo:spriteVencedor(spriteBomberman)
 	local posX, posY = spriteBomberman.x, spriteBomberman.y
-	--timer.cancel( movimentacao )
 	display.remove( spriteBomberman )
 	inimigo.animacaoVencedor_run, inimigo.animacaoVencedor = framesBomberman:animacaoVencedor(imagemVencedor)
 	inimigo.vencedorSprite = display.newSprite( inimigo.animacaoVencedor, inimigo.animacaoVencedor_run)
@@ -221,9 +220,13 @@ function inimigo:spriteVencedor(spriteBomberman)
 	return inimigo.vencedorSprite
 end
 
+function inimigo:getSpriteVencedor()
+	return inimigo.vencedorSprite
+end
+
 function inimigo:morrer(id)
 	if(id == 4) then
-		-- print( "INIMIGO MORTO" )
+		print( "INIMIGO MORTO" )
 		--timer.cancel( movimentacao )
 		display.remove(inimigo:getSprite())
 		cenario:removerEventos()

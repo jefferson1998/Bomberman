@@ -1,4 +1,6 @@
 cenario = {}
+local composer = require ("composer")
+
 
 local banco = require "bd.bancoDeDados"
 function cenario:getBanco()
@@ -91,9 +93,23 @@ function cenario:limparCenario()
 	if cenario:getPersonagem():getSpriteVencedor() ~= nil then
 		display.remove(cenario:getPersonagem():getSpriteVencedor())
 	end
-	display.remove(cenario:getMapa())
-	-- cenario = nil
 
+	if cenario:getInimigoView():getSpriteVencedor() ~= nil then
+		display.remove(cenario:getInimigoView():getSpriteVencedor())
+	end
+	cenario:getMapa().isVisible = false
+	composer.gotoScene("Sources.restart")
+	-- cenario:restart()
+end
+
+function cenario:isRestart()
+	return true
+end
+
+function cenario:restart()
+	botaoBomba:create()
+	direcional:create()
+	cenario:getMapa().isVisible = true
 end
 
 function cenario:timer(event)

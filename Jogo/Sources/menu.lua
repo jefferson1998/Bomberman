@@ -46,6 +46,7 @@ function scene:touch(event)
             composer.setVariable( "son", son )
             composer.gotoScene("Sources.sounds", options)
         elseif event.target.id== "bp" then
+            composer.setVariable( "play", false )
             composer.gotoScene("Sources.gamePlay", options)
         elseif event.target.id == "bc" then
             composer.gotoScene("Sources.credit", options)

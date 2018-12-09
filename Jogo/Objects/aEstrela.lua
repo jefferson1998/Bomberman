@@ -61,7 +61,7 @@ function aEstrela:addListaAberta(argNo)
 end
 
 function aEstrela:run()
-	print ("Rodando o run")
+	-- print ("Rodando o run")
 
 	self.listaFechada = {}
 	self.listaAberta = {}
