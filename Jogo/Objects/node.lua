@@ -52,22 +52,22 @@ function no:validarVizinho(px, py, direcao)
 	local distanciaAtualDaBomba = self:verificarDistanciaBomba(px, py, estado)
 
 	if(direcao == "cima" and estado[px - 1][py] ~= 0 and estado[px - 1][py] ~= 3 and estado[px - 1][py] ~= 5 and estado[px - 1][py] ~= nil) then
-		if(distanciaAtualDaBomba == 0 or distanciaAtualDaBomba > self:verificarDistanciaBomba(px - 1, py, estado))then
+		if(distanciaAtualDaBomba == 0 or self:verificarDistanciaBomba(px - 1, py, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px - 1, py, estado) == 0)then
 			return true
 		end
 	end
 	if(direcao == "direita" and estado[px][py + 1] ~= 0 and estado[px][py + 1] ~= 3 and estado[px][py + 1] ~= 5 and estado[px][py + 1] ~= nil) then
-		if(distanciaAtualDaBomba == 0 or distanciaAtualDaBomba > self:verificarDistanciaBomba(px, py + 1, estado))then
+		if(distanciaAtualDaBomba == 0 or self:verificarDistanciaBomba(px, py + 1, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px, py + 1, estado) == 0)then
 			return true
 		end
 	end
 	if(direcao == "baixo" and estado[px + 1][py] ~= 0 and estado[px + 1][py] ~= 3 and estado[px + 1][py] ~= 5 and estado[px + 1][py] ~= nil) then
-		if(distanciaAtualDaBomba == 0 or distanciaAtualDaBomba > self:verificarDistanciaBomba(px + 1, py, estado))then
+		if(distanciaAtualDaBomba == 0 or self:verificarDistanciaBomba(px + 1, py, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px + 1, py, estado) == 0)then
 			return true
 		end
 	end
 	if(direcao == "esquerda" and estado[px][py - 1] ~= 0 and estado[px][py - 1] ~= 3 and estado[px][py - 1] ~= 5 and estado[px][py - 1] ~= nil) then
-		if(distanciaAtualDaBomba == 0 or distanciaAtualDaBomba > self:verificarDistanciaBomba(px, py - 1, estado))then
+		if(distanciaAtualDaBomba == 0 or self:verificarDistanciaBomba(px, py - 1, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px, py - 1, estado) == 0)then
 			return true
 		end
 	end

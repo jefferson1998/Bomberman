@@ -38,19 +38,18 @@ function estadoDoJogo:atualizarEstado(obj)
 				self[posPersonagemX][posPersonagemY] = auxBombaPersonagem
 				auxBombaPersonagem = 1
 			else
-				self[posPersonagemX][posPersonagemY] = aux
+				self[posPersonagemX][posPersonagemY] = auxPersonagem
 			end
 		end
 		posPersonagemX, posPersonagemY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		
 		-- print (posPersonagemX, posPersonagemY)
-
-		aux= self[posPersonagemX][posPersonagemY]
-
+		if(self[posInimigoX][posInimigoY] ~= 4) then
+			auxPersonagem = self[posPersonagemX][posPersonagemY]
+		end
 		-- print(aux)
 
 		self[posPersonagemX][posPersonagemY] = obj:getId()
-
 	end
 
 	if (obj:getId() == 5) then
@@ -66,12 +65,6 @@ function estadoDoJogo:atualizarEstado(obj)
 			self[posBombaX][posBombaY] = obj:getId()
 			auxBombaInimigo = self[posBombaX][posBombaY]
 		end
-
-		-- if bombaInimigo ~= 0 then
-		-- 	posBombaX, posBombaY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(bombaInimigo))
-		-- 	self[posBombaX][posBombaY] = obj:getId()
-		-- 	aux = self[posBombaX][posBombaY]
-		-- end
 		
 	end
 
@@ -81,15 +74,15 @@ function estadoDoJogo:atualizarEstado(obj)
 				self[posInimigoX][posInimigoY] = auxBombaInimigo
 				auxBombaInimigo = 1
 			else
-				self[posInimigoX][posInimigoY] = aux
+				self[posInimigoX][posInimigoY] = auxInimigo
 			end	
 		end
 		posInimigoX, posInimigoY = map:pixelToBoard(cenario:getMapa():localizarNoMapa(obj:getSprite()))
 		
 		-- print (posInimigoX, posInimigoY)
-		-- if(self[posInimigoX][posInimigoY] == 5) then
-		aux = self[posInimigoX][posInimigoY]
-		-- end
+		if(self[posInimigoX][posInimigoY] ~= 2) then
+			auxInimigo = self[posInimigoX][posInimigoY]
+		end
 
 		-- print(auxInimigo)
 
