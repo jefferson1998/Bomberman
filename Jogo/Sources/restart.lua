@@ -9,9 +9,9 @@ function scene:create( event )
     local sceneGroup = self.view
     system.activate( "multitouch" )
 
-    local restart = display.newImage("imagens/restartJogo.png", display.contentCenterX, display.contentCenterY)
+    local restart = display.newImage("imagens/restartJogo.png", display.contentCenterX, display.contentCenterY * 0.8)
     restart.id = "restart"
-    local menu = display.newImage("imagens/menuJogo.png", display.contentCenterX, display.contentCenterY* 1.3)
+    local menu = display.newImage("imagens/menuJogo.png", display.contentCenterX, display.contentCenterY * 1.4)
     menu.id = "menu"
     restart:addEventListener( "touch", scene )
     menu:addEventListener( "touch", scene )
