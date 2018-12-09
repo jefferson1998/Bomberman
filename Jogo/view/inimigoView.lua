@@ -139,7 +139,7 @@ function inimigo:enterFrame()
 			local posicaoXPersonagem, posicaoYPersonagem = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
 			local posicaoXInimigo, posicaoYInimigo = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(inimigoGrafico))
 			
-			if(math.abs(posicaoXInimigo - posicaoXPersonagem) + math.abs(posicaoYInimigo - posicaoYPersonagem) == 1) then
+			if(math.abs(posicaoXInimigo - posicaoXPersonagem) + math.abs(posicaoYInimigo - posicaoYPersonagem) == 0) then
 				inimigo:soltarBomba()
 			end
 			

@@ -57,6 +57,25 @@ function map:localizarNoMapa(object)
 	return object.x, object.y
 end
 
+function map:verificarQuemEstaNaPosicao( posX, posY )
+	local personagemX, personagemY = self:pixelToBoard(self:localizarNoMapa(cenario:getPersonagem():getSprite()))
+	local inimigoX, inimigoY = self:pixelToBoard(self:localizarNoMapa(cenario:getInimigoView():getSprite()))
+
+	local hasPerson = false
+	local hasEnemy = false
+
+	if(personagemX == posX and personagemY == posY) then
+		hasPerson = true
+	end
+
+	if(inimigoX == posX and inimigoY == posY) then
+		hasEnemy = true
+	end
+
+	return hasPerson, hasEnemy
+
+end
+
 function map:pixelToBoard(posPixelX, posPixelY)
 	return (math.ceil(math.fmod(posPixelY, cenario:getMapa().designedHeight) / 32)),
 		(math.ceil(math.fmod(posPixelX, cenario:getMapa().designedWidth) / 32))

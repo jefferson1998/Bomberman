@@ -13,40 +13,42 @@ function explosaoBomba:explodir(estado, objBomba)
 	-- if spriteBomba.soltou
 	local origemX, origemY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(objBomba:getSprite()))
 	-- print (origemX,origemY)
-
 	local cima, baixo, direita, esquerda = true, true, true, true
-	
-	if(estado[origemX][origemY] == 2) then
-		cenario:getPersonagem():morrer(estado[origemX][origemY])
-	elseif (estado[origemX][origemY] == 4) then
-		cenario:getInimigoView():morrer(estado[origemX][origemY])
+
+	local hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX, origemY)
+	if (hasEnemy == true) then
+		cenario:getInimigoView():morrer(cenario:getInimigoView():getId())
+	end
+	if(hasPerson == true) then
+		cenario:getPersonagem():morrer(cenario:getPersonagem():getId())
 	end
 	estado:setEstado(3, origemX, origemY)
  
 	for i = 1, objBomba.tamanho do
-			-- print("CHEGUEI AKI ______________________________"..cenario:getBombaView():getBombaModel().tamanho)
-
-		
+			-- print("CHEGUEI AKI ______________________________"..cenario:getBombaView():getBombaModel().tamanho)		
 		if(baixo == true and estado[origemX + i][origemY] ~= 0 and estado[origemX + i][origemY] ~= nil) then
 			-- print("IF 1")
-			if(estado[origemX + i][origemY] == 2) then
-				cenario:getPersonagem():morrer(estado[origemX + i][origemY])
-			elseif (estado[origemX + i][origemY] == 4) then
-				cenario:getInimigoView():morrer(estado[origemX + i][origemY])
+			hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX + i, origemY)
+			if (hasEnemy == true) then
+				cenario:getInimigoView():morrer(cenario:getInimigoView():getId())
+			end
+			if(hasPerson == true) then
+				cenario:getPersonagem():morrer(cenario:getPersonagem():getId())
 			end
 			estado:setEstado(3, origemX + i, origemY)
 			-- print("Setei o Estado")
 		else
 			baixo = false
 		end
-		
 
 		if(cima == true and estado[origemX - i][origemY] ~= 0 and estado[origemX - i][origemY] ~= nil) then
 			-- print("IF 2")
-			if(estado[origemX - i][origemY] == 2) then
-				cenario:getPersonagem():morrer(estado[origemX - i][origemY])
-			elseif (estado[origemX - i][origemY] == 4) then
-				cenario:getInimigoView():morrer(estado[origemX - i][origemY])
+			hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX - i, origemY)
+			if (hasEnemy == true) then
+				cenario:getInimigoView():morrer(cenario:getInimigoView():getId())
+			end
+			if(hasPerson == true) then
+				cenario:getPersonagem():morrer(cenario:getPersonagem():getId())
 			end
 			estado:setEstado(3, origemX - i, origemY)
 			-- print("Setei o Estado")
@@ -56,10 +58,12 @@ function explosaoBomba:explodir(estado, objBomba)
 		
 		if(direita == true and estado[origemX][origemY + i] ~= 0 and estado[origemX][origemY + i] ~= nil) then
 			-- print("IF 3")
-			if(estado[origemX][origemY + i] == 2) then
-				cenario:getPersonagem():morrer(estado[origemX][origemY + i])
-			elseif (estado[origemX][origemY + i] == 4) then
-				cenario:getInimigoView():morrer(estado[origemX][origemY + i])
+			hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX, origemY + i)
+			if (hasEnemy == true) then
+				cenario:getInimigoView():morrer(cenario:getInimigoView():getId())
+			end
+			if(hasPerson == true) then
+				cenario:getPersonagem():morrer(cenario:getPersonagem():getId())
 			end
 			estado:setEstado(3, origemX, origemY + i)
 			-- print("Setei o Estado")
@@ -69,10 +73,12 @@ function explosaoBomba:explodir(estado, objBomba)
 		
 		if(esquerda == true and estado[origemX][origemY - i] ~= 0 and estado[origemX][origemY - i] ~= nil) then
 			-- print("IF 4")
-			if(estado[origemX][origemY - i] == 2) then
-				cenario:getPersonagem():morrer(estado[origemX][origemY - i])
-			elseif (estado[origemX][origemY - i] == 4) then
-				cenario:getInimigoView():morrer(estado[origemX][origemY - i])
+			hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX, origemY - i)
+			if (hasEnemy == true) then
+				cenario:getInimigoView():morrer(cenario:getInimigoView():getId())
+			end
+			if(hasPerson == true) then
+				cenario:getPersonagem():morrer(cenario:getPersonagem():getId())
 			end
 			estado:setEstado(3, origemX, origemY - i)
 			-- print("Setei o Estado")
