@@ -116,6 +116,7 @@ function cenario:restart()
 	cenario:getPersonagem():restartPersonagemGrafico()
 	cenario:getInimigoView():restartInimigoGrafico()
 	cenario:getMapa():getEstado()
+	caminhoDoInimigo = {}
 	Runtime:addEventListener("enterFrame", cenario)
 end
 

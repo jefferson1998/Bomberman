@@ -159,7 +159,7 @@ function inimigo:restartInimigoGrafico()
 	caminhoParaFazer = nil
 	passosX, passosY = 0, 0
 	posicaoAtualX, posicaoAtualY, posAntX, posAntY = nil,nil,nil,nil
-	
+
 end
 
 function inimigo:posicao()
