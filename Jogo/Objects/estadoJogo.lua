@@ -76,7 +76,7 @@ function estadoDoJogo:atualizarEstado(obj)
 		self[posInimigoX][posInimigoY] = obj:getId()
 	end
 
-	-- print(self:mostrarTabuleiroDoJogo())
+	print(self:mostrarTabuleiroDoJogo())
 end
 
 function estadoDoJogo:pegarCaminho(  )
