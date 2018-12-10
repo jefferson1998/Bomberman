@@ -90,19 +90,44 @@ local function compare(no1, no2)
 	return false
 end
 
-function inimigo:estaNaAreaDaBomba( posX, posY )
-	if(cenario:getBombaView():getSprite()) then
-		local cima, baixo, esquerda, direita = true, true, true, true
-		local posXbomba, posYbomba = cenario:getMapa():pixelToBorad(cenario:getMapa():localizarNoMapa(cenario:getBombaView():getSprite()))
-		
-		if(posX == posXbomba and posY == posYbomba) then
-			return true
+function inimigo:estaNaAreaDaBomba(px, py)
+	local cima, baixo, esquerda, direita = true, true, true, true
+	local mapa = cenario:getEstadoJogo():getEstado()
+	
+	for i = 1, 4 do
+		if(baixo == true and mapa[px + i][py] ~= 0 and mapa[px + i][py] ~= nil) then
+			if(mapa[px + i][py] == 5)then
+				return true
+			end
+		else
+			baixo = false
 		end
-
-		if((math.abs(posX - posXbomba) <= 4 and math.abs(posY - posYbomba) == 0) or (math.abs(posY - posYbomba) <= 4 and math.abs(posX - posXbomba) == 0)) then
-			return true
+		
+		if(cima == true and mapa[px - i][py] ~= 0 and mapa[px - i][py] ~= nil) then
+			if(mapa[px - i][py] == 5)then
+				return true
+			end
+		else 
+			cima = false
+		end
+		
+		if(direita == true and mapa[px][py + i] ~= 0 and mapa[px][py + i] ~= nil) then
+			if(mapa[px][py + i] == 5)then
+				return true
+			end
+		else
+			direita = false
+		end
+		
+		if(esquerda == true and mapa[px][py - i] ~= 0 and mapa[px][py - i] ~= nil) then
+			if(mapa[px][py - i] == 5)then
+				return true
+			end
+		else
+			esquerda = false
 		end
 	end
+	
 	return false
 end
 
@@ -159,12 +184,8 @@ function inimigo:enterFrame()
 				inimigo:soltarBomba()
 			end
 			
-			if(aEstrela) then
-				if(inimigo:estaNaAreaDaBomba(posicaoXInimigo, posicaoYInimigo) == false) then
-					caminhoDoInimigo = getAEstrela():getCaminho()
-				else
-					caminhoDoInimigo = getAEstrela():getCaminhoFuga()
-				end
+			if(aEstrela) then	
+				caminhoDoInimigo = getAEstrela():getCaminho()
 			end
 		end
 	end

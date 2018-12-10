@@ -4,31 +4,30 @@ function no:calcularDistancia(px, py)
 	local posX, posY
 	if(cenario:getInimigoView():estaNaAreaDaBomba(px,py) == true) then
 		for i = 1, 5 do
-			if(select(1, self:verificarDistanciaBomba(px + i, py)) == 0) then
-				posX = select(2, self:verificarDistanciaBomba(px + i, py).x)
-				posY = select(2, self:verificarDistanciaBomba(px + i, py).y)
+			if(select(1, self:verificarDistanciaBomba(px + i, py, cenario:getEstadoJogo():getEstado())) == 0) then
+				posX = select(2, self:verificarDistanciaBomba(px + i, py, cenario:getEstadoJogo():getEstado()))
+				posY = select(3, self:verificarDistanciaBomba(px + i, py, cenario:getEstadoJogo():getEstado()))
 				break
 			end
-			if(select(1, self:verificarDistanciaBomba(px - i, py)) == 0) then
-				posX = select(2, self:verificarDistanciaBomba(px - i, py).x)
-				posY = select(2, self:verificarDistanciaBomba(px - i, py).y)
+			if(select(1, self:verificarDistanciaBomba(px - i, py, cenario:getEstadoJogo():getEstado())) == 0) then
+				posX = select(2, self:verificarDistanciaBomba(px - i, py, cenario:getEstadoJogo():getEstado()))
+				posY = select(3, self:verificarDistanciaBomba(px - i, py, cenario:getEstadoJogo():getEstado()))
 				break
 			end
-			if(select(1, self:verificarDistanciaBomba(px, py + i)) == 0) then
-				posX = select(2, self:verificarDistanciaBomba(px, py + i).x)
-				posY = select(2, self:verificarDistanciaBomba(px, py + i).y)
+			if(select(1, self:verificarDistanciaBomba(px, py + i, cenario:getEstadoJogo():getEstado())) == 0) then
+				posX = select(2, self:verificarDistanciaBomba(px, py + i, cenario:getEstadoJogo():getEstado()))
+				posY = select(3, self:verificarDistanciaBomba(px, py + i, cenario:getEstadoJogo():getEstado()))
 				break
 			end
-			if(select(1, self:verificarDistanciaBomba(px, py - i)) == 0) then
-				posX = select(2, self:verificarDistanciaBomba(px, py - i).x)
-				posY = select(2, self:verificarDistanciaBomba(px, py - i).y)
+			if(select(1, self:verificarDistanciaBomba(px, py - i, cenario:getEstadoJogo():getEstado())) == 0) then
+				posX = select(2, self:verificarDistanciaBomba(px, py - i, cenario:getEstadoJogo():getEstado()))
+				posY = select(3, self:verificarDistanciaBomba(px, py - i, cenario:getEstadoJogo():getEstado()))
 				break
 			end
 		end
 	else
 		posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
 	end
-	
 	return math.abs(px - posX) + math.abs(py - posY)
 end
 
@@ -70,7 +69,7 @@ function no:verificarDistanciaBomba(px, py, mapa)
 		end
 	end
 
-	return 0, {x = px, y = py}
+	return 0, px, py
 
 end
 
