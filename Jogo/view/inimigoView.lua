@@ -90,6 +90,22 @@ local function compare(no1, no2)
 	return false
 end
 
+function inimigo:estaNaAreaDaBomba( posX, posY )
+	if(cenario:getBombaView():getSprite()) then
+		local cima, baixo, esquerda, direita = true, true, true, true
+		local posXbomba, posYbomba = cenario:getMapa():pixelToBorad(cenario:getMapa():localizarNoMapa(cenario:getBombaView():getSprite()))
+		
+		if(posX == posXbomba and posY == posYbomba) then
+			return true
+		end
+
+		if((math.abs(posX - posXbomba) <= 4 and math.abs(posY - posYbomba) == 0) or (math.abs(posY - posYbomba) <= 4 and math.abs(posX - posXbomba) == 0)) then
+			return true
+		end
+	end
+	return false
+end
+
 local pegarCaminho = true
 local caminhoFeito = true
 local caminhoParaFazer
@@ -144,7 +160,11 @@ function inimigo:enterFrame()
 			end
 			
 			if(aEstrela) then
-				caminhoDoInimigo = getAEstrela():getCaminho()
+				if(inimigo:estaNaAreaDaBomba(posicaoXInimigo, posicaoYInimigo) == false) then
+					caminhoDoInimigo = getAEstrela():getCaminho()
+				else
+					caminhoDoInimigo = getAEstrela():getCaminhoFuga()
+				end
 			end
 		end
 	end
