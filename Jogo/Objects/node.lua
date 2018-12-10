@@ -1,8 +1,35 @@
 local no = {}
 
 function no:calcularDistancia(px, py)
-	local personagemPosX, personagemPosY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
-	return math.abs(px - personagemPosX) + math.abs(py - personagemPosY)
+	local posX, posY
+	if(cenario:getInimigoView():estaNaAreaDaBomba(px,py) == true) then
+		for i = 1, 5 do
+			if(select(1, self:verificarDistanciaBomba(px + i, py)) == 0) then
+				posX = select(2, self:verificarDistanciaBomba(px + i, py).x)
+				posY = select(2, self:verificarDistanciaBomba(px + i, py).y)
+				break
+			end
+			if(select(1, self:verificarDistanciaBomba(px - i, py)) == 0) then
+				posX = select(2, self:verificarDistanciaBomba(px - i, py).x)
+				posY = select(2, self:verificarDistanciaBomba(px - i, py).y)
+				break
+			end
+			if(select(1, self:verificarDistanciaBomba(px, py + i)) == 0) then
+				posX = select(2, self:verificarDistanciaBomba(px, py + i).x)
+				posY = select(2, self:verificarDistanciaBomba(px, py + i).y)
+				break
+			end
+			if(select(1, self:verificarDistanciaBomba(px, py - i)) == 0) then
+				posX = select(2, self:verificarDistanciaBomba(px, py - i).x)
+				posY = select(2, self:verificarDistanciaBomba(px, py - i).y)
+				break
+			end
+		end
+	else
+		posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
+	end
+	
+	return math.abs(px - posX) + math.abs(py - posY)
 end
 
 function no:verificarDistanciaBomba(px, py, mapa)
@@ -43,7 +70,7 @@ function no:verificarDistanciaBomba(px, py, mapa)
 		end
 	end
 
-	return 0
+	return 0, {x = px, y = py}
 
 end
 
