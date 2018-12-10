@@ -12,7 +12,7 @@ local bomba = {}
 local imagem = "imagens/animacaoBomba.png"
 
 function bomba:newBomba(bombaSprite, tempo, animacaoBomba, id)
-    local newBomba = {bombaSprite = bombaSprite ,tempoBomba_run = tempo, animacaoBomba = animacaoBomba, idJogador = id, duracao = 4, tamanho = 4}
+    local newBomba = {bombaSprite = bombaSprite ,tempoBomba_run = tempo, animacaoBomba = animacaoBomba, idJogador = id, duracao = 4, tamanho = 3}
 
     function newBomba:getId()
         return 5
