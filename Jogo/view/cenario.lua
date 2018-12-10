@@ -1,7 +1,6 @@
 cenario = {}
 local composer = require ("composer")
 
-
 local banco = require "bd.bancoDeDados"
 function cenario:getBanco()
 	return banco
@@ -146,7 +145,7 @@ function cenario:removerSprites()
 	if cenario.personagemMorto ~= true and cenario.inimigoMorto == true  then
 		display.remove(cenario:getInimigoView():getSpriteVencedor())
 	end
-	
+
 	if cenario.personagemMorto == true and cenario.inimigoMorto ~= true then
 		display.remove(cenario:getPersonagem():getSpriteVencedor())
 	end
