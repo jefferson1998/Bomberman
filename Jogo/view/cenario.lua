@@ -112,6 +112,8 @@ function cenario:restart()
 	cenario:getInimigoView():restartInimigoGrafico()
 	cenario:getMapa():getEstado()
 	caminhoDoInimigo = {}
+	cenario.personagemMorto = false
+	cenario.inimigoMorto = false
 	Runtime:addEventListener("enterFrame", cenario)
 end
 
@@ -130,7 +132,8 @@ function cenario:removerEventos(id)
 		botaoBomba:removerEvento()
 		cenario:removerEvento()
 		
-	elseif (id == 4) then
+	end
+	if (id == 4) then
 		cenario:removerEvento()
 	end
 
@@ -140,23 +143,18 @@ end
 
 function cenario:removerSprites()
 	
-			if cenario:getPersonagem():getSprite().x ~= -50 and cenario:getInimigoView():getSprite().x == -50  then
-				print("INIMIGO MORTO")
-				display.remove(cenario:getInimigoView():getSpriteVencedor())
-			end
-			print(cenario:getPersonagem():getSprite().x)
-			if cenario:getPersonagem():getSprite().x == -50 and cenario:getInimigoView():getSprite().x ~= -50 then
-				print("PERSONAGEM MORTO")
-				display.remove(cenario:getPersonagem():getSpriteVencedor())
-			end
+	if cenario.personagemMorto ~= true and cenario.inimigoMorto == true  then
+		display.remove(cenario:getInimigoView():getSpriteVencedor())
+	end
+	
+	if cenario.personagemMorto == true and cenario.inimigoMorto ~= true then
+		display.remove(cenario:getPersonagem():getSpriteVencedor())
+	end
 
-			if cenario.inimigoMorto == true and cenario.personagemMorto == true then
-				print("DOIS MORTOS")
-				display.remove(cenario:getPersonagem():getSpriteVencedor())
-				display.remove(cenario:getInimigoView():getSpriteVencedor())
-				cenario.inimigoMorto = nil
-				cenario.personagemMorto = nil
-			end
+	if cenario.inimigoMorto == true and cenario.personagemMorto == true then
+		display.remove(cenario:getPersonagem():getSpriteVencedor())
+		display.remove(cenario:getInimigoView():getSpriteVencedor())
+	end
 
 end
 
