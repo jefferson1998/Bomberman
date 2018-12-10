@@ -61,7 +61,6 @@ function personagem:touch( e )
 
 		elseif e.target.myName == "down" then
 
-			print("baixo")
 			personagemGrafico:setSequence( "framesFrenteRun" )
 			personagemGrafico:play()
 			passosY = 1
@@ -131,10 +130,12 @@ end
 function personagem:morrer(id)
 	if(id == 2) then
 		cenario:getBanco():perdedor()
+		cenario.personagemMorto = true
 		cenario:getInimigoView():spriteVencedor(cenario:getInimigoView():getSprite()):play()
 		display.remove(personagem:getSprite())
  		cenario:removerEventos(personagem:getId())
  		cenario.tempo = timer.performWithDelay( 5000, cenario, 1)
+
 	end
 end
 

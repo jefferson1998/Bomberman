@@ -1,7 +1,6 @@
 cenario = {}
 local composer = require ("composer")
 
-
 local banco = require "bd.bancoDeDados"
 function cenario:getBanco()
 	return banco
@@ -18,7 +17,7 @@ function cenario:getEstadoJogo()
 end
 
 local inimigoView = require "view.inimigoView"
-function cenario:getInimigoView()
+function cenario:getInimigoView()	
 	return inimigoView
 end
 
@@ -64,19 +63,13 @@ local botaoBomba = require "view.botaoBombaView"
 cenario.tempo = nil
 
 function cenario:enterFrame()
-	-- print(cenario:getEstadoJogo():mostrarTabuleiroDoJogo())
-	-- print(personagemView:getSprite().x ~= nil)
+
 	if cenario:getPersonagem():getSprite().x ~= nil then
 		cenario:getPersonagem():enterFrame()
-	else 
-		cenario:removerEventos(personagemView:getId())
 	end 
 
 	if cenario:getInimigoView():getSprite().x ~= nil then
 		cenario:getInimigoView():enterFrame()
-	else
-		cenario:removerEventos(personagemView:getId())
-		cenario:getPersonagem():spriteVencedor(cenario:getPersonagem():getSprite()):play()
 	end
 end
 
@@ -118,6 +111,8 @@ function cenario:restart()
 	cenario:getInimigoView():restartInimigoGrafico()
 	cenario:getMapa():getEstado()
 	caminhoDoInimigo = {}
+	cenario.personagemMorto = false
+	cenario.inimigoMorto = false
 	Runtime:addEventListener("enterFrame", cenario)
 end
 
@@ -136,9 +131,30 @@ function cenario:removerEventos(id)
 		botaoBomba:removerEvento()
 		cenario:removerEvento()
 		
-	elseif (id == 4) then
+	end
+	if (id == 4) then
 		cenario:removerEvento()
 	end
+
+	cenario:removerSprites()
+	
+end
+
+function cenario:removerSprites()
+	
+	if cenario.personagemMorto ~= true and cenario.inimigoMorto == true  then
+		display.remove(cenario:getInimigoView():getSpriteVencedor())
+	end
+
+	if cenario.personagemMorto == true and cenario.inimigoMorto ~= true then
+		display.remove(cenario:getPersonagem():getSpriteVencedor())
+	end
+
+	if cenario.inimigoMorto == true and cenario.personagemMorto == true then
+		display.remove(cenario:getPersonagem():getSpriteVencedor())
+		display.remove(cenario:getInimigoView():getSpriteVencedor())
+	end
+
 end
 
 -- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem

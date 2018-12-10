@@ -1,35 +1,11 @@
 local no = {}
+local mapa = require ('mapa')
 
 function no:calcularDistancia(px, py)
-	local posX, posY
-	if(cenario:getInimigoView():estaNaAreaDaBomba(px,py) == true) then
-		for i = 1, 5 do
-			if(select(1, self:verificarDistanciaBomba(px + i, py)) == 0) then
-				posX = select(2, self:verificarDistanciaBomba(px + i, py).x)
-				posY = select(2, self:verificarDistanciaBomba(px + i, py).y)
-				break
-			end
-			if(select(1, self:verificarDistanciaBomba(px - i, py)) == 0) then
-				posX = select(2, self:verificarDistanciaBomba(px - i, py).x)
-				posY = select(2, self:verificarDistanciaBomba(px - i, py).y)
-				break
-			end
-			if(select(1, self:verificarDistanciaBomba(px, py + i)) == 0) then
-				posX = select(2, self:verificarDistanciaBomba(px, py + i).x)
-				posY = select(2, self:verificarDistanciaBomba(px, py + i).y)
-				break
-			end
-			if(select(1, self:verificarDistanciaBomba(px, py - i)) == 0) then
-				posX = select(2, self:verificarDistanciaBomba(px, py - i).x)
-				posY = select(2, self:verificarDistanciaBomba(px, py - i).y)
-				break
-			end
-		end
-	else
-		posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
-	end
-	
-	return math.abs(px - posX) + math.abs(py - posY)
+	-- local personagemPosX, personagemPosY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
+	local personagemPosX, personagemPosY = mapa:pixelToBoard(80,83)
+	-- print(personagemPosX,personagemPosY)
+	return math.abs(px - personagemPosX) + math.abs(py - personagemPosY)
 end
 
 function no:verificarDistanciaBomba(px, py, mapa)
@@ -70,48 +46,31 @@ function no:verificarDistanciaBomba(px, py, mapa)
 		end
 	end
 
-	return 0, {x = px, y = py}
+	return 0
 
 end
 
 function no:validarVizinho(px, py, direcao)
-	local estado = cenario:getEstadoJogo():getEstado()
+	local estado = mapa
 	local distanciaAtualDaBomba = self:verificarDistanciaBomba(px, py, estado)
 
 	if(direcao == "cima" and estado[px - 1][py] ~= 0 and estado[px - 1][py] ~= 3 and estado[px - 1][py] ~= 5 and estado[px - 1][py] ~= nil) then
-		if(distanciaAtualDaBomba == 0) then
-			if(self:verificarDistanciaBomba(px - 1, py, estado) ==  0) then
-				return true
-			end
-		elseif(self:verificarDistanciaBomba(px - 1, py, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px - 1, py, estado) ==  0) then
+		if(distanciaAtualDaBomba == 0 or self:verificarDistanciaBomba(px - 1, py, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px - 1, py, estado) == 0)then
 			return true
 		end
-		
 	end
 	if(direcao == "direita" and estado[px][py + 1] ~= 0 and estado[px][py + 1] ~= 3 and estado[px][py + 1] ~= 5 and estado[px][py + 1] ~= nil) then
-		if(distanciaAtualDaBomba == 0) then
-			if(self:verificarDistanciaBomba(px, py + 1, estado) ==  0) then
-				return true
-			end
-		elseif(self:verificarDistanciaBomba(px, py + 1, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px, py + 1, estado) ==  0) then
+		if(distanciaAtualDaBomba == 0 or self:verificarDistanciaBomba(px, py + 1, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px, py + 1, estado) == 0)then
 			return true
 		end
 	end
 	if(direcao == "baixo" and estado[px + 1][py] ~= 0 and estado[px + 1][py] ~= 3 and estado[px + 1][py] ~= 5 and estado[px + 1][py] ~= nil) then
-		if(distanciaAtualDaBomba == 0) then
-			if(self:verificarDistanciaBomba(px + 1, py, estado) ==  0) then
-				return true
-			end
-		elseif(self:verificarDistanciaBomba(px + 1, py, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px + 1, py, estado) ==  0) then
+		if(distanciaAtualDaBomba == 0 or self:verificarDistanciaBomba(px + 1, py, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px + 1, py, estado) == 0)then
 			return true
 		end
 	end
 	if(direcao == "esquerda" and estado[px][py - 1] ~= 0 and estado[px][py - 1] ~= 3 and estado[px][py - 1] ~= 5 and estado[px][py - 1] ~= nil) then
-		if(distanciaAtualDaBomba == 0) then
-			if(self:verificarDistanciaBomba(px, py - 1, estado) ==  0) then
-				return true
-			end
-		elseif(self:verificarDistanciaBomba(px, py - 1, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px, py - 1, estado) ==  0) then
+		if(distanciaAtualDaBomba == 0 or self:verificarDistanciaBomba(px, py - 1, estado) > distanciaAtualDaBomba or self:verificarDistanciaBomba(px, py - 1, estado) == 0)then
 			return true
 		end
 	end
