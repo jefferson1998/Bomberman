@@ -1,53 +1,7 @@
 local no = {}
 
 function no:calcularDistancia(px, py)
-	local posX, posY
-	if(cenario:getInimigoView():estaNaAreaDaBomba(px,py) == true) then
-		local estado = cenario:getEstadoJogo():getEstado()
-
-		local cima, baixo, esquerda, direita = true, true, true, true
-
-		for i = 1, 5 do
-			if(baixo == true and estado[px + i][py] ~= 0) then
-				if(select(1, self:verificarDistanciaBomba(px + i, py, estado)) == 0) then
-					posX = select(2, self:verificarDistanciaBomba(px + i, py, estado))
-					posY = select(3, self:verificarDistanciaBomba(px + i, py, estado))
-					break
-				end
-			else
-				baixo = false
-			end
-			if(ima == true and estado[px - i][py] ~= 0) then
-				if(select(1, self:verificarDistanciaBomba(px - i, py, estado)) == 0) then
-					posX = select(2, self:verificarDistanciaBomba(px - i, py, estado))
-					posY = select(3, self:verificarDistanciaBomba(px - i, py, estado))
-					break
-				end
-			else
-				cima = false
-		 	end
-			if(esquerda == true and estado[px][py + i] ~= 0) then	
-				if(select(1, self:verificarDistanciaBomba(px, py + i, estado)) == 0) then
-					posX = select(2, self:verificarDistanciaBomba(px, py + i, estado))
-					posY = select(3, self:verificarDistanciaBomba(px, py + i, estado))
-					break
-				end
-			else
-				esquerda = false
-			end				
-			if(direita == true and estado[px][py - i] ~= 0) then
-				if(select(1, self:verificarDistanciaBomba(px, py - i, estado)) == 0) then
-					posX = select(2, self:verificarDistanciaBomba(px, py - i, estado))
-					posY = select(3, self:verificarDistanciaBomba(px, py - i, estado))
-					break
-				end
-			else
-				direita = false
-			end
-		end
-	else
-		posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
-	end
+	local posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
 	return math.abs(px - posX) + math.abs(py - posY)
 end
 
