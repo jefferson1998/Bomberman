@@ -109,7 +109,7 @@ function cenario:restart()
 	cenario:getMapa().isVisible = true
 	cenario:getPersonagem():restartPersonagemGrafico()
 	cenario:getInimigoView():restartInimigoGrafico()
-	cenario:getMapa():getEstado()
+	cenario:getEstadoJogo():reset()
 	caminhoDoInimigo = {}
 	cenario.personagemMorto = false
 	cenario.inimigoMorto = false

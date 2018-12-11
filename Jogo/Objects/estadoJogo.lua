@@ -16,6 +16,16 @@ local pegarCaminho = false
 -- 5 = Bomba
 ------------------------------------------------------------------------------------------
 
+function estadoDoJogo:reset()
+	for i = 1, #self do
+		for j = 1, #self[i] do
+			if(self[i][j] == 5) then
+				self[i][j] = 1
+			end
+		end
+	end
+end
+
 function estadoDoJogo:mostrarTabuleiroDoJogo()
 	local str = ""
 
