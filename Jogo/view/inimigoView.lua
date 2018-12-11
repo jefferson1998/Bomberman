@@ -182,8 +182,8 @@ function inimigo:enterFrame()
 			
 			if(math.abs(posicaoXInimigo - posicaoXPersonagem) + math.abs(posicaoYInimigo - posicaoYPersonagem) == 0) then
 				inimigo:soltarBomba()
+				caminhoDoInimigo = getAEstrela():getCaminho()
 			end
-			
 			if(aEstrela) then	
 				caminhoDoInimigo = getAEstrela():getCaminho()
 			end
