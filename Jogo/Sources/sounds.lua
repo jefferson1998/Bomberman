@@ -2,17 +2,6 @@ local composer = require( "composer" )
  
 local scene = composer.newScene()
  
--- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
- 
--- -----------------------------------------------------------------------------------
--- Scene event functions
--- -----------------------------------------------------------------------------------
- 
--- create()
-
 
 function scene:create( event )
 
@@ -23,7 +12,6 @@ function scene:create( event )
         else 
             audio.resume()
         end
-        -- print( "Switch with ID '"..switch.id.."' is on: "..tostring() )
     end
 
     local sceneGroup = self.view
@@ -33,9 +21,7 @@ function scene:create( event )
     local widget = require( "widget" )
     local buttonReturn = display.newImage("imagens/botaoVoltar.png",display.actualContentWidth * 0.055, display.actualContentHeight * 1.0)
     buttonReturn:addEventListener( "touch", scene )
-    -- Handle press events for the checkbox
 
-    -- Create the widget
     local onOffSwitch = widget.newSwitch(
         {
             left = display.actualContentWidth * 0.2,
@@ -51,7 +37,6 @@ function scene:create( event )
     sceneGroup:insert(onOffSwitch)
 
 
-    -- Code here runs when the scene is first created but has not yet appeared on screen
  
 end
 
@@ -71,18 +56,12 @@ end
 function scene:destroy( event )
  
     local sceneGroup = self.view
-    -- Code here runs prior to the removal of scene's view
     display.remove(sceneGroup)
 end
  
  
--- -----------------------------------------------------------------------------------
--- Scene event function listeners
--- -----------------------------------------------------------------------------------
+
 scene:addEventListener( "create", scene )
-scene:addEventListener( "show", scene )
-scene:addEventListener( "hide", scene )
 scene:addEventListener( "destroy", scene )
--- -----------------------------------------------------------------------------------
  
 return scene

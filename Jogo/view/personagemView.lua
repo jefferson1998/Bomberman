@@ -50,7 +50,6 @@ end
 
 function personagem:touch( e ) 
 	
-	-- quando há clique ou clicar e arrastar para o lado
 	 if e.phase == "began" or e.phase == "moved" then
 
 		if e.target.myName == "up" then
@@ -81,21 +80,19 @@ function personagem:touch( e )
 
 		end
 		
-		-- quando soltar o botão ele para
 	elseif (e.phase == "ended" or e.phase == "canceled") then
 				
 		passosX = 0
 		passosY = 0
 		personagemGrafico:setFrame(1)
 		personagemGrafico:pause()
-		-- -- print(math.floor(personagemGrafico.x / 32))
-		-- -- print(personagemGrafico.x / 32)
+
 	end
 end
 
 function personagem:enterFrame()
 	local posicaoXAtualNoMapa, posicaoYAtualNoMapa = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(personagemGrafico))
-	-- print(cenario:getEstadoJogo():mostrarTabuleiroDoJogo())
+
 	personagemGrafico.x = personagemGrafico.x + passosX
 	personagemGrafico.y = personagemGrafico.y + passosY
 
@@ -112,7 +109,6 @@ function personagem:enterFrame()
 		self:morrer(self:getId())
 	end
 
-	--return personagemGrafico.x , personagemGrafico.y
 end
 
 function personagem:getSprite()
@@ -121,10 +117,6 @@ end
 
 function personagem:getId()
 	return personagem.id
-end
-
-function personagem:animacaoVencedor()
-	-- body
 end
 
 function personagem:morrer(id)

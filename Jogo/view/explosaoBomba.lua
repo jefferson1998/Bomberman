@@ -10,9 +10,8 @@ local explosaoBomba = {
 }
 
 function explosaoBomba:explodir(estado, objBomba)
-	-- if spriteBomba.soltou
 	local origemX, origemY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(objBomba:getSprite()))
-	-- print (origemX,origemY)
+
 	local cima, baixo, direita, esquerda = true, true, true, true
 
 	local hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX, origemY)
@@ -25,9 +24,9 @@ function explosaoBomba:explodir(estado, objBomba)
 	estado:setEstado(3, origemX, origemY)
  
 	for i = 1, objBomba.tamanho do
-			-- print("CHEGUEI AKI ______________________________"..cenario:getBombaView():getBombaModel().tamanho)		
-		if(baixo == true and estado[origemX + i][origemY] ~= 0 and estado[origemX + i][origemY] ~= nil) then
-			-- print("IF 1")
+
+	if(baixo == true and estado[origemX + i][origemY] ~= 0 and estado[origemX + i][origemY] ~= nil) then
+	
 			hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX + i, origemY)
 			if (hasEnemy == true) then
 				cenario:getInimigoView():morrer(cenario:getInimigoView():getId())
@@ -36,13 +35,13 @@ function explosaoBomba:explodir(estado, objBomba)
 				cenario:getPersonagem():morrer(cenario:getPersonagem():getId())
 			end
 			estado:setEstado(3, origemX + i, origemY)
-			-- print("Setei o Estado")
+	
 		else
 			baixo = false
 		end
 
 		if(cima == true and estado[origemX - i][origemY] ~= 0 and estado[origemX - i][origemY] ~= nil) then
-			-- print("IF 2")
+	
 			hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX - i, origemY)
 			if (hasEnemy == true) then
 				cenario:getInimigoView():morrer(cenario:getInimigoView():getId())
@@ -51,13 +50,13 @@ function explosaoBomba:explodir(estado, objBomba)
 				cenario:getPersonagem():morrer(cenario:getPersonagem():getId())
 			end
 			estado:setEstado(3, origemX - i, origemY)
-			-- print("Setei o Estado")
+	
 		else 
 			cima = false
 		end
 		
 		if(direita == true and estado[origemX][origemY + i] ~= 0 and estado[origemX][origemY + i] ~= nil) then
-			-- print("IF 3")
+	
 			hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX, origemY + i)
 			if (hasEnemy == true) then
 				cenario:getInimigoView():morrer(cenario:getInimigoView():getId())
@@ -66,13 +65,13 @@ function explosaoBomba:explodir(estado, objBomba)
 				cenario:getPersonagem():morrer(cenario:getPersonagem():getId())
 			end
 			estado:setEstado(3, origemX, origemY + i)
-			-- print("Setei o Estado")
+	
 		else
 			direita = false
 		end
 		
 		if(esquerda == true and estado[origemX][origemY - i] ~= 0 and estado[origemX][origemY - i] ~= nil) then
-			-- print("IF 4")
+	
 			hasPerson, hasEnemy = cenario:getMapa():verificarQuemEstaNaPosicao(origemX, origemY - i)
 			if (hasEnemy == true) then
 				cenario:getInimigoView():morrer(cenario:getInimigoView():getId())
@@ -81,18 +80,18 @@ function explosaoBomba:explodir(estado, objBomba)
 				cenario:getPersonagem():morrer(cenario:getPersonagem():getId())
 			end
 			estado:setEstado(3, origemX, origemY - i)
-			-- print("Setei o Estado")
+	
 		else
 			esquerda = false
 		end
 	end
 	local explosaoSprite = explosaoBomba:pintarExplosao(origemX, origemY, estado, objBomba)
 	explosaoBomba:fimExplosao(origemX, origemY, explosaoSprite, objBomba)
-	-- print(estado:mostrarTabuleiroDoJogo())
+	
 end
 
 function explosaoBomba:timer(event)
-	-- print ("resetando o estado")
+	
 	
 	local posX, posY = event.source.params.posicaoX, event.source.params.posicaoY
 	local bomba = event.source.params.objBomba
@@ -138,7 +137,7 @@ end
 function explosaoBomba:fimExplosao(posX, posY, sprite, objBomba)
 	local tempo = timer.performWithDelay(1500, explosaoBomba, 1)
 	tempo.params = {posicaoX = posX, posicaoY = posY, spriteExplosao = sprite, objBomba = objBomba}
-	-- print "Chamada a funcao fimExplosao"
+	
 end
 
 function explosaoBomba:pintarExplosao(x, y, estado, objBomba)

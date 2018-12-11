@@ -126,7 +126,6 @@ end
 
 function cenario:removerEventos(id)
 	if(id == 2) then
-		-- print ("chamei remover evento")
 		direcional:removerEvento()
 		botaoBomba:removerEvento()
 		cenario:removerEvento()
@@ -157,6 +156,5 @@ function cenario:removerSprites()
 
 end
 
--- executa em vários ciclos, ou seja, fica atualizando direto a posição do personagem
 Runtime:addEventListener("enterFrame", cenario)
 return cenario

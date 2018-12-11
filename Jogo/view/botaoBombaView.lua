@@ -15,11 +15,9 @@ botaoView.y = h - 150
 
 function botaoView:timer(event)
     if (event.source.params.bombaDoPersonagem ~= nil) then
-        -- print("duração bomba personagem" .. event.source.params.bombaDoPersonagem.duracao)
         event.source.params.bombaDoPersonagem.duracao = event.source.params.bombaDoPersonagem.duracao - 1
         if  event.source.params.bombaDoPersonagem.duracao == 0 then
             event.source.params.bombaDoPersonagem.bombaSprite:removeSelf()
-            -- print("BOMBAMODEL PERSONAGEM___")
             cenario:getExplosao():explodir(cenario:getEstadoJogo(), event.source.params.bombaDoPersonagem)
             event.source.params.bombaDoPersonagem = nil
             botaoView:setBombaAtiva(false)
@@ -79,7 +77,18 @@ function botaoView:create()
 	function botaoView:setBombaAtiva(condicao)
 		bombaAtiva = condicao
 	end
-	
+
+	function botaoView:timer(event)
+	    if (event.source.params.bombaDoPersonagem ~= nil) then
+	        event.source.params.bombaDoPersonagem.duracao = event.source.params.bombaDoPersonagem.duracao - 1
+	        if  event.source.params.bombaDoPersonagem.duracao == 0 then
+	            event.source.params.bombaDoPersonagem.bombaSprite:removeSelf()
+	            cenario:getExplosao():explodir(cenario:getEstadoJogo(), event.source.params.bombaDoPersonagem)
+	            event.source.params.bombaDoPersonagem = nil
+	            botaoView:setBombaAtiva(false)
+	       	end  
+	    end 
+	end
 	botaoView:addEventListener("touch", botaoView)
 end
 

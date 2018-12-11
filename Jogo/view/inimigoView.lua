@@ -16,11 +16,6 @@ function inimigo:newInimigo()
 	inimigo.bombermanSprite.x, inimigo.bombermanSprite.y = cenario:getMapa():boardToPixel(9, 13)
 	inimigo.bombermanSprite.anchorY = 0.85
 
-	-- local vertices = {-10,0, -10, 16, 10, 16, 10, 0}
-	-- physics.addBody( inimigo.bombermanSprite, "dynamic", {shape = vertices})
-	-- inimigo.bombermanSprite.isFixedRotation = true
-	-- physics.setGravity( 0, 0 )
-
 	return inimigo.bombermanSprite
 end
 
@@ -49,8 +44,6 @@ function inimigo:determinarOrientacao(caminhoX, caminhoY)
 end
 
 function inimigo:mover(px, py)
-
-	-- print (px, py)
 
 	posXpixel, posYpixel = cenario:getMapa():boardToPixel(px, py)
 
@@ -99,7 +92,6 @@ function inimigo:enterFrame()
 
 		if(#caminhoDoInimigo > 0)then
 			table.sort( caminhoDoInimigo, compare)
-			-- print(caminhoDoInimigo[1].px, caminhoDoInimigo[1].py)
 			if(caminhoFeito == true) then
 
 				caminhoParaFazer = caminhoDoInimigo[1]
@@ -185,7 +177,6 @@ end
 function inimigo:timer(event)
     if event.source.params ~= nil then
         if (event.source.params.bombaDoInimigo ~= nil) then
-            -- print("duração bomba inimigo " .. event.source.params.bombaDoInimigo.duracao)
             event.source.params.bombaDoInimigo.duracao = event.source.params.bombaDoInimigo.duracao - 1
             if  event.source.params.bombaDoInimigo.duracao == 0 then
 
@@ -193,14 +184,8 @@ function inimigo:timer(event)
             		inimigo:morrer()
             	end
 
-                -- remove a imagem da bomba
-                -- print("BOMBAMODEL inimigi _____")
                 event.source.params.bombaDoInimigo.bombaSprite:removeSelf()
 
-                -- print("BOMBAMODEL___" .. bombaMo.del.tempo)
-                -------------------------------------------------------------
-                -- Cria a sprite da explosao e nela ve se tem algum objeto --
-                -------------------------------------------------------------
                 cenario:getExplosao():explodir(cenario:getEstadoJogo(), event.source.params.bombaDoInimigo)
                 event.source.params.bombaDoInimigo = nil
                 inimigo:setBombaAtiva(false)
@@ -250,36 +235,6 @@ function inimigo:morrer(id)
  		cenario.tempo = timer.performWithDelay( 6000, cenario, 1)
 	end
 end
-
--- function inimigo:timer(event)
--- 	local rota = event.source.param
--- 	index = index + 1
--- 	self:mover(rota[index].px, rota[index].py)
--- end
-
--- function inimigo:run()
--- 	print ("Rodando o Run no inimigo")
-
--- 	caminho = getAEstrela():getCaminho()
--- 	table.sort(caminho, compare)
--- 	-- index = 1
-
--- 	-- if (movimentacao) then
--- 	-- 	timer.cancel(movimentacao)
--- 	-- end
-
--- 	-- print ("Tamanho Caminho: " ..tostring(#caminho))
--- 	-- if(#caminho ~= 0)then
--- 	-- 	self:mover(caminho[index].px, caminho[index].py)
-		
--- 	-- 	if(#caminho == 1) then
--- 	-- 		self:mover(caminho[index].px, caminho[index].py)
--- 	-- 	else
--- 	-- 		movimentacao = timer.performWithDelay( 450, inimigo, #caminho - 1)
--- 	-- 		movimentacao.param = caminho
--- 	-- 	end
--- 	-- end
--- end
 
 cenario:getEstadoJogo():atualizarEstado(inimigo)
 

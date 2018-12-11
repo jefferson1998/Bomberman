@@ -26,39 +26,29 @@ function bomba:newBomba(bombaSprite, tempo, animacaoBomba, id)
 end
 
 function bomba:newBombaPersonagem(argPosicaoX, argPosicaoY)
-	-- -- print(tempoBomba_run)
- --    -- print(bombaModel.tempo)
+
     local tempoBomba_run, animacaoBomba = frames:tempoBomba(imagem)
     local bombaSprite = display.newSprite( animacaoBomba, tempoBomba_run);
 
     local newBomba = bomba:newBomba(bombaSprite, tempoBomba_run, animacaoBomba, cenario:getPersonagem():getId())
 
 	newBomba.bombaSprite.x, newBomba.bombaSprite.y = mapa:boardToPixel(mapa:pixelToBoard(argPosicaoX, argPosicaoY))
-    -- print(bombaSprite.x,  bombaSprite.y)
     cenario:getEstadoJogo():atualizarEstado(newBomba)
-    -- if tempoDaBomba == nil then
-    --     tempoDaBomba = timer.performWithDelay( 1000, bomba, 0)
-    -- end
-    -- tempoDaBomba.params = {bombaDoPersonagem = newBomba} 
-    -- local novaBomba  bomba:newBomba()
-    -- table.insert( listaDeBombas, novaBomba)
+
 	return newBomba
 
 end
 
 function bomba:newBombaInimigo(argPosicaoX, argPosicaoY)
-    -- -- print(tempoBomba_run)
- --    -- print(bombaModel.tempo)
+
     local tempoBomba_run, animacaoBomba = frames:tempoBomba(imagem)
     local bombaSprite = display.newSprite( animacaoBomba, tempoBomba_run);
 
     local newBomba = bomba:newBomba(bombaSprite, tempoBomba_run, animacaoBomba, cenario:getInimigoView():getId())
 
     newBomba.bombaSprite.x, newBomba.bombaSprite.y = mapa:boardToPixel(mapa:pixelToBoard(argPosicaoX, argPosicaoY))
-    -- print(bombaSprite.x,  bombaSprite.y)
     cenario:getEstadoJogo():atualizarEstado(newBomba)
-    -- local novaBomba = bomba:newBomba()
-    -- table.insert( listaDeBombas, novaBomba)
+
     return newBomba
 
 end

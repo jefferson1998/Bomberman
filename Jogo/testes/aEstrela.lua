@@ -1,6 +1,5 @@
 local aEstrela = {listaAberta = {}, listaFechada = {}, caminho = {}}
 local node = require 'node'
-local mapa = require 'mapa'
 local contador = 1
 
 function aEstrela:equals(no, outroNo)
@@ -85,7 +84,7 @@ function aEstrela:continuarProcura(no)
 end
 
 function aEstrela:isBorda(no)
-	if (no.H == 0) then
+	if (no ~= nil and no.H == 0) then
 		return true
 	end
 	return false 

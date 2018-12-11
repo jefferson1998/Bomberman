@@ -1,5 +1,4 @@
 local no = {}
-local mapa = require ('mapa')
 
 function no:calcularDistancia(px, py)
 	-- local personagemPosX, personagemPosY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
