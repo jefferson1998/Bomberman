@@ -1,7 +1,56 @@
 local no = {}
 
+function no:vizinhoSeguro(raio)
+	local nordeste, sudeste, noroeste, sudoeste = true, true, true, true
+	local mapa = cenario:getEstadoJogo():getEstado()
+	local px, py = mapa:procurar(5)
+
+	if(px ~= 0 and py ~= 0) then
+		for i = 1, raio do
+			if(sudeste == true and mapa[px + i][py + i] ~= 0 and mapa[px + i][py + i] ~= nil) then
+				if(cenario:getInimigoView():estaNaAreaDaBomba(px + i, py + i) == false) then
+					return px + i, py + i
+				end
+			elseif(px + i == 10 or py + i == 14) then
+				sudeste = false
+			end
+			
+			if(nordeste == true and mapa[px - i][py + i] ~= 0 and mapa[px - i][py + i] ~= nil) then
+				if(cenario:getInimigoView():estaNaAreaDaBomba(px - i, py + i) == false) then
+					return px - i, py + i
+				end
+			elseif(px - i == 2 or py + i == 14)then
+				nordeste = false
+			end
+			
+			if(sudoeste == true and mapa[px + i][py - i] ~= 0 and mapa[px + i][py - i] ~= nil) then
+				if(cenario:getInimigoView():estaNaAreaDaBomba(px + i, py - i) == false) then
+					return px + i, py - i
+				end
+			elseif(px + i == 10 or py - i == 2) then
+				sudoeste = false
+			end
+			
+			if(noroeste == true and mapa[px - i][py - i] ~= 0 and mapa[px - i][py - i] ~= nil) then
+				if(cenario:getInimigoView():estaNaAreaDaBomba(px - i, py - i) == false) then
+					return px - i, py - i
+				end
+			elseif(px - i == 2 or py - i == 2) then
+				noroeste = false
+			end
+		end
+	end
+end
+
 function no:calcularDistancia(px, py)
-	local posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))
+	local posX, posY
+	
+	if(cenario:getInimigoView():estaNaAreaDaBomba(cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getInimigoView():getSprite()))) == true) then
+		posX, posY = self:vizinhoSeguro(2)
+	else
+		posX, posY = cenario:getMapa():pixelToBoard(cenario:getMapa():localizarNoMapa(cenario:getPersonagem():getSprite()))	
+	end
+
 	return math.abs(px - posX) + math.abs(py - posY)
 end
 

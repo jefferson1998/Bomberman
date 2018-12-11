@@ -110,4 +110,15 @@ function estadoDoJogo:setEstado(value, posX, posY)
 	self[posX][posY] = value
 end
 
+function estadoDoJogo:procurar( id )
+	for i = 1, #self do
+		for j = 1, #self[i] do
+			if(self[i][j] == id) then
+				return i, j
+			end
+		end
+	end
+	return 0, 0 
+end
+
 return estadoDoJogo
